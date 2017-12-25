@@ -4,13 +4,12 @@ import {
   getCategoriesLoading, getCategories, getCategoriesSuccess, getCategoriesFailure
 } from '../actions/categories';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (store) => {
   return {
-    categories: state.categories,
-    loading: state.categories.loading
-
+    categories: store.categories.categories,
+    loading: store.categories.loading,
+    error: store.categories.error
   }
-
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -19,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getCategoriesLoading());
       dispatch(getCategories()).then(response => {
         if(response.payload.status<400){
-          dispatch(getCategoriesSuccess(response.payload.categories));
+          dispatch(getCategoriesSuccess(response.payload.data));
 
         }else{
           dispatch(getCategoriesFailure(response.payload.message));

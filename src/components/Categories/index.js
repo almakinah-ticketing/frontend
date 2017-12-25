@@ -11,6 +11,7 @@ export default class Categories extends Component {
     return(
       <div>
         <h1>Categories</h1>
+        {console.log("Categories in state right now: ")}
         {console.log(categories)}
         {
         	categories.map((category) => {

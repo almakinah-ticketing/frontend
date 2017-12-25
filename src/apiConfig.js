@@ -1,3 +1,3 @@
-export const rootApi = 'http://localhost:3001';
+export const rootApi = 'http://localhost:3000';
 
-export const categoriesApi = `${rootApi}/home/categories`;
+export const categoriesApi = `${rootApi}/categories`;
