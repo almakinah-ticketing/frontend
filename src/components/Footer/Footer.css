@@ -1,0 +1,23 @@
+.icons {
+  color: #565656;
+}
+
+.contact-nav ul li a {
+  text-decoration: none;
+}
+
+.contact-nav ul li {
+  display: inline-block;
+}
+
+.contact-nav ul li + li {
+  margin-left: 20px;
+}
+
+.contact-nav {
+  margin-right: 10px;
+}
+
+.copyrights {
+  margin-left: 10px;
+}
