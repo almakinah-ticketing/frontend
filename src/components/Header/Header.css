@@ -1,0 +1,35 @@
+.pull-start {
+  float: left;
+}
+
+.pull-end {
+  float: right;
+}
+
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.info-nav ul {
+  padding-left: 0;
+  margin-left: 10px;
+}
+
+.action-nav ul {
+  margin-right: 10px;
+}
+
+.info-nav ul li, .action-nav ul li {
+  display: inline-block;
+}
+
+.info-nav ul li + li, .action-nav ul li + li {
+  margin-left: 10px;
+}
+
+.logo {
+  width: 50px;
+}
