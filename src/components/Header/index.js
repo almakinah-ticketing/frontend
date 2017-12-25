@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom';
 class Header extends Component {
   render() {
     return(
-      <div className="Header clearfix">
+      <div className="App-header clearfix">
         <img className="logo pull-start" src="logo.png" alt="Logo" />
         <nav className="info-nav pull-start">
           <ul>

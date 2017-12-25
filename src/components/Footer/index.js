@@ -4,7 +4,7 @@ import './Footer.css';
 class Footer extends Component {
   render() {
     return(
-      <div className="Footer clearfix">
+      <div className="App-footer clearfix">
         <p className="copyrights pull-start">&copy; 2017 AlMakinah</p>
         <nav className="contact-nav pull-end">
           <ul>
