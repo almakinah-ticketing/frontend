@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Categories from '../components/Categories';
+import EventsList from '../pages/EventsList';
 import {
   getCategoriesLoading, getCategories, getCategoriesSuccess, getCategoriesFailure
 } from '../actions/categories';
@@ -29,6 +30,5 @@ const mapDispatchToProps = (dispatch) => {
 
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
