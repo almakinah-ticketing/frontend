@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getCategories()).then(response => {
         if(response.payload.status<400){
           dispatch(getCategoriesSuccess(response.payload.data));
-
+        
         }else{
           dispatch(getCategoriesFailure(response.payload.message));
 

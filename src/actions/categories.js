@@ -17,7 +17,7 @@ export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
 
 export const getCategoriesLoading = () => {
   return{
-    type : GET_CATEGORIES_LOADING
+    type: GET_CATEGORIES_LOADING
   }
 }
 

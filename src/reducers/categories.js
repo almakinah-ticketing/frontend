@@ -13,8 +13,6 @@ export default (currentState = INITIAL_STATE, action) => {
     case GET_CATEGORIES_LOADING:
       return {...currentState, loading: true};
     case GET_CATEGORIES_SUCCESS:
-      console.log("I'm in get categories success and this is the action: ");
-      console.log(action);
       return {...currentState, loading: false, categories: action.categories};
     case GET_CATEGORIES_FAILURE:
       return {...currentState, loading: false, error: action.error};
