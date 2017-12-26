@@ -13,17 +13,19 @@ export default class Categories extends Component {
     console.log(categories);
     return (
       <div>
-        <h3>Categories</h3>
-        {console.log("Categories in state right now: ")}
-        {console.log(categories)}
+        <h1>Categories</h1>
+       
         {
-      	   categories.map((category) => {
-      	     return (
-              <div>{category.name}</div>
-              )
-           })
-         }
+        	categories.map((category) => {
+        		return (
+        			<div>{category.name}</div>
+
+        			)
+
+        	})
+        }  
       </div>
-      );
+    )
+
   }
 }

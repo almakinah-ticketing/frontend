@@ -1,6 +1,7 @@
-"categories": [
-  {
-    "id": 1,
-    "name": "red"
-  }
-]
+{
+	"hotestEvent": {
+		"id": 1,
+		"title": "first event",
+		"date": "1/1/2018"
+	}
+}
