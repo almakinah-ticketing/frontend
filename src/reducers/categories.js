@@ -1,4 +1,6 @@
-import {GET_CATEGORIES_LOADING, GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE} from '../actions/categories'
+import {
+  GET_CATEGORIES_LOADING, GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE
+} from '../actions/categories';
 
 const INITIAL_STATE = {
   categories: [],
@@ -18,6 +20,5 @@ export default (currentState = INITIAL_STATE, action) => {
       return {...currentState, loading: false, error: action.error};
     default:
       return currentState;
-
   }
 }

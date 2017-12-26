@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
 import './EventsList.css';
 import SearchForm from '../../components/SearchForm';
-import FilterForm from '../../components/FilterForm';
+import { FilterForm } from '../../containers/Categories';
+import { Events } from '../../containers/Events';
 
 class EventsList extends Component {
-  componentWillMount(){
-    this.props.getCategories();
-  }
-
   render() {
-    const {
-      categories, 
-      loading, 
-      error
-    } = this.props;
     return(
       <div className="EventsList">
-      <SearchForm />
-      <FilterForm categories={categories} />
-        <div className="all-events-list">
-          AllEventsList
-        </div>
+        <SearchForm />
+        <FilterForm />
+        <Events />
       </div>
       );
   }

@@ -1,43 +1,81 @@
-// import Axios from 'axios';
-// import { eventsApi, eventsByCategoryApi } from '../apiConfig';
+import Axios from 'axios';
+import { eventsApi, categoryEventsApi } from '../apiConfig';
 
-// /* Action types */
+/* Action types */
 
-// // Get all events
-// export const GET_CATEGORIES_LOADING = 'GET_CATEGORIES_LOADING';
-// export const  GET_CATEGORIES = 'GET_CATEGORIES';
-// export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
-// export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
+// Get all events
+export const GET_EVENTS_LOADING = 'GET_EVENTS_LOADING';
+export const  GET_EVENTS = 'GET_EVENTS';
+export const GET_EVENTS_SUCCESS = 'GET_EVENTS_SUCCESS';
+export const GET_EVENTS_FAILURE = 'GET_EVENTS_FAILURE';
+
+// Get events by category
+export const GET_CATEGORY_EVENTS_LOADING = 'GET_CATEGORY_EVENTS_LOADING';
+export const  GET_CATEGORY_EVENTS = 'GET_CATEGORY_EVENTS';
+export const GET_CATEGORY_EVENTS_SUCCESS = 'GET_CATEGORY_EVENTS_SUCCESS';
+export const GET_CATEGORY_EVENTS_FAILURE = 'GET_CATEGORY_EVENTS_FAILURE';
 
 
-// /* Action object creators */
 
-// // Get all categories
+/* Action object creators */
 
-// export const getCategoriesLoading = () => {
-//   return{
-//     type : GET_CATEGORIES_LOADING
-//   }
-// }
+// Get all events
 
-// export const getCategories = () => {
-//   const payload = Axios.get(categoriesApi);
-//   return{
-//     type: GET_CATEGORIES,
-//     payload
-//   }
-// }
+export const getEventsLoading = () => {
+  return {
+    type : GET_EVENTS_LOADING
+  }
+}
 
-// export const getCategoriesSuccess = (categories) => {
-//   return{
-//     type: GET_CATEGORIES_SUCCESS,
-//     categories
-//   }
-// }
+export const getEvents = () => {
+  const payload = Axios.get(eventsApi);
+  return {
+    type: GET_EVENTS,
+    payload
+  }
+}
 
-// export const getCategoriesFailure = (error) => {
-//   return{
-//     type: GET_CATEGORIES_FAILURE,
-//     error
-//   }
-// }
+export const getEventsSuccess = (events) => {
+  return {
+    type: GET_EVENTS_SUCCESS,
+    events
+  }
+}
+
+export const getEventsFailure = (error) => {
+  return { 
+    type: GET_EVENTS_FAILURE,
+    error
+  }
+}
+
+
+// Get events by category
+
+export const getCategoryEventsLoading = () => {
+  return {
+    type : GET_CATEGORY_EVENTS_LOADING
+  }
+}
+
+export const getCategoryEvents = (categoryId) => {
+  const payload = Axios.get(categoryEventsApi(categoryId));
+  return {
+    type: GET_CATEGORY_EVENTS,
+    payload
+  }
+}
+
+export const getCategoryEventsSuccess = (events) => {
+  return {
+    type: GET_CATEGORY_EVENTS_SUCCESS,
+    events
+  }
+}
+
+export const getCategoryEventsFailure = (error) => {
+  return { 
+    type: GET_CATEGORY_EVENTS_FAILURE,
+    error
+  }
+}

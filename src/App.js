@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import {Route} from 'react-router-dom';
 import Home from './pages/Home';
-import EventsList from './containers/EventsList';
+import EventsList from './pages/EventsList';
 import About from './pages/About';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';

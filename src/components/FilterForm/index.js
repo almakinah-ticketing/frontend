@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
 
 class FilterForm extends Component {
-  _parseDate(now) {
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var day = now.getDate();
-    var date = `${year}-${month}-${day}`;
+  _parseDate(newDate) {
+    const year = newDate.getFullYear();
+    const month = newDate.getMonth() + 1;
+    const day = newDate.getDate();
+    const date = `${year}-${month}-${day}`;
     return date;
+  }
+
+  componentWillMount(){
+    const {
+      getCategories
+    } = this.props;
+    getCategories();
   }
 
   render() {
     /* Add name and value attributes and related validations, props, and onChange and onClick event handlers */
-    const {categories} = this.props;
+    const {
+      categories, 
+      loading, 
+      error
+    } = this.props;
     return(
       <form className="filter-events-form">
         <input type="checkbox" id="filter-events-category" className="filter-events-checkbox" name="filter-events-filters" />
@@ -19,7 +30,7 @@ class FilterForm extends Component {
         <select id="filter-events-category" className="filter-events-select">
           <option>All Categories</option>
           {categories.map((category) => {
-            return(
+            return (
               <option>{category.name}</option>
               );
             })
