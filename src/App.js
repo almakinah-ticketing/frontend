@@ -4,7 +4,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import {Route} from 'react-router-dom';
 import Home from './pages/Home';
-import EventsList from './pages/EventsList';
+import { EventsList } from './containers/EventsList';
+import EventDetails from './pages/EventDetails';
 import About from './pages/About';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
@@ -18,6 +19,7 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
           <Route path="/events" exact component={EventsList} />
+          <Route path="/events/:id" exact component={EventDetails} />
           <Route path="/about" exact component={About} />
           <Route path="/login" exact component={LogIn} />
           <Route path="/signup" exact component={SignUp} />
