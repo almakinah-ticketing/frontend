@@ -1,34 +1,29 @@
 import React, { Component } from 'react';
 
 export default class Categories extends Component {
-	componentWillMount(){
-		this.props.getCategories();
+  componentWillMount() {
+    const {
+      getCategories
+    } = this.props;
+    getCategories();
+  }
 
-	}
-
-  render(){
-  	const {categories, loading, error} = this.props;
-    return(
+  render() {
+    const {categories, loading, error} = this.props;
+    console.log(categories);
+    return (
       <div>
-        <h1>Categories</h1>
+        <h3>Categories</h3>
         {console.log("Categories in state right now: ")}
         {console.log(categories)}
         {
-        	categories.map((category) => {
-        		return (
-        			<div>{category.name}</div>
-
-        			)
-
-        	})
-        }
-        
-        
+      	   categories.map((category) => {
+      	     return (
+              <div>{category.name}</div>
+              )
+           })
+         }
       </div>
-
-
-
-    )
+      );
   }
-
 }

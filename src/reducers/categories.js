@@ -1,11 +1,11 @@
 import {
-  GET_CATEGORIES_LOADING,  GET_CATEGORIES, GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE
-} from '../actions/categories'
+  GET_CATEGORIES_LOADING, GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE
+} from '../actions/categories';
 
 const INITIAL_STATE = {
   categories: [],
   loading: false,
-  error:null
+  error: null
 }
 
 export default (currentState = INITIAL_STATE, action) => {
@@ -20,6 +20,5 @@ export default (currentState = INITIAL_STATE, action) => {
       return {...currentState, loading: false, error: action.error};
     default:
       return currentState;
-
   }
 }
