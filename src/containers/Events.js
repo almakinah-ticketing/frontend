@@ -4,6 +4,7 @@ import {
   getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
   getCategoryEventsLoading, getCategoryEvents, getCategoryEventsSuccess, getCategoryEventsFailure
 } from '../actions/events';
+import UpcomingComponent from '../components/Upcoming';
 
 const mapStateToProps = (store) => {
   return {
@@ -39,3 +40,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export const Events = connect(mapStateToProps, mapDispatchToProps)(EventsComponent);
+export const Upcoming = connect(mapStateToProps, mapDispatchToProps)(UpcomingComponent);
+
