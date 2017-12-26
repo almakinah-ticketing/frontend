@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 
 export default class Categories extends Component {
-	componentWillMount(){
-		this.props.getCategories();
+  componentWillMount() {
+    const {
+      getCategories
+    } = this.props;
+    getCategories();
+  }
 
-	}
-
-  render(){
-  	const {categories, loading, error} = this.props;
-    return(
+  render() {
+    const {categories, loading, error} = this.props;
+    console.log(categories);
+    return (
       <div>
         <h1>Categories</h1>
        
@@ -23,5 +26,6 @@ export default class Categories extends Component {
         }  
       </div>
     )
+
   }
 }

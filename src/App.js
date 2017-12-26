@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import {Route, Switch} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import Home from './pages/Home';
 import EventsList from './pages/EventsList';
 import About from './pages/About';
@@ -16,6 +16,7 @@ class App extends Component {
         <Header />
         <div className="App-container">
           <Route path="/" exact component={Home} />
+          <Route path="/home" exact component={Home} />
           <Route path="/events" exact component={EventsList} />
           <Route path="/about" exact component={About} />
           <Route path="/login" exact component={LogIn} />

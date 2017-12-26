@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
-import Categories from '../../containers/Categories';
+import {Categories} from '../../containers/Categories';
 import HotestEvent from '../../containers/HotestEvent';
 
 class Home extends Component {
