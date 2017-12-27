@@ -12,11 +12,15 @@ export default (currentState = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_CATEGORIES_LOADING:
       return {...currentState, loading: true};
+      break;
     case GET_CATEGORIES_SUCCESS:
-      return {...currentState, loading: false, categories: action.categories};
+      return {...currentState, loading: false, error: null, categories: action.categories};
+      break;
     case GET_CATEGORIES_FAILURE:
       return {...currentState, loading: false, error: action.error};
+      break;
     default:
       return currentState;
+      break;
   }
 }

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import CategoriesComponent from '../components/Categories';
-import FilterFormComponent from '../components/FilterForm';
 import {
   getCategoriesLoading, getCategories, getCategoriesSuccess, getCategoriesFailure
 } from '../actions/categories';
@@ -30,4 +29,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export const Categories = connect(mapStateToProps, mapDispatchToProps)(CategoriesComponent);
-export const FilterForm = connect(mapStateToProps, mapDispatchToProps)(FilterFormComponent);
