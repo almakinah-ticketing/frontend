@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { eventsApi, categoryEventsApi } from '../apiConfig';
+import { eventsApi } from '../apiConfig';
 
 /* Action types */
 
@@ -9,11 +9,11 @@ export const  GET_EVENTS = 'GET_EVENTS';
 export const GET_EVENTS_SUCCESS = 'GET_EVENTS_SUCCESS';
 export const GET_EVENTS_FAILURE = 'GET_EVENTS_FAILURE';
 
-// Get events by category
-export const GET_CATEGORY_EVENTS_LOADING = 'GET_CATEGORY_EVENTS_LOADING';
-export const  GET_CATEGORY_EVENTS = 'GET_CATEGORY_EVENTS';
-export const GET_CATEGORY_EVENTS_SUCCESS = 'GET_CATEGORY_EVENTS_SUCCESS';
-export const GET_CATEGORY_EVENTS_FAILURE = 'GET_CATEGORY_EVENTS_FAILURE';
+// // Get events by category if weren't checking in apiConfig
+// export const GET_CATEGORY_EVENTS_LOADING = 'GET_CATEGORY_EVENTS_LOADING';
+// export const  GET_CATEGORY_EVENTS = 'GET_CATEGORY_EVENTS';
+// export const GET_CATEGORY_EVENTS_SUCCESS = 'GET_CATEGORY_EVENTS_SUCCESS';
+// export const GET_CATEGORY_EVENTS_FAILURE = 'GET_CATEGORY_EVENTS_FAILURE';
 
 
 
@@ -27,8 +27,8 @@ export const getEventsLoading = () => {
   }
 }
 
-export const getEvents = () => {
-  const payload = Axios.get(eventsApi);
+export const getEvents = (categoryId) => {
+  const payload = Axios.get(eventsApi(categoryId));
   return {
     type: GET_EVENTS,
     payload
@@ -50,32 +50,32 @@ export const getEventsFailure = (error) => {
 }
 
 
-// Get events by category
+// // Get events by category if weren't checking in apiConfig
 
-export const getCategoryEventsLoading = () => {
-  return {
-    type : GET_CATEGORY_EVENTS_LOADING
-  }
-}
+// export const getCategoryEventsLoading = () => {
+//   return {
+//     type : GET_CATEGORY_EVENTS_LOADING
+//   }
+// }
 
-export const getCategoryEvents = (categoryId) => {
-  const payload = Axios.get(categoryEventsApi(categoryId));
-  return {
-    type: GET_CATEGORY_EVENTS,
-    payload
-  }
-}
+// export const getCategoryEvents = (categoryId) => {
+//   const payload = Axios.get(categoryEventsApi(categoryId));
+//   return {
+//     type: GET_CATEGORY_EVENTS,
+//     payload
+//   }
+// }
 
-export const getCategoryEventsSuccess = (events) => {
-  return {
-    type: GET_CATEGORY_EVENTS_SUCCESS,
-    events
-  }
-}
+// export const getCategoryEventsSuccess = (events) => {
+//   return {
+//     type: GET_CATEGORY_EVENTS_SUCCESS,
+//     events
+//   }
+// }
 
-export const getCategoryEventsFailure = (error) => {
-  return { 
-    type: GET_CATEGORY_EVENTS_FAILURE,
-    error
-  }
-}
+// export const getCategoryEventsFailure = (error) => {
+//   return { 
+//     type: GET_CATEGORY_EVENTS_FAILURE,
+//     error
+//   }
+// }

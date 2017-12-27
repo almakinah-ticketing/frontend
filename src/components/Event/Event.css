@@ -1,0 +1,9 @@
+.event {
+  width: 60%;
+  margin: auto;
+  /*text-align: left;*/
+}
+
+.event-text-info {
+  margin-left: 5%;
+}
