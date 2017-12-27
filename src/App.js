@@ -6,6 +6,7 @@ import {Route} from 'react-router-dom';
 import Home from './pages/Home';
 import { EventsList } from './containers/EventsList';
 import EventDetails from './pages/EventDetails';
+import TicketTypes from './containers/TicketTypes';
 import About from './pages/About';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
@@ -24,6 +25,9 @@ class App extends Component {
           <Route path="/about" exact component={About} />
           <Route path="/login" exact component={LogIn} />
           <Route path="/signup" exact component={SignUp} />
+
+          <Route path="/tickettypes" exact component ={TicketTypes}/>
+
         </div>
         <Footer />
       </div>
