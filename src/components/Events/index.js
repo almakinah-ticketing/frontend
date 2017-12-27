@@ -45,8 +45,7 @@ class Events extends Component {
       events,
       eventsLoading,
       eventsError,
-      getEvents,
-      _filterByCategory
+      getEvents
     } = this.props;
     return (
       <div className="all-events-list">
@@ -59,7 +58,7 @@ class Events extends Component {
             : 
               events.map((event) => {
                 return (
-                  <Event event={event}  getEvents={getEvents} _filterByCategory={_filterByCategory} />
+                  <Event event={event}  getEvents={getEvents} source="events" />
                   );
           })
         }

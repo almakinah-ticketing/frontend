@@ -5,7 +5,8 @@ class FilterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryId: 0
+      categoryId: '0',
+      date: new Date()
     }
     this._parseDate = this._parseDate.bind(this);
     this._handleChange = this._handleChange.bind(this);
@@ -20,7 +21,7 @@ class FilterForm extends Component {
   }
 
   _handleChange(event) {
-    this.setState({[event.target.name]: Number(event.target.value)});
+    this.setState({[event.target.name]: event.target.value});
   }
 
   componentWillMount() {
@@ -31,7 +32,7 @@ class FilterForm extends Component {
 
   // set value of select dropdown to null/all categories if there are no query params
     if (this.props.location.search === '') {
-      this.setState({categoryId: 0});
+      this.setState({categoryId: '0'});
     } else {
       var searchArray = this.props.location.search.split('?');
       var queryParamsString = searchArray[1];
@@ -44,9 +45,9 @@ class FilterForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // set value of select dropdown to null/all categories if there are no query params
+    // set value of select dropdown to '0'/all categories if there are no query params
     if (nextProps.location.search === '') {
-      this.setState({categoryId: 0});
+      this.setState({categoryId: '0'});
     } else {
       var searchArray = nextProps.location.search.split('?');
       var queryParamsString = searchArray[1];
@@ -61,8 +62,7 @@ class FilterForm extends Component {
   render() { 
     /* Add filter by date functionality */
     const {
-      categories,
-      _filterByCategory
+      categories
     } = this.props;
     return(
       <form className="filter-events-form">
@@ -79,8 +79,8 @@ class FilterForm extends Component {
         </select>
         <input type="checkbox" id="filter-events-date" className="filter-events-checkbox" name="filter-events-filters" />
         <label className="filter-events-label" htmlFor="filter-events-date">Date</label>
-        <input type="date" id="filter-events-date" className="filter-events-date" value={this._parseDate(new Date())} />
-        <button type="button" className="filter-events-submit" onClick={() => {_filterByCategory(this.state.categoryId)}}><Link to={(this.state.categoryId === 0) ? '/events' : `/events?categoryId=${this.state.categoryId}`}>Filter</Link></button>
+        <input type="date" id="filter-events-date" className="filter-events-date" name="date" value={this._parseDate(this.state.date)} onChange={this._handleChange} />
+        <button type="button" className="filter-events-submit"><Link to={(this.state.categoryId === '0') ? '/events' : `/events?categoryId=${this.state.categoryId}`}>Filter</Link></button>
       </form>
     );
   }
