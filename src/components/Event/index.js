@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Events from '../Events';
 import './Event.css';
 
 class Event extends Component {
@@ -30,9 +29,6 @@ class Event extends Component {
   }
 
   _parseDuration(endDatetime, startDatetime) {
-    const { 
-      event
-    } = this.props;
     var endTime = (new Date(endDatetime)).getTime();
     var startTime = (new Date(startDatetime)).getTime();
     var durationMs = endTime - startTime;
@@ -59,7 +55,6 @@ class Event extends Component {
   render() {
     const {
       event,
-      categories,
       _filterByCategory
     } = this.props;
     return (

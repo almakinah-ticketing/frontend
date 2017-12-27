@@ -36,7 +36,7 @@ class EventsList extends Component {
     return(
       <div className="EventsList">
         <SearchForm />
-        <FilterForm categories={categories} events={events} getCategories={getCategories} getEvents={getEvents} _filterByCategory={this._filterByCategory} />
+        <FilterForm categories={categories} events={events} getCategories={getCategories} getEvents={getEvents} _filterByCategory={this._filterByCategory} location={location} />
         <Events events={events} getEvents={getEvents} eventsLoading={eventsLoading} eventsError={eventsError} _filterByCategory={this._filterByCategory} location={location} />
       </div>
       );
