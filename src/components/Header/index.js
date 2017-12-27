@@ -6,11 +6,12 @@ class Header extends Component {
   render() {
     return(
       <div className="App-header clearfix">
-        <img className="logo pull-start" src="logo.png" alt="Logo" />
+        <NavLink to="/"><img className="logo pull-start" src="logo.png" alt="Logo" /></NavLink>
         <nav className="info-nav pull-start">
           <ul>
-            <li><NavLink to="/events">Events</NavLink></li>
+            <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/about">About the Summit</NavLink></li>
+            <li><NavLink to="/events">Events</NavLink></li>
           </ul>
         </nav>
         <nav className="action-nav pull-end">

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import Categories from '../components/Categories';
+import CategoriesComponent from '../components/Categories';
+import FilterFormComponent from '../components/FilterForm';
 import {
   getCategoriesLoading, getCategories, getCategoriesSuccess, getCategoriesFailure
 } from '../actions/categories';
@@ -13,22 +14,20 @@ const mapStateToProps = (store) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return{
+  return {
     getCategories: () => {
       dispatch(getCategoriesLoading());
       dispatch(getCategories()).then(response => {
-        if(response.payload.status<400){
+        if (response.payload.status<400) {
           dispatch(getCategoriesSuccess(response.payload.data));
-        
-        }else{
+
+        } else {
           dispatch(getCategoriesFailure(response.payload.message));
-
         }
-      })
+      });
     }
-
   }
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export const Categories = connect(mapStateToProps, mapDispatchToProps)(CategoriesComponent);
+export const FilterForm = connect(mapStateToProps, mapDispatchToProps)(FilterFormComponent);
