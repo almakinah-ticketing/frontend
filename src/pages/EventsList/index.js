@@ -7,23 +7,25 @@ import Events from '../../components/Events';
 class EventsList extends Component {
   constructor(props) {
     super(props);
-    this._filterByCategory = this._filterByCategory.bind(this);
+    // this._filterEvents = this._filterEvents.bind(this);
   }
 
-  _filterByCategory(categoryId) {
-    const {
-      getEvents
-    } = this.props;
-    if (categoryId === null) {
-      getEvents();
-    } else {
-      // getCategoryEvents(categoryId);
-      getEvents(categoryId);
-    }
-  }
+  // _filterEvents(categoryId, date) {
+  //   const {
+  //     getEvents
+  //   } = this.props;
+  //   if (categoryId === '0' && date === new Date()) {
+  //     getEvents();
+  //   } else if (categoryId !== '0' && date === new Date()) {
+  //     getEvents(categoryId);
+  //   } else if (categoryId === '0' && date !== new Date()) {
+  //     getEvents(date);
+  //   } else if (categoryId !== '0' && date !== new Date()) {
+  //     getEvents(categoryId, date);
+  //   }
+  // }
 
   render() {
-    console.log(this.props);
     const {
       categories,
       events,
@@ -36,8 +38,8 @@ class EventsList extends Component {
     return(
       <div className="EventsList">
         <SearchForm />
-        <FilterForm categories={categories} events={events} getCategories={getCategories} getEvents={getEvents} _filterByCategory={this._filterByCategory} location={location} />
-        <Events events={events} getEvents={getEvents} eventsLoading={eventsLoading} eventsError={eventsError} _filterByCategory={this._filterByCategory} location={location} />
+        <FilterForm categories={categories} events={events} getCategories={getCategories} getEvents={getEvents} location={location} />
+        <Events events={events} getEvents={getEvents} eventsLoading={eventsLoading} eventsError={eventsError} location={location} />
       </div>
       );
   }

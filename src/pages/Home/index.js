@@ -10,7 +10,7 @@ class Home extends Component {
   render() {
     return(
       <div className="Home">
-        <h2>Home Page</h2>
+        <h1 className="App-title">AlMakinah Summit</h1>
         <NavLink to="/"><img className="logo" src="logo.png" alt="Logo"/></NavLink>
         <SearchForm />
         <HotestEvent />

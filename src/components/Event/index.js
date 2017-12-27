@@ -54,29 +54,98 @@ class Event extends Component {
 
   render() {
     const {
+      source,
       event,
-      _filterByCategory
+      _filterEvents,
+      loading,
+      error
     } = this.props;
-    return (
-      <div className="event clearfix">
-        <Link to={`/events/${event.id}`}><img src={event.img} alt={event.title} className="event-img pull-start" /></Link>
-        <div className="event-text-info pull-start">
-          <Link to={`/events/${event.id}`}><h2>{event.title}</h2></Link>
-          <time dateTime={event.start_datetime}>{this._parseDate(event.start_datetime)}</time>
-          <p>{this._parseDuration(event.end_datetime, event.start_datetime)}</p>
-          {
-            JSON.parse(event.overview).map((line) => {
-              return(
-                <p>{line}</p>
-                );
-            })
-          }
-          <form>
-            <button type="button" onClick={() => {_filterByCategory(event.category.id)}}><Link to={`/events?categoryId=${event.category.id}`}>#{event.category.name}</Link></button>
-          </form>
+    if (source === 'events' || source === 'upcomingEvents') {
+      return (
+        <div className="event clearfix">
+          <Link to={`/events/${event.id}`}><img src={event.img} alt={event.title} className="event-img pull-start" /></Link>
+          <div className="event-text-info pull-start">
+            <Link to={`/events/${event.id}`}><h2>{event.title}</h2></Link>
+            <Link to={`/events?categoryId=${event.category.id}`}>#{event.category.name}</Link>
+            <time dateTime={event.start_datetime}>{this._parseDate(event.start_datetime)}</time>
+            <p>{this._parseDuration(event.end_datetime, event.start_datetime)}</p>
+            <div className="overview">
+              {
+                JSON.parse(event.overview).map((line) => {
+                  return(
+                    <p className="overview-line">{line}</p>
+                    );
+                })
+              }
+            </div>
+          </div>
         </div>
-      </div>
       );
+    } else if (source === 'eventDetails') {
+      if (Object.keys(event).length === 0) {
+        if (loading) {
+          return(
+            <p className="loading-message">Loading event details...</p>
+            );
+        } else if (error) {
+          return(
+            <p className="error-message">Oops, something went wrong!</p>
+            );
+        } else {
+          return (
+            <span></span>
+            );
+        }
+      } else {
+        return(
+          <div className="event-details">
+            <Link to={`/events/${event.data.id}`}><h1>{event.data.title}</h1></Link>
+            <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img" /></Link>
+            <Link to={`/events?categoryId=${event.data.category_id}`}>#{event.category}</Link>
+            <p><span className="dataKeys">When?</span><time dateTime={event.data.start_datetime}>{this._parseDate(event.data.start_datetime)}</time></p>
+            <p><span className="dataKeys">How long?</span>{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
+            <div className="overview">
+              <span className="dataKeys">What exactly?</span>
+              {
+                JSON.parse(event.data.overview).map((line) => {
+                  return(
+                    <p className="overview-line">{line}</p>
+                    );
+                })
+              }
+            </div>
+            {/* add info on tickets remaining, sold out, etc.? */}
+            <ul className="ticket-prices-per-type">
+              {
+                event.data.types.map((type) => {
+                  return(
+                    <li>
+                      <span className="ticket-type-name">{type.name}</span>
+                      <span className="ticket-type-price">{type.price}</span>
+                    </li>
+                    );
+                })
+              }
+            <div className="agenda">
+              <span className="dataKeys">What'll be happening?</span>
+              {
+                JSON.parse(event.data.agenda).map((line) => {
+                  return(
+                    <p className="agenda-line">{line}</p>
+                    );
+                })
+              }
+            </div>
+            </ul>
+            {
+              (event.tickets_available !== 0)
+              ? <Link to={`/events/${event.data.id}/tickets`}>Get Tickets Now</Link>
+              : <span></span>
+            }
+        </div>
+        );
+      }
+    }
   }
 }
 
