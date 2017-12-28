@@ -62,7 +62,8 @@ class FilterForm extends Component {
   render() { 
     /* Add filter by date functionality */
     const {
-      categories
+      categories,
+      _filterEvents
     } = this.props;
     return(
       <form className="filter-events-form">
@@ -80,7 +81,7 @@ class FilterForm extends Component {
         <input type="checkbox" id="filter-events-date" className="filter-events-checkbox" name="filter-events-filters" />
         <label className="filter-events-label" htmlFor="filter-events-date">Date</label>
         <input type="date" id="filter-events-date" className="filter-events-date" name="date" value={this._parseDate(this.state.date)} onChange={this._handleChange} />
-        <button type="button" className="filter-events-submit"><Link to={(this.state.categoryId === '0') ? '/events' : `/events?categoryId=${this.state.categoryId}`}>Filter</Link></button>
+        <button type="button" className="filter-events-submit btn btn-default"><Link to={_filterEvents(this.state.categoryId, this._parseDate(this.state.date))}>Filter</Link></button>
       </form>
     );
   }

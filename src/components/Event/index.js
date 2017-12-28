@@ -46,9 +46,9 @@ class Event extends Component {
     if (durationH > 1) {
       hoursWord = 'hours';
     } else {
-      hoursWord = 'minutes';
+      hoursWord = 'hour';
     }
-    var durationString = `Duration: ${(durationH !== 0) ? durationH : ''} ${(durationH !== 0) ? hoursWord : ''} ${(durationM !== 0) ? durationM : ''} ${(durationM !== 0) ? minutesWord : ''}`;
+    var durationString = `${(durationH !== 0) ? durationH : ''} ${(durationH !== 0) ? hoursWord : ''} ${(durationM !== 0) ? durationM : ''} ${(durationM !== 0) ? minutesWord : ''}`;
     return durationString;
   }
 
@@ -63,12 +63,19 @@ class Event extends Component {
     if (source === 'events' || source === 'upcomingEvents') {
       return (
         <div className="event clearfix">
+          {
+            (new Date(event.start_datetime) < new Date()) 
+            ? <p className="event-expired-message">Event has already happened</p>
+            : (event.tickets_available === 0)
+              ? <p className="event-sold-out-message">Sold out</p>
+              : <span></span>
+          }
           <Link to={`/events/${event.id}`}><img src={event.img} alt={event.title} className="event-img pull-start" /></Link>
           <div className="event-text-info pull-start">
-            <Link to={`/events/${event.id}`}><h2>{event.title}</h2></Link>
-            <Link to={`/events?categoryId=${event.category.id}`}>#{event.category.name}</Link>
+            <h2><Link to={`/events/${event.id}`}>{event.title}</Link></h2>
+            <Link to={_filterEvents(event.category.id)}>#{event.category.name}</Link>
             <time dateTime={event.start_datetime}>{this._parseDate(event.start_datetime)}</time>
-            <p>{this._parseDuration(event.end_datetime, event.start_datetime)}</p>
+            <p>Duration: {this._parseDuration(event.end_datetime, event.start_datetime)}</p>
             <div className="overview">
               {
                 JSON.parse(event.overview).map((line) => {
@@ -98,14 +105,14 @@ class Event extends Component {
         }
       } else {
         return(
-          <div className="event-details">
-            <Link to={`/events/${event.data.id}`}><h1>{event.data.title}</h1></Link>
-            <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img" /></Link>
-            <Link to={`/events?categoryId=${event.data.category_id}`}>#{event.category}</Link>
-            <p><span className="dataKeys">When?</span><time dateTime={event.data.start_datetime}>{this._parseDate(event.data.start_datetime)}</time></p>
-            <p><span className="dataKeys">How long?</span>{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
+          <div className="event-details container-fluid">
+            <h1><Link to={`/events/${event.data.id}`} className="col-md-12">{event.data.title}</Link></h1>
+            <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img col-md-12" /></Link>
+            <Link to={_filterEvents(event.data.category_id)}>#{event.category}</Link>
+            <p><span className="dataKeys col-md-4">When?</span><time dateTime={event.data.start_datetime} className="col-md-8">{this._parseDate(event.data.start_datetime)}</time></p>
+            <p><span className="dataKeys col-md-4">How long?</span>{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
             <div className="overview">
-              <span className="dataKeys">What exactly?</span>
+              <span className="dataKeys col-md-4">What exactly?</span>
               {
                 JSON.parse(event.data.overview).map((line) => {
                   return(
@@ -115,19 +122,19 @@ class Event extends Component {
               }
             </div>
             {/* add info on tickets remaining, sold out, etc.? */}
-            <ul className="ticket-prices-per-type">
+            <ul className="ticket-prices-per-type list-unstyled">
               {
                 event.data.types.map((type) => {
                   return(
                     <li>
                       <span className="ticket-type-name">{type.name}</span>
-                      <span className="ticket-type-price">{type.price}</span>
+                      <span className="ticket-type-price">EGP {type.price}</span>
                     </li>
                     );
                 })
               }
             <div className="agenda">
-              <span className="dataKeys">What'll be happening?</span>
+              <span className="dataKeys col-md-4">What'll be happening?</span>
               {
                 JSON.parse(event.data.agenda).map((line) => {
                   return(
@@ -138,9 +145,11 @@ class Event extends Component {
             </div>
             </ul>
             {
-              (event.tickets_available !== 0)
-              ? <Link to={`/events/${event.data.id}/tickets`}>Get Tickets Now</Link>
-              : <span></span>
+              (new Date(event.data.start_datetime) < new Date()) 
+              ? <p className="event-expired-message">Event has already happened</p>
+              : (event.tickets_available === 0)
+                ? <p className="event-sold-out-message">Sold out</p>
+                : <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get Tickets Now</Link>
             }
         </div>
         );

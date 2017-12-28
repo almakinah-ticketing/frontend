@@ -27,8 +27,8 @@ export const getEventsLoading = () => {
   }
 }
 
-export const getEvents = (categoryId) => {
-  const payload = Axios.get(eventsApi(categoryId));
+export const getEvents = (categoryId, date) => {
+  const payload = Axios.get(eventsApi(categoryId, date));
   return {
     type: GET_EVENTS,
     payload

@@ -13,7 +13,7 @@ export default class Categories extends Component {
     console.log(categories);
     return (
       <div>
-        <h1>Categories</h1>
+        <h2>Categories</h2>
        
         {
         	categories.map((category) => {

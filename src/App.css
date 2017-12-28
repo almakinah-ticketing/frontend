@@ -22,3 +22,18 @@ body {
   clip: rect(0,0,0,0);
   border: 0;
 }
+
+.pull-start {
+  float: left;
+}
+
+.pull-end {
+  float: right;
+}
+
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}

@@ -6,16 +6,22 @@ class Events extends Component {
   componentWillMount() {
     const {
       getEvents
-    } = this.props;    
+    } = this.props;  
     if (this.props.location.search === '') {
       getEvents();
     } else {
       var searchArray = this.props.location.search.split('?');
       var queryParamsString = searchArray[1];
       var queryParamsObject = new URLSearchParams(queryParamsString);
-      var categoryId = queryParamsObject.get("categoryId");
-      if (this.props.location.search === `?categoryId=${categoryId}`) {
+      var categoryId = queryParamsObject.get("categoryId"); 
+      var date = queryParamsObject.get("date"); 
+      if (categoryId && date) {
+        getEvents(categoryId, date);
+      } else if (categoryId) {
+        console.log("im right")
         getEvents(categoryId);
+      } else if (date) {
+        getEvents(date);
       }
     }
   }
@@ -33,9 +39,18 @@ class Events extends Component {
         var queryParamsString = searchArray[1];
         var queryParamsObject = new URLSearchParams(queryParamsString);
         var categoryId = queryParamsObject.get("categoryId");
-        if (nextProps.location.search === `?categoryId=${categoryId}`) {
+        var date = queryParamsObject.get("date"); 
+        if (categoryId && date) {
+          getEvents(categoryId, date);
+        } else if (categoryId) {
           getEvents(categoryId);
+          console.log("right again")
+        } else if (date) {
+          getEvents(date);
         }
+        // if (nextProps.location.search === `?categoryId=${categoryId}`) {
+        //   getEvents(categoryId);
+        // }
       }
     }
   }
@@ -45,7 +60,8 @@ class Events extends Component {
       events,
       eventsLoading,
       eventsError,
-      getEvents
+      getEvents,
+      _filterEvents
     } = this.props;
     return (
       <div className="all-events-list">
@@ -58,7 +74,7 @@ class Events extends Component {
             : 
               events.map((event) => {
                 return (
-                  <Event event={event}  getEvents={getEvents} source="events" />
+                  <Event event={event}  getEvents={getEvents} source="events" _filterEvents={_filterEvents} />
                   );
           })
         }
