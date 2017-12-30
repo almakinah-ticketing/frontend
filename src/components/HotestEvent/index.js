@@ -9,7 +9,7 @@ export default class HotestEvent extends Component {
 		const {hotestEvent, loading, error} = this.props;
 		return(
 			<div>
-				<h1>HotestEvent</h1>
+				<h2>HotestEvent</h2>
 			
 			
 				<div>{hotestEvent.title}</div>

@@ -31,9 +31,10 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     },
-    getEvents: (categoryId) => {
+    getEvents: (params) => {
       dispatch(getEventsLoading());
-      dispatch(getEvents(categoryId)).then((response) => {
+      dispatch(getEvents(params)).then((response) => {
+        console.log(response);
         if (response.payload.status < 400) {
           dispatch(getEventsSuccess(response.payload.data));
         } else {
