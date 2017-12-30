@@ -60,6 +60,7 @@ class Event extends Component {
       loading,
       error
     } = this.props;
+    console.log(this.props);
     if (source === 'events' || source === 'upcomingEvents') {
       return (
         <div className="event clearfix">
@@ -73,8 +74,8 @@ class Event extends Component {
           <Link to={`/events/${event.id}`}><img src={event.img} alt={event.title} className="event-img pull-start" /></Link>
           <div className="event-text-info pull-start">
             <h2><Link to={`/events/${event.id}`}>{event.title}</Link></h2>
-            <Link to={_filterEvents(event.category.id)}>#{event.category.name}</Link>
-            <time dateTime={event.start_datetime}>{this._parseDate(event.start_datetime)}</time>
+            <Link to={_filterEvents({categoryId: event.category.id})}>#{event.category.name}</Link>
+            <time dateTime={event.start_datetime}><Link to={_filterEvents({date: event.start_datetime})}>{this._parseDate(event.start_datetime)}</Link></time>
             <p>Duration: {this._parseDuration(event.end_datetime, event.start_datetime)}</p>
             <div className="overview">
               {
@@ -108,8 +109,8 @@ class Event extends Component {
           <div className="event-details container-fluid">
             <h1><Link to={`/events/${event.data.id}`} className="col-md-12">{event.data.title}</Link></h1>
             <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img col-md-12" /></Link>
-            <Link to={_filterEvents(event.data.category_id)}>#{event.category}</Link>
-            <p><span className="dataKeys col-md-4">When?</span><time dateTime={event.data.start_datetime} className="col-md-8">{this._parseDate(event.data.start_datetime)}</time></p>
+            <Link to={_filterEvents({categoryId: event.data.category_id})}>#{event.category}</Link>
+            <p><span className="dataKeys col-md-4">When?</span><time dateTime={event.data.start_datetime} className="col-md-8"><Link to={_filterEvents({date: event.data.start_datetime})}>{this._parseDate(event.data.start_datetime)}</Link></time></p>
             <p><span className="dataKeys col-md-4">How long?</span>{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
             <div className="overview">
               <span className="dataKeys col-md-4">What exactly?</span>

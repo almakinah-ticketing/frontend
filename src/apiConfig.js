@@ -3,14 +3,14 @@ export const rootApi = 'http://localhost:3000';
 export const categoriesApi = `${rootApi}/categories`;
 // export const eventsApi = (categoryId) => `${rootApi}/${(categoryId && categoryId !== '0') ? 'categories/' + categoryId : 'events'}`;
 // export const categoryEventsApi = (categoryId) => `${rootApi}/categories/${categoryId}`;
-export const eventsApi = function (categoryId, date) {
+export const eventsApi = function (params) {
   var route;
-  if (categoryId && categoryId !== '0' && date) {
-    route = `${rootApi}/filter/events?event_date=${date}&category_id=${categoryId}`;
-  } else if (categoryId && categoryId !== 0) {
-    route = `${rootApi}/categories/${categoryId}`;
-  } else if (date) {
-    route = `${rootApi}/find/events?event_date=${date}`;
+  if (params.categoryId && params.categoryId !== '0' && params.date) {
+    route = `${rootApi}/events?event_date=${params.date}&category_id=${params.categoryId}`;
+  } else if (params.categoryId && params.categoryId !== '0') {
+    route = `${rootApi}/events?category_id=${params.categoryId}`;
+  } else if (params.date) {
+    route = `${rootApi}/events?event_date=${params.date}`;
   } else {
     route = `${rootApi}/events`;
   }

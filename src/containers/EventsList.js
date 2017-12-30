@@ -31,9 +31,9 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     },
-    getEvents: (categoryId, date) => {
+    getEvents: (params) => {
       dispatch(getEventsLoading());
-      dispatch(getEvents(categoryId, date)).then((response) => {
+      dispatch(getEvents(params)).then((response) => {
         console.log(response);
         if (response.payload.status < 400) {
           dispatch(getEventsSuccess(response.payload.data));

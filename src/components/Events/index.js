@@ -8,7 +8,7 @@ class Events extends Component {
       getEvents
     } = this.props;  
     if (this.props.location.search === '') {
-      getEvents();
+      getEvents({});
     } else {
       var searchArray = this.props.location.search.split('?');
       var queryParamsString = searchArray[1];
@@ -16,12 +16,11 @@ class Events extends Component {
       var categoryId = queryParamsObject.get("categoryId"); 
       var date = queryParamsObject.get("date"); 
       if (categoryId && date) {
-        getEvents(categoryId, date);
+        getEvents({categoryId: categoryId, date: date});
       } else if (categoryId) {
-        console.log("im right")
-        getEvents(categoryId);
+        getEvents({categoryId: categoryId});
       } else if (date) {
-        getEvents(date);
+        getEvents({date: date});
       }
     }
   }
@@ -33,7 +32,7 @@ class Events extends Component {
     } = this.props;
     if (this.props.location.search !== nextProps.location.search) {
       if (nextProps.location.search === '') {
-        getEvents();
+        getEvents({});
       } else {
         var searchArray = nextProps.location.search.split('?');
         var queryParamsString = searchArray[1];
@@ -41,12 +40,11 @@ class Events extends Component {
         var categoryId = queryParamsObject.get("categoryId");
         var date = queryParamsObject.get("date"); 
         if (categoryId && date) {
-          getEvents(categoryId, date);
+          getEvents({categoryId: categoryId, date: date});
         } else if (categoryId) {
-          getEvents(categoryId);
-          console.log("right again")
+          getEvents({categoryId: categoryId});
         } else if (date) {
-          getEvents(date);
+          getEvents({date: date});
         }
         // if (nextProps.location.search === `?categoryId=${categoryId}`) {
         //   getEvents(categoryId);

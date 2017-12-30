@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 
 export default class Upcoming extends Component{
   componentWillMount(){
-    this.props.getEvents();
+    this.props.getEvents({});
   }
 
   render(){
-    const {events, loading, error} = this.props;
+    const {events, loading, error, _filterEvents} = this.props;
 
      return (
       <div>
@@ -20,7 +20,7 @@ export default class Upcoming extends Component{
             return (
               <div>
                  {
-                    index < 3? <Event event={event} source="upcomingEvents" /> : false
+                    index < 3? <Event event={event} _filterEvents={_filterEvents} source="upcomingEvents" /> : false
                   }
             
               </div>

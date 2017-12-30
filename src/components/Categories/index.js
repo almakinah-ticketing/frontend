@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Categories extends Component {
   componentWillMount() {
@@ -9,23 +10,21 @@ export default class Categories extends Component {
   }
 
   render() {
-    const {categories, loading, error} = this.props;
+    const {categories, loading, error, _filterEvents} = this.props;
     console.log(categories);
     return (
       <div>
-        <h2>Categories</h2>
-       
+        <h2>Categories</h2>     
+        <ul>
         {
         	categories.map((category) => {
         		return (
-        			<div>{category.name}</div>
-
+        			<li><Link to={_filterEvents({categoryId: category.id})}>{category.name}</Link></li>
         			)
-
         	})
-        }  
+        }
+        </ul>  
       </div>
     )
-
   }
 }
