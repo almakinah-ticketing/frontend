@@ -1,0 +1,17 @@
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.typeName {
+	float:left;
+
+}
+.checkbox {
+	float: left;
+}
+.counter{
+	float:right;
+}

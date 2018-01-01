@@ -14,7 +14,7 @@ export default (currentState = INITIAL_STATE, action) => {
       return {...currentState, loading: true};
       break;
     case GET_TYPES_SUCCESS:
-      return {...currentState, loading: false, types: action.types};
+      return {...currentState, loading: false, error: null, types: action.types};
       break;
     case GET_TYPES_FAILURE:
       return {...currentState, loading: false, error: action.error};

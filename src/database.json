@@ -1,7 +1,41 @@
+
+	
 {
-	"hotestEvent": {
-		"id": 1,
-		"title": "first event",
-		"date": "1/1/2018"
-	}
+
+	"types" : [
+	   {
+	       "id": 1,
+	       "name": "Type 1",
+	       "price": 100,
+	       "capacity": 50,
+	       "available_tickets": 20,
+	       "group_ticket_no": 1,
+	       "event_id": 1,
+	       "created_at": "2017-12-27T08:58:14.277Z",
+	       "updated_at": "2017-12-27T08:58:14.277Z"
+	   },
+
+		    {
+	       "id": 3,
+	       "name": "Type 2",
+	       "price": 60,
+	       "capacity": 100,
+	       "available_tickets": 50,
+	       "group_ticket_no": 1,
+	       "event_id": 1,
+	       "created_at": "2017-12-27T08:58:14.807Z",
+	       "updated_at": "2017-12-27T08:58:14.807Z"
+	   },
+	   {
+	       "id": 18,
+	       "name": "Type 3",
+	       "price": 150,
+	       "capacity": 80,
+	       "available_tickets": 2,
+	       "group_ticket_no": 1,
+	       "event_id": 1,
+	       "created_at": "2017-12-27T08:58:27.668Z",
+	       "updated_at": "2017-12-27T08:58:27.668Z"
+	   }
+	]
 }
