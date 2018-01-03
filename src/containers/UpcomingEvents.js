@@ -14,9 +14,9 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getEvents: (categoryId) => {
+    getEvents: (params) => {
       dispatch(getEventsLoading());
-      dispatch(getEvents(categoryId)).then((response) => {
+      dispatch(getEvents(params)).then((response) => {
         if (response.payload.status < 400) {
           dispatch(getEventsSuccess(response.payload.data));
         } else {

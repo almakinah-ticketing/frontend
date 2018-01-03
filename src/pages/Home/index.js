@@ -42,7 +42,7 @@ class Home extends Component {
         <h1 className="App-title"><Link to="/">AlMakinah Summit</Link></h1>
         <Link to="/"><img className="logo" src="logo.png" alt="Logo"/></Link>
         <SearchForm />
-        <HotestEvent />
+        <HotestEvent _filterEvents={this._filterEvents} />
         <Upcoming _filterEvents={this._filterEvents} />
         <Categories _filterEvents={this._filterEvents} />
       </div>
