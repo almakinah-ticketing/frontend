@@ -98,6 +98,11 @@ class Event extends Component {
                     );
                 })
               }
+              {
+                (source === 'hottest-event')
+                  ? <p className="hottest-event-tickets-remaining">{event.tickets_available_per_event} tickets remaining!</p>
+                  : <span></span>
+              }
             </div>
           </div>
         </div>
