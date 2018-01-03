@@ -13,21 +13,21 @@ class EventsList extends Component {
   // returns route with filtered data depending on query params to use in <Link>s
   _filterEvents(params) {
     var route;
-    function _parseDate(newDate) {
-      const dateObject = new Date(newDate);
-      const year = dateObject.getFullYear();
-      const month = dateObject.getMonth() + 1;
-      const day = dateObject.getDate();
-      const date = `${year}-${month}-${day}`;
-      return date;
-    }
+    // function _parseDateToDatabase(newDate) {
+    //   const dateObject = new Date(newDate);
+    //   const year = dateObject.getFullYear();
+    //   const month = dateObject.getMonth() + 1;
+    //   const day = dateObject.getDate();
+    //   const date = `${year}-${month}-${day}`;
+    //   return date;
+    // }
      if (params.categoryId && params.categoryId !== '0' && params.date) {
       route = `/events?categoryId=${params.categoryId}&date=${params.date}`;
     } else if (params.categoryId && params.categoryId !== '0') {
       route = `/events?categoryId=${params.categoryId}`;
     } else if (params.date) {
-      var parsedDate = _parseDate(params.date);
-      route = `/events?date=${parsedDate}`;
+      // var parsedDate = _parseDateToDatabase(params.date);
+      route = `/events?date=${params.date}`;
     } else {
       route = `/events`;
     }
