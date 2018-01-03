@@ -1,6 +1,8 @@
 export const rootApi = 'http://localhost:3000';
 
 export const categoriesApi = `${rootApi}/categories`;
+// export const eventsApi = (categoryId) => `${rootApi}/${(categoryId && categoryId !== '0') ? 'categories/' + categoryId : 'events'}`;
+// export const categoryEventsApi = (categoryId) => `${rootApi}/categories/${categoryId}`;
 export const eventsApi = function (params) {
   var route;
   if (params.categoryId && params.categoryId !== '0' && params.date) {
@@ -15,7 +17,4 @@ export const eventsApi = function (params) {
   return route;
 }
 export const eventApi = (eventId) => `${rootApi}/events/${eventId}`;
-
-// export const eventsApi = (categoryId) => `${rootApi}/${(categoryId && categoryId !== '0') ? 'categories/' + categoryId : 'events'}`;
-// export const categoryEventsApi = (categoryId) => `${rootApi}/categories/${categoryId}`;
-// export const hotestEventApi = `${rootApi}/events/hottest`;
+export const hotestEventApi = 'http://localhost:3002/hotestEvent';
