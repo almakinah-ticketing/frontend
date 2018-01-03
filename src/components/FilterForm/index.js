@@ -61,7 +61,6 @@ class FilterForm extends Component {
   }
 
   render() { 
-    /* Add filter by date functionality */
     const {
       categories,
       _filterEvents
