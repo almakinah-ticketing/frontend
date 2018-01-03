@@ -4,7 +4,8 @@ import {
   getCategoriesLoading, getCategories, getCategoriesSuccess, getCategoriesFailure
 } from '../actions/categories';
 import {
-  getEventsLoading, getEvents, getEventsSuccess, getEventsFailure
+  getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
+  addEventLoading, addEvent, addEventSuccess, addEventFailure
   // getCategoryEventsLoading, getCategoryEvents, getCategoryEventsSuccess, getCategoryEventsFailure
 } from '../actions/events';
 
@@ -31,9 +32,10 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     },
-    getEvents: (categoryId) => {
+    getEvents: (params) => {
       dispatch(getEventsLoading());
-      dispatch(getEvents(categoryId)).then((response) => {
+      dispatch(getEvents(params)).then((response) => {
+        console.log(response);
         if (response.payload.status < 400) {
           dispatch(getEventsSuccess(response.payload.data));
         } else {
@@ -41,6 +43,19 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     }
+    // Add Event
+
+    // addEvent: (event) => {
+    //   dispatch(addEventLoading());
+    //   dispatch(addEvent(event)).then((response) => {
+    //     if (response.payload.status < 400) {
+    //       dispatch(addEventSuccess(response.payload.data));
+    //     } else {
+    //       dispatch(addEventFailure(response.payload.message));
+    //     }
+    //   });
+    // }
+
     // getCategoryEvents: (categoryId) => {
     //   dispatch(getCategoryEventsLoading());
     //   dispatch(getCategoryEvents(categoryId)).then((response) => {

@@ -1,12 +1,16 @@
 import {
-  GET_EVENTS_LOADING, GET_EVENTS_SUCCESS, GET_EVENTS_FAILURE
+  GET_EVENTS_LOADING, GET_EVENTS_SUCCESS, GET_EVENTS_FAILURE,
+  ADD_EVENT_LOADING, ADD_EVENT, ADD_EVENT_SUCCESS, ADD_EVENT_FAILURE
   // GET_CATEGORY_EVENTS_LOADING, GET_CATEGORY_EVENTS_SUCCESS, GET_CATEGORY_EVENTS_FAILURE
 } from '../actions/events';
 
 const INITIAL_STATE = {
   events: [],
   loading: false,
-  error: null
+  error: null,
+  event: {},
+   adding: false,
+  errorAdding: null
 }
 
 export default (currentState = INITIAL_STATE, action) => {
@@ -36,6 +40,29 @@ export default (currentState = INITIAL_STATE, action) => {
         error: action.error
       };
       break;
+      // Add Event
+
+    case ADD_EVENT_LOADING:
+      return {
+        ...currentState,
+        adding: true
+      };
+      break;
+    case ADD_EVENT_SUCCESS:
+     return {
+      ...currentState,
+      adding: false,
+      event: [...currentState.items, action.event]
+      };
+      break;
+    case ADD_EVENT_FAILURE:
+     return {
+      ...currentState,
+      adding: false,
+      errorAdding: action.error
+      };
+      break;
+
     default:
       return currentState;
       break;

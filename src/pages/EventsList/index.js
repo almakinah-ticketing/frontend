@@ -7,23 +7,34 @@ import Events from '../../components/Events';
 class EventsList extends Component {
   constructor(props) {
     super(props);
-    this._filterByCategory = this._filterByCategory.bind(this);
+    this._filterEvents = this._filterEvents.bind(this);
   }
 
-  _filterByCategory(categoryId) {
-    const {
-      getEvents
-    } = this.props;
-    if (categoryId === null) {
-      getEvents();
-    } else {
-      // getCategoryEvents(categoryId);
-      getEvents(categoryId);
+  // returns route with filtered data depending on query params to use in <Link>s
+  _filterEvents(params) {
+    var route;
+    function _parseDate(newDate) {
+      const dateObject = new Date(newDate);
+      const year = dateObject.getFullYear();
+      const month = dateObject.getMonth() + 1;
+      const day = dateObject.getDate();
+      const date = `${year}-${month}-${day}`;
+      return date;
     }
+     if (params.categoryId && params.categoryId !== '0' && params.date) {
+      route = `/events?categoryId=${params.categoryId}&date=${params.date}`;
+    } else if (params.categoryId && params.categoryId !== '0') {
+      route = `/events?categoryId=${params.categoryId}`;
+    } else if (params.date) {
+      var parsedDate = _parseDate(params.date);
+      route = `/events?date=${parsedDate}`;
+    } else {
+      route = `/events`;
+    }
+    return route;
   }
 
   render() {
-    console.log(this.props);
     const {
       categories,
       events,
@@ -36,8 +47,8 @@ class EventsList extends Component {
     return(
       <div className="EventsList">
         <SearchForm />
-        <FilterForm categories={categories} events={events} getCategories={getCategories} getEvents={getEvents} _filterByCategory={this._filterByCategory} />
-        <Events events={events} getEvents={getEvents} eventsLoading={eventsLoading} eventsError={eventsError} _filterByCategory={this._filterByCategory} location={location} />
+        <FilterForm categories={categories} events={events} getCategories={getCategories} getEvents={getEvents} location={location} _filterEvents={this._filterEvents} />
+        <Events events={events} getEvents={getEvents} eventsLoading={eventsLoading} eventsError={eventsError} location={location} _filterEvents={this._filterEvents} />
       </div>
       );
   }

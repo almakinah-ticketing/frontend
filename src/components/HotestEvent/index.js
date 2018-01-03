@@ -9,12 +9,26 @@ export default class HotestEvent extends Component {
 		const {hotestEvent, loading, error} = this.props;
 		return(
 			<div>
-				<h1>HotestEvent</h1>
+				<h2>HotestEvent</h2>
+			{
+				hotestEvent.map((event) => {
+					return(
+						<div>
+							<h3>{event.title}</h3>
+							<p>{event.img}</p>
+							<p>{event.overview}</p>
+							<p>{event.agenda}</p>
+							<p>{event.event_date}</p>
+						</div>
+
+
+
+
+					)
+				})
+			}
 			
-			
-				<div>{hotestEvent.title}</div>
 				
-				<div>{hotestEvent.date}</div>
 			</div>
 		)
 

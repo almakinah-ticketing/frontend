@@ -1,18 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
+  
 }
 
 .sr-only {
@@ -24,4 +21,19 @@
   overflow: hidden;
   clip: rect(0,0,0,0);
   border: 0;
+}
+
+.pull-start {
+  float: left;
+}
+
+.pull-end {
+  float: right;
+}
+
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
 }

@@ -1,10 +1,10 @@
 import {
-GET_HOTESTEVENT_LOADING, GET_HOTESTEVENT, GET_HOTESTEVENT_SUCCESS, GET_HOTESTEVENT_FAILURE
+GET_HOTESTEVENT_LOADING, GET_HOTESTEVENT_SUCCESS, GET_HOTESTEVENT_FAILURE
 } from '../actions/hotestEvent'
 
 
 const INITIAL_STATE = {
-  hotestEvent: {},
+  hotestEvent: [],
   loading: false,
   error: null
 }

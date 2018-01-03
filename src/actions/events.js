@@ -9,6 +9,15 @@ export const  GET_EVENTS = 'GET_EVENTS';
 export const GET_EVENTS_SUCCESS = 'GET_EVENTS_SUCCESS';
 export const GET_EVENTS_FAILURE = 'GET_EVENTS_FAILURE';
 
+
+// Add event
+
+export const ADD_EVENT_LOADING = 'ADD_EVENT_LOADING';
+export const ADD_EVENT = 'ADD_EVENT';
+export const ADD_EVENT_SUCCESS = 'ADD_EVENT_SUCCESS';
+export const ADD_EVENT_FAILURE = 'ADD_EVENT_FAILURE';
+
+
 // // Get events by category if weren't checking in apiConfig
 // export const GET_CATEGORY_EVENTS_LOADING = 'GET_CATEGORY_EVENTS_LOADING';
 // export const  GET_CATEGORY_EVENTS = 'GET_CATEGORY_EVENTS';
@@ -27,8 +36,8 @@ export const getEventsLoading = () => {
   }
 }
 
-export const getEvents = (categoryId) => {
-  const payload = Axios.get(eventsApi(categoryId));
+export const getEvents = (params) => {
+  const payload = Axios.get(eventsApi(params));
   return {
     type: GET_EVENTS,
     payload
@@ -48,6 +57,40 @@ export const getEventsFailure = (error) => {
     error
   }
 }
+
+
+// Add Event
+
+// export const addEventLoading = () => {
+//   return{
+//     type: ADD_EVENT_LOADING
+//   }
+// }
+
+// export const addEvent = (event) => {
+//   const payload = Axios.post(postEventApi, {
+//     event,
+//     complete: false
+//   });
+//   return{
+//     type: ADD_EVENT,
+//     payload
+//   }
+// }
+
+// export const addEventSuccess = (event) => {
+//   return{
+//     type:ADD_EVENT_SUCCESS,
+//     event
+//   }
+// }
+
+// export const addEventFailure = (error) => {
+//   return{
+//     type: ADD_EVENT_FAILURE,
+//     error
+//   }
+// }
 
 
 // // Get events by category if weren't checking in apiConfig

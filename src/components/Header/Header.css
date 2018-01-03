@@ -1,16 +1,5 @@
-.pull-start {
-  float: left;
-}
-
-.pull-end {
-  float: right;
-}
-
-.clearfix::before,
-.clearfix::after {
-  content: "";
-  display: table;
-  clear: both;
+.App-header {
+  background-color: #fbc212;
 }
 
 .info-nav ul {
@@ -28,8 +17,4 @@
 
 .info-nav ul li + li, .action-nav ul li + li {
   margin-left: 10px;
-}
-
-.logo {
-  width: 50px;
 }
