@@ -5,11 +5,12 @@ import './Event.css';
 class Event extends Component {
   constructor(props) {
     super(props);
-    this._parseDate = this._parseDate.bind(this);
+    this._parseDateToDisplay = this._parseDateToDisplay.bind(this);
+    this._parseTimeToDisplay = this._parseTimeToDisplay.bind(this);
     this._parseDuration = this._parseDuration.bind(this);
   }
 
-  _parseDate(dateArg) {
+  _parseDateToDisplay(dateArg) {
     var dateNew = new Date(dateArg);
     var daysWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -17,15 +18,28 @@ class Event extends Component {
     var dayMonth = dateNew.getDate();
     var month = months[dateNew.getMonth()];
     var year = dateNew.getFullYear();
+    var dateString = `${dayWeek} ${month} ${dayMonth} ${year}`;
+    return dateString;
+  }
+
+  _parseTimeToDisplay(dateArg) {
+    var dateNew = new Date(dateArg);
     var hours24 = dateNew.getHours();
-    var hours = (hours24 >= 12) ? hours24 - 12 : `0${hours24}`;
+    var hours;
+    if (hours24 > 12) {
+      hours = hours24 - 12;
+    } else if (hours24 >= 10) {
+      hours = hours24;
+    } else if (hours24 < 10) {
+      hours = `0${hours24}`;
+    }
     var minutes = dateNew.getMinutes();
     if (minutes < 10) {
       minutes = '0' + minutes;
     }
     var amOrPm = (hours24 >= 12) ? 'pm' : 'am';
-    var dateString = `${dayWeek} ${month} ${dayMonth} ${year} at ${hours}:${minutes} ${amOrPm}`;
-    return dateString;
+    var timeString = `${hours}:${minutes} ${amOrPm}`;
+    return timeString;
   }
 
   _parseDuration(endDatetime, startDatetime) {
@@ -60,30 +74,34 @@ class Event extends Component {
       loading,
       error
     } = this.props;
-    console.log(this.props);
-    if (source === 'events' || source === 'upcomingEvents') {
+    if (source === 'events' || source === 'upcomingEvents' || source === 'hottest-event') {
       return (
         <div className="event clearfix">
           {
-            (new Date(event.start_datetime) < new Date()) 
+            (new Date(event.data.start_datetime) < new Date()) 
             ? <p className="event-expired-message">Event has already happened</p>
-            : (event.tickets_available === 0)
+            : (event.tickets_available_per_event === 0)
               ? <p className="event-sold-out-message">Sold out</p>
               : <span></span>
           }
-          <Link to={`/events/${event.id}`}><img src={event.img} alt={event.title} className="event-img pull-start" /></Link>
+          <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img pull-start" /></Link>
           <div className="event-text-info pull-start">
-            <h2><Link to={`/events/${event.id}`}>{event.title}</Link></h2>
-            <Link to={_filterEvents({categoryId: event.category.id})}>#{event.category.name}</Link>
-            <time dateTime={event.start_datetime}><Link to={_filterEvents({date: event.start_datetime})}>{this._parseDate(event.start_datetime)}</Link></time>
-            <p>Duration: {this._parseDuration(event.end_datetime, event.start_datetime)}</p>
+            <h2><Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h2>
+            <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>
+            <time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
+            <p>Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
             <div className="overview">
               {
-                JSON.parse(event.overview).map((line) => {
+                JSON.parse(event.data.overview).map((line) => {
                   return(
                     <p className="overview-line">{line}</p>
                     );
                 })
+              }
+              {
+                (source === 'hottest-event')
+                  ? <p className="hottest-event-tickets-remaining">{event.tickets_available_per_event} tickets remaining!</p>
+                  : <span></span>
               }
             </div>
           </div>
@@ -109,8 +127,8 @@ class Event extends Component {
           <div className="event-details container-fluid">
             <h1><Link to={`/events/${event.data.id}`} className="col-md-12">{event.data.title}</Link></h1>
             <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img col-md-12" /></Link>
-            <Link to={_filterEvents({categoryId: event.data.category_id})}>#{event.category}</Link>
-            <p><span className="dataKeys col-md-4">When?</span><time dateTime={event.data.start_datetime} className="col-md-8"><Link to={_filterEvents({date: event.data.start_datetime})}>{this._parseDate(event.data.start_datetime)}</Link></time></p>
+            <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>
+            <p><span className="dataKeys col-md-4">When?</span><time dateTime={event.data.start_datetime} className="col-md-8"><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
             <p><span className="dataKeys col-md-4">How long?</span>{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
             <div className="overview">
               <span className="dataKeys col-md-4">What exactly?</span>
@@ -122,7 +140,6 @@ class Event extends Component {
                 })
               }
             </div>
-            {/* add info on tickets remaining, sold out, etc.? */}
             <ul className="ticket-prices-per-type list-unstyled">
               {
                 event.data.types.map((type) => {
@@ -130,6 +147,11 @@ class Event extends Component {
                     <li>
                       <span className="ticket-type-name">{type.name}</span>
                       <span className="ticket-type-price">EGP {type.price}</span>
+                      {
+                        (type.tickets_available_per_type === 0)
+                        ? <span className="ticket-type-sold-out">Sold out</span>
+                        : <span className="ticket-type-tickets-available">{type.tickets_available_per_type} tickets left</span>
+                      }
                     </li>
                     );
                 })

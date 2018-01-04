@@ -1,29 +1,28 @@
 import { connect } from 'react-redux';
 import HotestEvent from '../components/HotestEvent';
 import {
-  getHotestEventLoading, getHotestEvent, getHotestEventSuccess, getHotestEventFailure
-} from '../actions/hotestEvent';
+  getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
+} from '../actions/events';
 
 const mapStateToProps = (store) => {
   return {
-    hotestEvent: store.hotestEvent.hotestEvent,
-    loading: store.hotestEvent.loading,
-    error: store.hotestEvent.error
+    events: store.events.events,
+    loading: store.events.loading,
+    error: store.events.error
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    getHotestEvent: () => {
-      dispatch(getHotestEventLoading());
-      dispatch(getHotestEvent()).then(response =>{
-        if (response.payload.status<400){
-          dispatch(getHotestEventSuccess(response.payload.data));
-          
-        }else{
-          dispatch(getHotestEventFailure(response.payload.message));
+    getEvents: (params) => {
+      dispatch(getEventsLoading());
+      dispatch(getEvents(params)).then((response) => {
+        if (response.payload.status < 400) {
+          dispatch(getEventsSuccess(response.payload.data));
+        } else {
+          dispatch(getEventsFailure(response.payload.message));
         }
-      })
+      });
     }
   }
 }
