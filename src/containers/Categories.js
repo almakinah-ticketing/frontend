@@ -3,6 +3,7 @@ import CategoriesComponent from '../components/Categories';
 import {
   getCategoriesLoading, getCategories, getCategoriesSuccess, getCategoriesFailure
 } from '../actions/categories';
+import EventForm from '../pages/EventForm';
 
 const mapStateToProps = (store) => {
   return {
@@ -29,3 +30,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export const Categories = connect(mapStateToProps, mapDispatchToProps)(CategoriesComponent);
+export const SelectCategory = connect(mapStateToProps, mapDispatchToProps)(EventForm);

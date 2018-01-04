@@ -5,11 +5,14 @@ import Footer from './components/Footer';
 import {Route} from 'react-router-dom';
 import Home from './pages/Home';
 import { EventsList } from './containers/EventsList';
+import TicketTypes from './containers/TicketTypes';
 import { EventDetails } from './containers/EventDetails';
 import PurchaseForm from './pages/PurchaseForm';
 import About from './pages/About';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
+import {SelectCategory} from './containers/Categories';
+import {EventForm} from './containers/EventsList';
 
 class App extends Component {
   render() {
@@ -28,6 +31,10 @@ class App extends Component {
           <Route path="/about" exact component={About} />
           <Route path="/login" exact component={LogIn} />
           <Route path="/signup" exact component={SignUp} />
+
+          <Route path="/tickettypes" exact component ={TicketTypes}/>
+          <Route path="/eventform" exact component ={EventForm}/>
+
         </div>
         <Footer />
       </div>

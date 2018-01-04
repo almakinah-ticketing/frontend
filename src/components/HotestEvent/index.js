@@ -38,20 +38,19 @@ export default class HotestEvent extends Component {
 			error, 
 			_filterEvents
 		} = this.props;
-		var hottestEvent = this._hottestEvent(events);
 		return (
 			<div className="hottest-event">
 				<h2>Hottest Event</h2>
 				{ 
-					(events === undefined && events.length === 0)
+					(events === undefined || events.length === 0)
 					? (loading)
 				          ? <p className="loading-message">Loading hottest event...</p>
 				          : (error)
 				            ? <p className="error-message">Oops, something went wrong!</p>
 				            : <span></span>
-				      : (hottestEvent)
-				      	? <Event event={hottestEvent} loading={loading} error={error} source="hottest-event" _filterEvents={_filterEvents} />
-				      	: <span></span>
+			      		: (this._hottestEvent(events) !== undefined)
+			      			? <Event event={this._hottestEvent(events)} loading={loading} error={error} source="hottest-event" _filterEvents={_filterEvents} />
+			      			: <span></span>
 				}
 			</div>
 		);
