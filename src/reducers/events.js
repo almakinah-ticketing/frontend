@@ -9,7 +9,12 @@ const INITIAL_STATE = {
   loading: false,
   error: null,
   event: {},
-   adding: false,
+  title:"",
+  overview:"",
+  agenda:"",
+  start_datetime:"",
+  end_datetime:"",
+  adding: false,
   errorAdding: null
 }
 

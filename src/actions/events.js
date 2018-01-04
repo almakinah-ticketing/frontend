@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { eventsApi } from '../apiConfig';
+import { eventsApi , postEventApi} from '../apiConfig';
 
 /* Action types */
 
@@ -61,36 +61,35 @@ export const getEventsFailure = (error) => {
 
 // Add Event
 
-// export const addEventLoading = () => {
-//   return{
-//     type: ADD_EVENT_LOADING
-//   }
-// }
+export const addEventLoading = () => {
+  return{
+    type: ADD_EVENT_LOADING
+  }
+}
 
-// export const addEvent = (event) => {
-//   const payload = Axios.post(postEventApi, {
-//     event,
-//     complete: false
-//   });
-//   return{
-//     type: ADD_EVENT,
-//     payload
-//   }
-// }
+export const addEvent = (event) => {
+  const payload = Axios.post(postEventApi, {
+    event
+  });
+  return{
+    type: ADD_EVENT,
+    payload
+  }
+}
 
-// export const addEventSuccess = (event) => {
-//   return{
-//     type:ADD_EVENT_SUCCESS,
-//     event
-//   }
-// }
+export const addEventSuccess = (event) => {
+  return{
+    type:ADD_EVENT_SUCCESS,
+    event
+  }
+}
 
-// export const addEventFailure = (error) => {
-//   return{
-//     type: ADD_EVENT_FAILURE,
-//     error
-//   }
-// }
+export const addEventFailure = (error) => {
+  return{
+    type: ADD_EVENT_FAILURE,
+    error
+  }
+}
 
 
 // // Get events by category if weren't checking in apiConfig

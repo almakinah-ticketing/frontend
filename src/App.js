@@ -11,7 +11,8 @@ import PurchaseForm from './pages/PurchaseForm';
 import About from './pages/About';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
-import EventForm from './pages/EventForm';
+import {SelectCategory} from './containers/Categories';
+import {EventForm} from './containers/EventsList';
 
 class App extends Component {
   render() {
