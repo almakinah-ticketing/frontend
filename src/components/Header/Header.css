@@ -18,3 +18,7 @@
 .info-nav ul li + li, .action-nav ul li + li {
   margin-left: 10px;
 }
+
+.logo {
+  width: 70px;
+}

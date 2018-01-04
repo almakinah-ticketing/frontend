@@ -15,6 +15,9 @@ export const eventsApi = function (params) {
   return route;
 }
 export const eventApi = (eventId) => `${rootApi}/events/${eventId}`;
+export const attendeesApi = `${rootApi}/attendees`;
+export const adminsApi = `${rootApi}/admins`;
+export const loginApi = (userType) => `${rootApi}/${userType}/login`;
 
 // export const eventsApi = (categoryId) => `${rootApi}/${(categoryId && categoryId !== '0') ? 'categories/' + categoryId : 'events'}`;
 // export const categoryEventsApi = (categoryId) => `${rootApi}/categories/${categoryId}`;

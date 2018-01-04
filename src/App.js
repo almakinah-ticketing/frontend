@@ -9,7 +9,8 @@ import { EventDetails } from './containers/EventDetails';
 import PurchaseForm from './pages/PurchaseForm';
 import About from './pages/About';
 import LogIn from './pages/LogIn';
-import SignUp from './pages/SignUp';
+import LogInAdmin from './pages/LogInAdmin';
+import SignUp from './containers/SignUp';
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path="/events/:id/tickets" exact component={PurchaseForm} />
           <Route path="/about" exact component={About} />
           <Route path="/login" exact component={LogIn} />
+          <Route path="/admin/login" exact component={LogInAdmin} />
           <Route path="/signup" exact component={SignUp} />
         </div>
         <Footer />

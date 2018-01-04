@@ -12,6 +12,12 @@ body {
   
 }
 
+/*.error-messages{
+  background:red;
+  width:100%;
+  color:white;
+}*/
+
 .sr-only {
   position: absolute;
   width: 1px;

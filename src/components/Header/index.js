@@ -16,8 +16,8 @@ class Header extends Component {
         </nav>
         <nav className="action-nav pull-end">
           <ul>
-            <li><NavLink to="/login" className="btn btn-default navbar-btn">Log In</NavLink></li>
-            <li><NavLink to="/signup" className="btn btn-default navbar-btn">Sign Up</NavLink></li>
+            <li><NavLink to="/login">Log In</NavLink></li>
+            <li><NavLink to="/signup">Sign Up</NavLink></li>
           </ul>
         </nav>
       </div>
