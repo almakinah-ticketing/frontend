@@ -43,12 +43,14 @@ class EventDetails extends Component {
     const {
       event,
       loading,
-      error
+      error,
+      isAuthenticated,
+      currentUser
     } = this.props;
     return (
       <div className="event-details-page">
         <SearchForm />
-        <Event event={event} source="eventDetails" loading={loading} error={error} _filterEvents={this._filterEvents} />
+        <Event event={event} source="eventDetails" loading={loading} error={error} _filterEvents={this._filterEvents} isAuthenticated={isAuthenticated} currentUser={currentUser} />
       </div>
     );
   }

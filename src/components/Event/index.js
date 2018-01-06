@@ -8,6 +8,7 @@ class Event extends Component {
     this._parseDateToDisplay = this._parseDateToDisplay.bind(this);
     this._parseTimeToDisplay = this._parseTimeToDisplay.bind(this);
     this._parseDuration = this._parseDuration.bind(this);
+    this._linkContent = this._linkContent.bind(this);
   }
 
   _parseDateToDisplay(dateArg) {
@@ -66,6 +67,29 @@ class Event extends Component {
     return durationString;
   }
 
+  _linkContent() {
+    const { isAuthenticated, currentUser, event } = this.props;
+    if (isAuthenticated) {
+      if (currentUser.attendee_id) {
+        // show "bought" if event forthcoming + tickets already bought
+        return(
+          <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get Tickets Now</Link>
+          );
+      } else if (currentUser.admin_id) {
+        return(
+          <div>
+            <button className="btn btn-primary update-event-btn">Update Event</button>
+            <button className="btn btn-link delete-event-btn-link">Delete Event</button>
+          </div>
+          );
+      }
+    } else {
+      return(
+        <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get Tickets Now</Link>
+          );
+    }
+  }
+
   render() {
     const {
       source,
@@ -86,7 +110,7 @@ class Event extends Component {
           }
           <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img pull-start" /></Link>
           <div className="event-text-info pull-start">
-            <h2><Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h2>
+            <h3><Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h3>
             <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>
             <time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
             <p>Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
@@ -125,7 +149,7 @@ class Event extends Component {
       } else {
         return(
           <div className="event-details container-fluid">
-            <h1><Link to={`/events/${event.data.id}`} className="col-md-12">{event.data.title}</Link></h1>
+            <h3><Link to={`/events/${event.data.id}`} className="col-md-12">{event.data.title}</Link></h3>
             <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img col-md-12" /></Link>
             <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>
             <p><span className="dataKeys col-md-4">When?</span><time dateTime={event.data.start_datetime} className="col-md-8"><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
@@ -169,10 +193,14 @@ class Event extends Component {
             </ul>
             {
               (new Date(event.data.start_datetime) < new Date()) 
+              // show "you attended this event" if event passed + attendee had bought a ticket
               ? <p className="event-expired-message">Event has already happened</p>
-              : (event.tickets_available === 0)
+              : (event.tickets_available_per_event === 0)
                 ? <p className="event-sold-out-message">Sold out</p>
-                : <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get Tickets Now</Link>
+                : this._linkContent()
+            }
+            {
+              // render table showing event figures if admin
             }
         </div>
         );

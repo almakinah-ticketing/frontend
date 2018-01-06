@@ -1,23 +1,43 @@
 import {
-  SET_CURRENT_USER
+  LOGIN_LOADING, LOGIN_SUCCESS, LOGIN_FAILURE, SET_CURRENT_USER
 } from '../actions/authentication';
+import isEmpty from 'lodash/isEmpty';
 
 const INITIAL_STATE = {
-  attendee: {}
+  isAuthenticated: false,
+  currentUser: {},
+  loading: false,
+  error: null
 }
-
-// login 
 
 export default (currentState = INITIAL_STATE, action) => {
   switch (action.type) {
-    case POST_NEW_ATTENDEE_LOADING:
-      return {...currentState, loading: true};
+    case LOGIN_LOADING:
+      return {
+        ...currentState,
+        loading: true,
+        error: null
+      }
       break;
-    case POST_NEW_ATTENDEE_SUCCESS:
-      return {...currentState, loading: false, error: null, attendee: action.attendee};
+    case LOGIN_SUCCESS:
+      return {
+        ...currentState,
+        loading: false,
+        error: null
+      }
       break;
-    case POST_NEW_ATTENDEE_FAILURE:
-      return {...currentState, loading: false, error: action.error};
+    case SET_CURRENT_USER:
+      return {
+        isAuthenticated: !isEmpty(action.currentUser),
+        currentUser: action.currentUser
+      };
+      break;
+    case LOGIN_FAILURE:
+      return {
+        ...currentState,
+        loading: false,
+        error: action.error
+      }
       break;
     default:
       return currentState;

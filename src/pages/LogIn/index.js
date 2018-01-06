@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './LogIn.css';
 import history from '../../history';
+import { withLastLocation } from 'react-router-last-location';
 
 class LogIn extends Component {
   constructor(props) {
     super(props);
+    props = this.props;
     if (history.location.state) {
       this.state = {
         email: history.location.state.email,
@@ -13,35 +14,68 @@ class LogIn extends Component {
       }
     } else {
       this.state = {
-      email: '',
-      password: ''
+        email: '',
+        password: ''
       }
     }
     this._handleChange = this._handleChange.bind(this);
+    this._submitLoginData = this._submitLoginData.bind(this);
   }
 
   _handleChange(event) {
     this.setState({...this.state, [event.target.name]: event.target.value});
   }
 
+  _submitLoginData(event) {
+    event.preventDefault();
+    const { login, lastLocation } = this.props;
+    login('attendees', this.state, lastLocation);
+    this.setState({
+      password: ''
+    });
+  }
+
+  componentWillMount() {
+    const { currentUser, lastLocation, loginLoading } = this.props;
+    loginLoading();
+    if (currentUser) {
+      if (lastLocation && lastLocation.pathname !== '/admin/login' && lastLocation.pathname !== '/login') {
+        history.replace(lastLocation.pathname);
+      } else {
+        if (currentUser.attendee_id) {
+          history.push('/calendar');
+        } else if (currentUser.admin_id) {
+          history.push('/admin/dashboard');
+        }
+      }
+    }
+  }
+
   render() {
+    const {error} = this.props;
     return(
       <div className="login">
-        <form className="attendee-login-form">
+      {
+          (error)
+          ? <p className="error-messages alert alert-danger">{error}</p>
+          : null
+        }
+        <form className="attendee-login-form" onSubmit={this._submitLoginData}>
           <div className="form-group">
             <label htmlFor="email">Email address</label>
-            <input type="email" className="form-control" id="email" name="email" value={this.state.email} required pattern="\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i" onChange={this._handleChange} />
+            <input type="email" className="form-control" id="email" name="email" value={this.state.email} required onChange={this._handleChange} />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input type="password" className="form-control" id="password" name="password" value={this.state.password} required minLength="8" maxLength="72" pattern="(\w*[-\/\\^$*+?!&.()|[\]{}]*){3,}" onChange={this._handleChange} />
+            <input type="password" className="form-control" id="password" name="password" value={this.state.password} required onChange={this._handleChange} />
           </div>
-          <button type="submit" class="btn btn-primary">Log In</button>
+          <button type="submit" class="btn btn-primary">Log in</button>
         </form>
-        <Link to="/admin/login" className="login-as-admin">Log In as Admin</Link>
+        <Link to="/signup">Don't have an account? Sign up.</Link>
+        <Link to="/admin/login" className="login-as-admin">Log in as admin.</Link>
       </div>
       );
   }
 }
 
-export default LogIn;
+export default withLastLocation(LogIn);

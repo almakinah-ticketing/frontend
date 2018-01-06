@@ -1,6 +1,6 @@
 import {
   POST_NEW_ATTENDEE_LOADING, POST_NEW_ATTENDEE_SUCCESS, POST_NEW_ATTENDEE_FAILURE
-} from '../actions/attendee';
+} from '../actions/attendees';
 
 const INITIAL_STATE = {
   attendee: {},
@@ -11,13 +11,26 @@ const INITIAL_STATE = {
 export default (currentState = INITIAL_STATE, action) => {
   switch (action.type) {
     case POST_NEW_ATTENDEE_LOADING:
-      return {...currentState, loading: true};
+      return {
+        ...currentState, 
+        loading: true,
+        error: null
+      };
       break;
     case POST_NEW_ATTENDEE_SUCCESS:
-      return {...currentState, loading: false, error: null, attendee: action.attendee};
+      return {
+        ...currentState, 
+        loading: false, 
+        error: null, 
+        attendee: action.attendee
+      };
       break;
     case POST_NEW_ATTENDEE_FAILURE:
-      return {...currentState, loading: false, error: action.error};
+      return {
+        ...currentState, 
+        loading: false, 
+        error: action.error
+      };
       break;
     default:
       return currentState;

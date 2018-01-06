@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import './SignUp.css';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import history from '../../history';
 
 class SignUp extends Component {
@@ -23,7 +23,7 @@ class SignUp extends Component {
 
   _submitNewAttendee(event) {
     event.preventDefault();
-    const {postNewAttendee, error} = this.props;
+    const {postNewAttendee} = this.props;
     var attendee = {
       attendee: this.state
     };
@@ -31,16 +31,25 @@ class SignUp extends Component {
     this.setState({
       password: '',
       password_confirmation: ''
-    })
-    if (!error) {
-      history.push('/login', {email: this.state.email});
+    });
+  }
+
+  componentWillMount() {
+    const { currentUser, lastLocation, postNewAttendeeLoading } = this.props;
+    postNewAttendeeLoading();
+    if (currentUser.attendee_id) {
+      if (lastLocation) {
+        history.replace(lastLocation.pathname);
+      } else {
+        history.push('/calendar');
+      }
     }
   }
   
   render() {
     const {error} = this.props;
     return(
-      <div className="SignUp">
+      <div className="signup">
         {
           (error)
           ? <p className="error-messages alert alert-danger">{error}</p>
@@ -77,8 +86,9 @@ class SignUp extends Component {
             <input type="text" className="form-control" id="phone-number" name="phone_number" value={this.state.phone_number} aria-describedby="phoneNumberHelp" required minLength="9" maximum="11" pattern="\d*" onChange={this._handleChange}/>
             <small id="phoneNumberHelp" className="form-text text-muted">Please enter a valid mobile phone or landline number in case event organizers need to contact you.</small>
           </div>
-          <button className="btn btn-primary">Sign Up</button>
+          <button className="btn btn-primary">Sign up</button>
         </form>
+        <Link to="/login">Already have an account? Log in.</Link>
       </div>
       );
   }

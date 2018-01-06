@@ -1,16 +1,23 @@
 import React, {Component} from 'react';
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import {Route} from 'react-router-dom';
+import { Attendee, Admin } from './routeAuthorization';
+import Header from './containers/Header';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import { EventsList } from './containers/EventsList';
 import { EventDetails } from './containers/EventDetails';
 import PurchaseForm from './pages/PurchaseForm';
 import About from './pages/About';
-import LogIn from './pages/LogIn';
-import LogInAdmin from './pages/LogInAdmin';
+import { LogIn } from './containers/LogIn';
+import { LogInAdmin } from './containers/LogIn';
 import SignUp from './containers/SignUp';
+import AttendeeCalendar from './containers/AttendeeCalendar';
+import AttendeeCart from './pages/AttendeeCart';
+import AttendeeHistory from './pages/AttendeeHistory';
+import AdminDashboard from './containers/AdminDashboard';
+import CreateEventForm from './pages/CreateEventForm';
+import InviteAdminForm from './pages/InviteAdminForm';
 
 class App extends Component {
   render() {
@@ -25,11 +32,17 @@ class App extends Component {
           <Route path="/events?date=:date" exact component={EventsList} />
           <Route path="/events?categoryId=:id&date=:date" exact component={EventsList} />
           <Route path="/events/:id" exact component={EventDetails} />
-          <Route path="/events/:id/tickets" exact component={PurchaseForm} />
+          <Route path="/events/:id/tickets" exact component={Attendee(PurchaseForm)} />
           <Route path="/about" exact component={About} />
           <Route path="/login" exact component={LogIn} />
           <Route path="/admin/login" exact component={LogInAdmin} />
           <Route path="/signup" exact component={SignUp} />
+          <Route path="/calendar" exact component={Attendee(AttendeeCalendar)} />
+          <Route path="/cart" exact component={Attendee(AttendeeCart)} />
+          <Route path="/history" exact component={Attendee(AttendeeHistory)} />
+          <Route path="/admin/dashboard" exact component={Admin(AdminDashboard)} />
+          <Route path="/admin/create" exact component={Admin(CreateEventForm)} />
+          <Route path="/admin/invite" exact component={Admin(InviteAdminForm)} />
         </div>
         <Footer />
       </div>
