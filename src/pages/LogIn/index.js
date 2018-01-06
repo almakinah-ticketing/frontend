@@ -36,9 +36,9 @@ class LogIn extends Component {
   }
 
   componentWillMount() {
-    const { currentUser, lastLocation, loginLoading } = this.props;
+    const { isAuthenticated, currentUser, lastLocation, loginLoading } = this.props;
     loginLoading();
-    if (currentUser) {
+    if (isAuthenticated) {
       if (lastLocation && lastLocation.pathname !== '/admin/login' && lastLocation.pathname !== '/login') {
         history.replace(lastLocation.pathname);
       } else {
@@ -52,14 +52,17 @@ class LogIn extends Component {
   }
 
   render() {
-    const {error} = this.props;
+    const {error, lastLocation} = this.props;
+    console.log(lastLocation);
     return(
       <div className="login">
       {
-          (error)
+        (error)
           ? <p className="error-messages alert alert-danger">{error}</p>
-          : null
-        }
+          : (history.location.state)
+            ? <p className="success-messages alert alert-success">Account created successfully. Log in below.</p>
+            : null
+      }
         <form className="attendee-login-form" onSubmit={this._submitLoginData}>
           <div className="form-group">
             <label htmlFor="email">Email address</label>
