@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import './EventForm.css'
+import './CreateEventForm.css'
 // import { SelectCategory } from '../../containers/Categories';
 
-
-export default class EventForm extends Component{
+export default class CreateEventForm extends Component{
  constructor(){
         super();
         this.state = {
@@ -15,10 +14,8 @@ export default class EventForm extends Component{
           start_datetime:"",
           end_datetime:"",
         }
-
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
   componentWillMount() {
@@ -58,7 +55,7 @@ export default class EventForm extends Component{
       return(
         <div>
           <h1>Create New Event </h1>
-          <div className="eventForm">
+          <div className="create-event-form">
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Label htmlFor="title">Title</Label>
@@ -66,9 +63,7 @@ export default class EventForm extends Component{
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="category">Category</Label>
-
                 <select name="category_id" onChange={this.handleChange}>
-                  
                  {
                     categories.map((category) => {
                       return (
@@ -76,9 +71,7 @@ export default class EventForm extends Component{
                         )
                     })
                   }
-                
                 </select>
-
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="img">Event Image</Label>
@@ -123,7 +116,6 @@ export default class EventForm extends Component{
               <Button type="submit">Submit</Button>
             </Form>
           </div>
-
         </div>
       )
     }

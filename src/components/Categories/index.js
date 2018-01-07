@@ -20,8 +20,7 @@ export default class Categories extends Component {
         	categories.map((category) => {
         		return (
         			<li>
-                            <h3><Link to={_filterEvents({categoryId: category.id})}>{category.name}</Link></h3>
-                            <Link to={_filterEvents({categoryId: category.id})}><img src={category.img} alt={category.name} /></Link>
+                            <Link to={_filterEvents({categoryId: category.id})}><span className="category-name-link">{category.name}</span><img src={category.img} alt={category.name} /></Link>
                             </li>
         			)
         	})

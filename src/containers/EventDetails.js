@@ -7,6 +7,8 @@ import {
 
 const mapStateToProps = (store) => {
   return {
+    isAuthenticated: store.authentication.isAuthenticated,
+    currentUser: store.authentication.currentUser,
     event: store.event.event,
     loading: store.event.loading,
     error: store.event.error,

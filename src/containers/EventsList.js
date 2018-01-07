@@ -8,7 +8,7 @@ import {
   addEventLoading, addEvent, addEventSuccess, addEventFailure
   // getCategoryEventsLoading, getCategoryEvents, getCategoryEventsSuccess, getCategoryEventsFailure
 } from '../actions/events';
-import EventFormComponent from '../pages/EventForm';
+import CreateEventFormComponent from '../pages/CreateEventForm';
 
 const mapStateToProps = (store) => {
   return {
@@ -70,4 +70,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export const EventsList = connect(mapStateToProps, mapDispatchToProps)(EventsListPage);
-export const EventForm = connect(mapStateToProps, mapDispatchToProps)(EventFormComponent);
+export const CreateEventForm = connect(mapStateToProps, mapDispatchToProps)(CreateEventFormComponent);

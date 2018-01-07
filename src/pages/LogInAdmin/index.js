@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import history from '../../history';
 import { withLastLocation } from 'react-router-last-location';
 
-class LogIn extends Component {
+class LogInAdmin extends Component {
   constructor(props) {
     super(props);
-    props = this.props;
-    if (history.location.state) {
-      this.state = {
-        email: history.location.state.email,
-        password: ''
-      }
-    } else {
-      this.state = {
-        email: '',
-        password: ''
-      }
+    this.state = {
+      email: '',
+      password: ''
     }
     this._handleChange = this._handleChange.bind(this);
     this._submitLoginData = this._submitLoginData.bind(this);
@@ -28,18 +19,17 @@ class LogIn extends Component {
 
   _submitLoginData(event) {
     event.preventDefault();
-    const { login, lastLocation } = this.props;
-    login('attendees', this.state, lastLocation);
+    const {login, lastLocation} = this.props;
+    login('admins', this.state, lastLocation);
     this.setState({
       password: ''
     });
   }
 
   componentWillMount() {
-    const { isAuthenticated, currentUser, lastLocation, loginLoading } = this.props;
-    loginLoading();
-    if (isAuthenticated) {
-      if (lastLocation && lastLocation.pathname !== '/admin/login' && lastLocation.pathname !== '/login') {
+    const { currentUser, lastLocation } = this.props;
+    if (currentUser.admin_id) {
+      if (lastLocation && lastLocation.pathname !== '/login' && lastLocation.pathname !== '/admin/login') {
         history.replace(lastLocation.pathname);
       } else {
         if (currentUser.attendee_id) {
@@ -52,17 +42,14 @@ class LogIn extends Component {
   }
 
   render() {
-    const {error, lastLocation} = this.props;
-    console.log(lastLocation);
+    const {error} = this.props;
     return(
       <div className="login">
       {
-        (error)
+          (error)
           ? <p className="error-messages alert alert-danger">{error}</p>
-          : (history.location.state)
-            ? <p className="success-messages alert alert-success">Account created successfully. Log in below.</p>
-            : null
-      }
+          : null
+        }
         <form className="attendee-login-form" onSubmit={this._submitLoginData}>
           <div className="form-group">
             <label htmlFor="email">Email address</label>
@@ -72,13 +59,11 @@ class LogIn extends Component {
             <label htmlFor="password">Password</label>
             <input type="password" className="form-control" id="password" name="password" value={this.state.password} required onChange={this._handleChange} />
           </div>
-          <button type="submit" class="btn btn-primary">Log in</button>
+          <button type="submit" class="btn btn-primary">Log in as admin</button>
         </form>
-        <Link to="/signup">Don't have an account? Sign up.</Link>
-        <Link to="/admin/login" className="login-as-admin">Log in as admin.</Link>
       </div>
       );
   }
 }
 
-export default withLastLocation(LogIn);
+export default withLastLocation(LogInAdmin);

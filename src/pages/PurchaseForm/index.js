@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './PurchaseForm.css';
-// import TicketsCounter from '../../containers/TicketsCounter';
+import history from '../../history';
 
 export default class PurchaseForm extends Component {
   constructor(props) {
@@ -20,7 +20,10 @@ export default class PurchaseForm extends Component {
   }
 
   componentWillMount(){
-    console.log(this.props.match.params);
+    const { isAuthenticated, currentUser } = this.props;
+    if (!isAuthenticated && !currentUser.admin_id) {
+      history.push('/login');
+    }
     const eventId = this.props.match.params.id;
     this.props.getTypes(eventId);
   }
@@ -62,64 +65,47 @@ export default class PurchaseForm extends Component {
   //   }
   // }
 
-
-
-
-    render() {
-      // console.log(this.state, this.state['Type 1']+this.state['Type 2']+this.state['Type 3']);
-      const {types, loading, error, count, increment, decrement} = this.props;
-      let total = 0;
-
-
-      return(
-        <div>
-          <h2>PurchaseForm</h2>
-          {
-            
-          types.map((type) => {
-            const count = this.state[type.name];
-            total += type.price * count;
-           // console.log(this.state[type.name]+count);
-            return (
-              <div>
-                <div className="clearfix">
-                  
-                  <label className="typeName">{type.name}     </label>
-                  <label className="typePrice">{type.price} EGP</label>
-
-                  <div className="counter">
-                    <label>{count}</label>  
-                    <button onClick={(event) => {this._increment(type, event)}}>+</button>
-                    <button onClick={(event) => {this._decrement(type, event)}}>-</button>
-                  </div>
-
+  render() {
+    // console.log(this.state, this.state['Type 1']+this.state['Type 2']+this.state['Type 3']);
+    const {types, loading, error, count, increment, decrement} = this.props;
+    let total = 0;
+    return(
+      <div>
+        <h2>PurchaseForm</h2>
+        {
+        types.map((type) => {
+          const count = this.state[type.name];
+          total += type.price * count;
+         // console.log(this.state[type.name]+count);
+          return (
+            <div>
+              <div className="clearfix">
+                <label className="typeName">{type.name}     </label>
+                <label className="typePrice">{type.price} EGP</label>
+                <div className="counter">
+                  <label>{count}</label>  
+                  <button onClick={(event) => {this._increment(type, event)}}>+</button>
+                  <button onClick={(event) => {this._decrement(type, event)}}>-</button>
                 </div>
               </div>
-
-              )
-
-          })
-        }  
-        <div>
-
-          <label>Total</label>
-
-
-          {
-            total
-          }
-
-        </div>
-
-        <div>
-          <button>Add to Cart</button>
-          <button>Pay Now</button>
-          <button>cancel</button>
-        </div>
-        </div>
-      );
+            </div>
+            )
+        })
+      }  
+      <div>
+        <label>Total</label>
+        {
+          total
+        }
+      </div>
+      <div>
+        <button>Add to Cart</button>
+        <button>Pay Now</button>
+        <button>cancel</button>
+      </div>
+      </div>
+    );
   }
-
 }
 
 
