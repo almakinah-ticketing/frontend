@@ -1,7 +1,7 @@
 export const rootApi = 'http://localhost:3000';
 export const categoriesApi = `${rootApi}/categories`;
 // export const hotestEventApi = `${rootApi}/hot/event`;
-export const ticketTypesApi = (eventId) => `${rootApi}/event/${eventId}/types`;
+export const ticketTypesApi = (eventId) => `${rootApi}/events/${eventId}/types`;
 // export const eventsApi = (categoryId) => `${rootApi}/${(categoryId && categoryId !== '0') ? 'categories/' + categoryId : 'events'}`;
 // export const categoryEventsApi = (categoryId) => `${rootApi}/categories/${categoryId}`;
 

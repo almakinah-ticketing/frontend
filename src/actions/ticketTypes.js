@@ -20,8 +20,8 @@ export const getTypesLoading = () => {
   }
 }
 
-export const getTypes = () => {
-  const payload = Axios.get(ticketTypesApi);
+export const getTypes = (eventId) => {
+  const payload = Axios.get(ticketTypesApi(eventId));
   return{
     type: GET_TYPES,
     payload
