@@ -94,4 +94,3 @@ export default connect(mapStateToProps, mapDispatchToProps)(PurchaseForm);
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(TicketTypes);
->>>>>>> develop

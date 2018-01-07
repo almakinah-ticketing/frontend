@@ -73,19 +73,19 @@ class Event extends Component {
       if (currentUser.attendee_id) {
         // show "bought" if event forthcoming + tickets already bought
         return(
-          <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary col-sm-12 col-md-12 col-lg-12 col-xl-12">Get Tickets Now</Link>
+          <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get Tickets Now</Link>
           );
       } else if (currentUser.admin_id) {
         return(
           <div>
-            <button className="btn btn-primary update-event-btn col-sm-12 col-md-12 col-lg-12 col-xl-12">Update Event</button>
-            <button className="btn btn-link delete-event-btn-link col-sm-12 col-md-12 col-lg-12 col-xl-12">Delete Event</button>
+            <button className="btn btn-primary update-event-btn">Update Event</button>
+            <button className="btn btn-link delete-event-btn-link">Delete Event</button>
           </div>
           );
       }
     } else {
       return(
-        <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary col-sm-12 col-md-12 col-lg-12 col-xl-12">Get Tickets Now</Link>
+        <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get Tickets Now</Link>
           );
     }
   }
@@ -208,14 +208,16 @@ class Event extends Component {
             </div>
             </ul>
             <div className="row">
-            {
-              (new Date(event.data.start_datetime) < new Date()) 
-              // show "you attended this event" if event passed + attendee had bought a ticket
-              ? <p className="event-expired-message col-sm-12 col-md-12 col-lg-12 col-xl-12">Event has already happened</p>
-              : (event.tickets_available_per_event === 0)
-                ? <p className="event-sold-out-message col-sm-12 col-md-12 col-lg-12 col-xl-12">Sold out</p>
-                : this._linkContent()
-            }
+              <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              {
+                (new Date(event.data.start_datetime) < new Date()) 
+                // show "you attended this event" if event passed + attendee had bought a ticket
+                ? <p className="event-expired-message">Event has already happened</p>
+                : (event.tickets_available_per_event === 0)
+                  ? <p className="event-sold-out-message">Sold out</p>
+                  : this._linkContent()
+              }
+              </div>
             </div>
             {
               // render table showing event figures if admin
