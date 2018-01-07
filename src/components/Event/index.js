@@ -73,19 +73,19 @@ class Event extends Component {
       if (currentUser.attendee_id) {
         // show "bought" if event forthcoming + tickets already bought
         return(
-          <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get Tickets Now</Link>
+          <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary col-sm-12 col-md-12 col-lg-12 col-xl-12">Get Tickets Now</Link>
           );
       } else if (currentUser.admin_id) {
         return(
           <div>
-            <button className="btn btn-primary update-event-btn">Update Event</button>
-            <button className="btn btn-link delete-event-btn-link">Delete Event</button>
+            <button className="btn btn-primary update-event-btn col-sm-12 col-md-12 col-lg-12 col-xl-12">Update Event</button>
+            <button className="btn btn-link delete-event-btn-link col-sm-12 col-md-12 col-lg-12 col-xl-12">Delete Event</button>
           </div>
           );
       }
     } else {
       return(
-        <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get Tickets Now</Link>
+        <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary col-sm-12 col-md-12 col-lg-12 col-xl-12">Get Tickets Now</Link>
           );
     }
   }
@@ -148,14 +148,27 @@ class Event extends Component {
         }
       } else {
         return(
-          <div className="event-details container-fluid">
-            <h3><Link to={`/events/${event.data.id}`} className="col-md-12">{event.data.title}</Link></h3>
-            <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img col-md-12" /></Link>
-            <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>
-            <p><span className="dataKeys col-md-4">When?</span><time dateTime={event.data.start_datetime} className="col-md-8"><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
-            <p><span className="dataKeys col-md-4">How long?</span>{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
-            <div className="overview">
-              <span className="dataKeys col-md-4">What exactly?</span>
+          <div className="event-details container">
+            <div className="row">
+              <h3><Link to={`/events/${event.data.id}`} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">{event.data.title}</Link></h3>
+            </div>
+            <div className="row">
+              <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>
+            </div>
+            <div className="row">
+              <Link to={_filterEvents({categoryId: event.data.category.id})} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">#{event.data.category.name}</Link>
+            </div>
+            <div className="row">
+              <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">When?</span>
+              <time dateTime={event.data.start_datetime} className="col-sm-8 col-md-8 col-lg-8 col-xl-8"><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
+            </div>
+            <div className="row">
+              <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">How long?</span>
+              <p className="col-sm-8 col-md-8 col-lg-8 col-xl-8">{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
+            </div>
+            <div className="row">
+              <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">What exactly?</span>
+              <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
               {
                 JSON.parse(event.data.overview).map((line) => {
                   return(
@@ -163,25 +176,27 @@ class Event extends Component {
                     );
                 })
               }
+              </div>
             </div>
             <ul className="ticket-prices-per-type list-unstyled">
               {
                 event.data.types.map((type) => {
                   return(
-                    <li>
-                      <span className="ticket-type-name">{type.name}</span>
-                      <span className="ticket-type-price">EGP {type.price}</span>
+                    <li className="row">
+                      <span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.name}</span>
+                      <span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">EGP {type.price}</span>
                       {
                         (type.tickets_available_per_type === 0)
-                        ? <span className="ticket-type-sold-out">Sold out</span>
-                        : <span className="ticket-type-tickets-available">{type.tickets_available_per_type} tickets left</span>
+                        ? <span className="ticket-type-sold-out col-sm-4 col-md-4 col-lg-4 col-xl-4">Sold out</span>
+                        : <span className="ticket-type-tickets-available col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.tickets_available_per_type} tickets left</span>
                       }
                     </li>
                     );
                 })
               }
-            <div className="agenda">
-              <span className="dataKeys col-md-4">What'll be happening?</span>
+            <div className="row">
+              <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">What'll be happening?</span>
+              <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
               {
                 JSON.parse(event.data.agenda).map((line) => {
                   return(
@@ -189,16 +204,19 @@ class Event extends Component {
                     );
                 })
               }
+              </div>
             </div>
             </ul>
+            <div className="row">
             {
               (new Date(event.data.start_datetime) < new Date()) 
               // show "you attended this event" if event passed + attendee had bought a ticket
-              ? <p className="event-expired-message">Event has already happened</p>
+              ? <p className="event-expired-message col-sm-12 col-md-12 col-lg-12 col-xl-12">Event has already happened</p>
               : (event.tickets_available_per_event === 0)
-                ? <p className="event-sold-out-message">Sold out</p>
+                ? <p className="event-sold-out-message col-sm-12 col-md-12 col-lg-12 col-xl-12">Sold out</p>
                 : this._linkContent()
             }
+            </div>
             {
               // render table showing event figures if admin
             }
