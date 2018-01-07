@@ -6,10 +6,9 @@ import { eventApi } from '../apiConfig';
 // Get event
 
 export const GET_EVENT_LOADING = 'GET_EVENT_LOADING';
-export const  GET_EVENT = 'GET_EVENT';
+export const GET_EVENT = 'GET_EVENT';
 export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
 export const GET_EVENT_FAILURE = 'GET_EVENT_FAILURE';
-
 
 /* Action creators */
 

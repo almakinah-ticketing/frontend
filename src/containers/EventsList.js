@@ -4,9 +4,11 @@ import {
   getCategoriesLoading, getCategories, getCategoriesSuccess, getCategoriesFailure
 } from '../actions/categories';
 import {
-  getEventsLoading, getEvents, getEventsSuccess, getEventsFailure
+  getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
+  addEventLoading, addEvent, addEventSuccess, addEventFailure
   // getCategoryEventsLoading, getCategoryEvents, getCategoryEventsSuccess, getCategoryEventsFailure
 } from '../actions/events';
+import CreateEventFormComponent from '../pages/CreateEventForm';
 
 const mapStateToProps = (store) => {
   return {
@@ -40,7 +42,20 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(getEventsFailure(response.payload.message));
         }
       });
+    },
+    // Add Event
+
+    addEvent: (event) => {
+      dispatch(addEventLoading());
+      dispatch(addEvent(event)).then((response) => {
+        if (response.payload.status < 400) {
+          dispatch(addEventSuccess(response.payload.data));
+        } else {
+          dispatch(addEventFailure(response.payload.message));
+        }
+      });
     }
+
     // getCategoryEvents: (categoryId) => {
     //   dispatch(getCategoryEventsLoading());
     //   dispatch(getCategoryEvents(categoryId)).then((response) => {
@@ -55,3 +70,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export const EventsList = connect(mapStateToProps, mapDispatchToProps)(EventsListPage);
+export const CreateEventForm = connect(mapStateToProps, mapDispatchToProps)(CreateEventFormComponent);

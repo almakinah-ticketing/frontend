@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { eventsApi } from '../apiConfig';
+import { eventsApi , postEventApi} from '../apiConfig';
 
 /* Action types */
 
@@ -8,6 +8,15 @@ export const GET_EVENTS_LOADING = 'GET_EVENTS_LOADING';
 export const  GET_EVENTS = 'GET_EVENTS';
 export const GET_EVENTS_SUCCESS = 'GET_EVENTS_SUCCESS';
 export const GET_EVENTS_FAILURE = 'GET_EVENTS_FAILURE';
+
+
+// Add event
+
+export const ADD_EVENT_LOADING = 'ADD_EVENT_LOADING';
+export const ADD_EVENT = 'ADD_EVENT';
+export const ADD_EVENT_SUCCESS = 'ADD_EVENT_SUCCESS';
+export const ADD_EVENT_FAILURE = 'ADD_EVENT_FAILURE';
+
 
 // // Get events by category if weren't checking in apiConfig
 // export const GET_CATEGORY_EVENTS_LOADING = 'GET_CATEGORY_EVENTS_LOADING';
@@ -45,6 +54,39 @@ export const getEventsSuccess = (events) => {
 export const getEventsFailure = (error) => {
   return { 
     type: GET_EVENTS_FAILURE,
+    error
+  }
+}
+
+
+// Add Event
+
+export const addEventLoading = () => {
+  return{
+    type: ADD_EVENT_LOADING
+  }
+}
+
+export const addEvent = (event) => {
+  const payload = Axios.post(postEventApi, {
+    event
+  });
+  return{
+    type: ADD_EVENT,
+    payload
+  }
+}
+
+export const addEventSuccess = (event) => {
+  return{
+    type:ADD_EVENT_SUCCESS,
+    event
+  }
+}
+
+export const addEventFailure = (error) => {
+  return{
+    type: ADD_EVENT_FAILURE,
     error
   }
 }

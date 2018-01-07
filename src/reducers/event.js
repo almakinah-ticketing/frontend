@@ -1,11 +1,12 @@
 import {
-  GET_EVENT_LOADING, GET_EVENT_SUCCESS, GET_EVENT_FAILURE
+  GET_EVENT_LOADING, GET_EVENT_SUCCESS, GET_EVENT_FAILURE,
 } from '../actions/event';
 
 const INITIAL_STATE = {
   event: {},
   loading: false,
-  error: null
+  error: null,
+ 
 }
 
 export default (currentState = INITIAL_STATE, action) => {
@@ -31,6 +32,7 @@ export default (currentState = INITIAL_STATE, action) => {
         loading: false        
       };
       break;
+  
     default:
       return currentState;
       break;

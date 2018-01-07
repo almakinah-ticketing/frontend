@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import EventDetailsPage from '../pages/EventDetails';
 import {
   getEventLoading, getEvent, getEventSuccess, getEventFailure
+ 
 } from '../actions/event';
 
 const mapStateToProps = (store) => {
@@ -10,7 +11,11 @@ const mapStateToProps = (store) => {
     currentUser: store.authentication.currentUser,
     event: store.event.event,
     loading: store.event.loading,
-    error: store.event.error
+    error: store.event.error,
+     // post event
+    adding: store.event.adding,
+    errorAdding: store.event.errorAdding
+
   }
 }
 
@@ -27,6 +32,7 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     }
+
   }
 }
 

@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import { EventsList } from './containers/EventsList';
 import { EventDetails } from './containers/EventDetails';
-import PurchaseForm from './pages/PurchaseForm';
+import PurchaseForm from './containers/PurchaseForm';
 import About from './pages/About';
 import { LogIn } from './containers/LogIn';
 import { LogInAdmin } from './containers/LogIn';
@@ -16,7 +16,7 @@ import AttendeeCalendar from './containers/AttendeeCalendar';
 import AttendeeCart from './pages/AttendeeCart';
 import AttendeeHistory from './pages/AttendeeHistory';
 import AdminDashboard from './containers/AdminDashboard';
-import CreateEventForm from './pages/CreateEventForm';
+import {CreateEventForm} from './containers/EventsList';
 import InviteAdminForm from './pages/InviteAdminForm';
 
 class App extends Component {
