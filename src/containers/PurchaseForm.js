@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import TicketTypes from '../pages/PurchaseForm';
+import PurchaseForm from '../pages/PurchaseForm';
 import{
   getTypesLoading, getTypes, getTypesSuccess, getTypesFailure
 } from '../actions/ticketTypes';
@@ -15,9 +15,9 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    getTypes: () => {
+    getTypes: (eventId) => {
       dispatch(getTypesLoading());
-      dispatch(getTypes()).then(response => {
+      dispatch(getTypes(eventId)).then(response => {
         if (response.payload.status<400){
           dispatch(getTypesSuccess(response.payload.data));
         }else{
@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TicketTypes);
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseForm);
 
 
 

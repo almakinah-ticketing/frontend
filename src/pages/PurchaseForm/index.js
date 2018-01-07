@@ -20,7 +20,9 @@ export default class PurchaseForm extends Component {
   }
 
   componentWillMount(){
-    this.props.getTypes();
+    console.log(this.props.match.params);
+    const eventId = this.props.match.params.id;
+    this.props.getTypes(eventId);
   }
 
   _increment(type, event) {
