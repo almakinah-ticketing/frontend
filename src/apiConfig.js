@@ -22,7 +22,7 @@ export const eventApi = (eventId) => `${rootApi}/events/${eventId}`;
 export const attendeesApi = `${rootApi}/attendees`;
 export const adminsApi = `${rootApi}/admins`;
 export const loginsApi = (userType) => `${rootApi}/${userType}/logins`;
-
+export const currentUserApi = (userType, userId) => `${rootApi}/${userType}/${userId}`;
 
 export const postEventApi = `${rootApi}/events`;
 
