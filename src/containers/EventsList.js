@@ -43,8 +43,6 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     },
-    // Add Event
-
     addEvent: (event) => {
       dispatch(addEventLoading());
       dispatch(addEvent(event)).then((response) => {

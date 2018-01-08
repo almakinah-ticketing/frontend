@@ -40,7 +40,7 @@ export default class HotestEvent extends Component {
 		} = this.props;
 		return (
 			<div className="hottest-event">
-				<h2>Hottest Event</h2>
+				<h2>Hottest event</h2>
 				{ 
 					(events === undefined || events.length === 0)
 					? (loading)

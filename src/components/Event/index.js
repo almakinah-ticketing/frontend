@@ -193,7 +193,17 @@ class Event extends Component {
       currentUser,
       error
     } = this.props;
-    if (source === 'events' || source === 'upcomingEvents' || source === 'hottest-event') {
+    if (source === 'most-popular-events') {
+    return (
+      <div className="event col-sm-4 col-md-4 col-lg-4 col-xl-4">
+        <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img" /></Link>
+        <h3><Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h3>
+        <p className="tickets-sold-per-event">{event.tickets_sold} ticket(s) sold</p>
+        <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>
+        <time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
+        </div>
+      );  
+    } else if (source === 'events' || source === 'upcomingEvents' || source === 'hottest-event') {
       return (
         <div className="event clearfix">
           {
@@ -219,7 +229,7 @@ class Event extends Component {
               }
               {
                 (source === 'hottest-event')
-                  ? <p className="hottest-event-tickets-remaining">{event.tickets_available_per_event} tickets remaining!</p>
+                  ? <p className="hottest-event-tickets-remaining">{event.tickets_available_per_event} ticket(s) remaining!</p>
                   : <span></span>
               }
             </div>

@@ -52,7 +52,7 @@ class Header extends Component {
   }
 
   render() {
-    const { isAuthenticated, currentUser, logout } = this.props;
+    const { isAuthenticated, currentUser } = this.props;
     return(
       <div className="App-header clearfix">
         <h1><NavLink to="/"><img className="logo pull-start navbar-brand" src="original-favicon.png" alt="Logo" /></NavLink></h1>

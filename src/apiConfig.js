@@ -13,6 +13,8 @@ export const eventsApi = function (params) {
     route = `${rootApi}/events?category_id=${params.categoryId}`;
   } else if (params.date) {
     route = `${rootApi}/events?event_date=${params.date}`;
+  } else if (params.popularity) {
+    route = `${rootApi}/events?popularity=${params.popularity}`;
   } else {
     route = `${rootApi}/events`;
   }
@@ -22,7 +24,7 @@ export const eventApi = (eventId) => `${rootApi}/events/${eventId}`;
 export const attendeesApi = `${rootApi}/attendees`;
 export const adminsApi = `${rootApi}/admins`;
 export const loginsApi = (userType) => `${rootApi}/${userType}/logins`;
-export const currentUserApi = (userType, userId) => `${rootApi}/${userType}/${userId}`;
+// export const currentUserApi = (userType, userId) => `${rootApi}/${userType}/${userId}`;
 
 export const postEventApi = `${rootApi}/events`;
 

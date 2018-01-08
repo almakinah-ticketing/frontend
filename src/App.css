@@ -52,3 +52,7 @@ body {
 .login-as-admin {
   display: block;
 }
+
+.all-time-revenues, .all-time-tickets-sold {
+  font-size: 30px;
+}

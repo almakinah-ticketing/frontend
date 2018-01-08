@@ -13,7 +13,7 @@ export default class Upcoming extends Component{
 
      return (
       <div>
-        <h2>Upcoming Events</h2>
+        <h2>Upcoming events</h2>
        
         {
           events.map((event, index) => {
