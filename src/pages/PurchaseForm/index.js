@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './PurchaseForm.css';
 import history from '../../history';
+import Checkout from '../../Checkout';
 
 export default class PurchaseForm extends Component {
   constructor(props) {
@@ -88,6 +89,7 @@ export default class PurchaseForm extends Component {
                   <button onClick={(event) => {this._decrement(type, event)}}>-</button>
                 </div>
               </div>
+              
             </div>
             )
         })
@@ -100,7 +102,13 @@ export default class PurchaseForm extends Component {
       </div>
       <div>
         <button>Add to Cart</button>
-        <button>Pay Now</button>
+        <p>
+                  <Checkout
+                    name={'The Road to learn React'}
+                    description={'Only the Book'}
+                    amount={total}
+                  />
+                </p>
         <button>cancel</button>
       </div>
       </div>
