@@ -52,8 +52,7 @@ class Header extends Component {
   }
 
   render() {
-    const { isAuthenticated, currentUser } = this.props;
-    console.log(isAuthenticated);
+    const { isAuthenticated, currentUser, logout } = this.props;
     return(
       <div className="App-header clearfix">
         <h1><NavLink to="/"><img className="logo pull-start navbar-brand" src="original-favicon.png" alt="Logo" /></NavLink></h1>
@@ -65,12 +64,12 @@ class Header extends Component {
           </ul>
         </nav>
         {
-          (isAuthenticated)
+          (isAuthenticated && currentUser)
           ? (currentUser.attendee_id)
             ? this._attendeeAdvancedNav()
             : (currentUser.admin_id)
               ? this._adminAdvancedNav()
-              : null
+              : <p>hi</p>
           : this._unauthenticatedAdvancedNav()
         }
       </div>

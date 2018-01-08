@@ -16,7 +16,7 @@ import AttendeeCalendar from './containers/AttendeeCalendar';
 import AttendeeCart from './pages/AttendeeCart';
 import AttendeeHistory from './pages/AttendeeHistory';
 import AdminDashboard from './containers/AdminDashboard';
-import {CreateEventForm} from './containers/EventsList';
+import { CreateEventForm } from './containers/EventsList';
 import InviteAdminForm from './pages/InviteAdminForm';
 
 class App extends Component {
