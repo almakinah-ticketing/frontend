@@ -89,11 +89,16 @@ class Event extends Component {
           <p className="event-sold-out-message">Sold out</p>
         }
       } else if (currentUser.admin_id) {
-        return(
-          <div>
-            <button className="btn btn-primary update-event-btn">Update Event</button>
-            <button className="btn btn-link delete-event-btn-link">Delete Event</button>
-          </div>
+         if (!eventHappened && !eventSoldOut) {
+          return(
+            <div>
+              <button className="btn btn-primary update-event-btn">Update Event</button>
+              <button className="btn btn-link delete-event-btn-link">Delete Event</button>
+            </div>
+          );
+        } else if (eventHappened) {
+          return(
+            <p className="event-expired-message">Event has already happened</p>
           );
       }
     } else {
@@ -102,6 +107,7 @@ class Event extends Component {
           );
     }
   }
+}
 
   _attendeeTicketCountMessage() {
     const { isAuthenticated, currentUser, ticketsBoughtInSession, event } = this.props;

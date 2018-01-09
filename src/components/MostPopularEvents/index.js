@@ -37,15 +37,21 @@ class MostPopularEvents extends Component {
   }
 
   render() {
-    const { events } = this.props;
-    console.log(events);
+    const { events, loading, error } = this.props;
     return(
-      <div className="most-popular-events container">
+      <div className="most-popular-events col-sm-8 col-md-8 col-lg-8 col-xl-8 container">
         <h3>Most popular events</h3>
         <div className="3-most-popular row">
         {
-          events.map((event, index) => {
+          (events.length === 0) 
+          ? (loading)
+            ? <p className="loading-message">Loading your most popular events...</p>
+            : (error)
+            ? <p className="error-message">Oops, something went wrong!</p>
+            : null
+          : events.map((event, index) => {
             if (index < 3) {
+              console.log(index);
               return (
               <Event event={event} source={"most-popular-events"} _filterEvents={this._filterEvents} />
               );

@@ -1,8 +1,6 @@
 import Axios from 'axios';
 import { adminsApi } from '../apiConfig';
 
-// change to login
-
 /* Action types */
 
 // Post new admin
@@ -36,9 +34,9 @@ export function postNewAdminSuccess(admin) {
   };
 } 
 
-export function postNewAdminLoading(admin) {
+export function postNewAdminFailure(admin) {
   return {
-    type: POST_NEW_ADMIN_LOADING,
+    type: POST_NEW_ADMIN_FAILURE,
     error
   };
 } 

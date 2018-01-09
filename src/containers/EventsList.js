@@ -6,7 +6,6 @@ import {
 import {
   getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
   addEventLoading, addEvent, addEventSuccess, addEventFailure
-  // getCategoryEventsLoading, getCategoryEvents, getCategoryEventsSuccess, getCategoryEventsFailure
 } from '../actions/events';
 import CreateEventFormComponent from '../pages/CreateEventForm';
 
@@ -29,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
         if (response.payload.status<400) {
           dispatch(getCategoriesSuccess(response.payload.data));
         } else {
-          dispatch(getCategoriesFailure(response.payload.message));
+          dispatch(getCategoriesFailure(response.payload.response.data));
         }
       });
     },
@@ -39,7 +38,7 @@ const mapDispatchToProps = (dispatch) => {
         if (response.payload.status < 400) {
           dispatch(getEventsSuccess(response.payload.data));
         } else {
-          dispatch(getEventsFailure(response.payload.message));
+          dispatch(getEventsFailure(response.payload.response.data));
         }
       });
     },
@@ -49,7 +48,7 @@ const mapDispatchToProps = (dispatch) => {
         if (response.payload.status < 400) {
           dispatch(addEventSuccess(response.payload.data));
         } else {
-          dispatch(addEventFailure(response.payload.message));
+          dispatch(addEventFailure(response.payload.response.data));
         }
       });
     }

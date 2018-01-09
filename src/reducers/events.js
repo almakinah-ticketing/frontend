@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   error: null,
   event: {},
   title:"",
+  img:"",
   overview:"",
   agenda:"",
   start_datetime:"",
@@ -29,7 +30,6 @@ export default (currentState = INITIAL_STATE, action) => {
       break;
     case GET_EVENTS_SUCCESS:
     // case GET_CATEGORY_EVENTS_SUCCESS:
-      console.log(action.events);
       return {
         ...currentState, 
         loading: false, 
@@ -67,7 +67,6 @@ export default (currentState = INITIAL_STATE, action) => {
       errorAdding: action.error
       };
       break;
-
     default:
       return currentState;
       break;

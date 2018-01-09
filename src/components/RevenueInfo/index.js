@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ResponsiveContainer, LineChart, Line
+  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend
 } from 'recharts';
 
 class RevenueInfo extends Component {
@@ -9,12 +9,7 @@ class RevenueInfo extends Component {
     super(props);
     this._calculateAllTimeRevenues = this._calculateAllTimeRevenues.bind(this);
     this._calculateAllTimeTicketsSold = this._calculateAllTimeTicketsSold.bind(this);
-    this._parseDataToChart = this._parseDataToChart.bind(this);
-  }
-
-  componentWillMount() {
-    const { getEvents } = this.props;
-    getEvents({});
+    this._dataToChart = this._dataToChart.bind(this);
   }
 
   _calculateAllTimeRevenues() {
@@ -41,45 +36,58 @@ class RevenueInfo extends Component {
     return totalTicketsSold;
   }
 
-  _parseDataToChart() {
+  _dataToChart() {
     const { events } = this.props;
-    for (var i = 0; i < events.length; i++) {
-      var monthlyTicketSales = events[i].tickets_sold_per_month;
-      var monthlyRevenues = {};
-      var types = event.data.types;
-      for (var j = 0; j < types.length; j++) {
-        var monthlyTicketSalesPerType = types[i].tickets_sold_per_type_month;
-        var pricePerType = types[i].price;
-        var monthlyRevenuesPerType = {}
-        for (key in monthlyTicketSalesPerType) {
-          monthlyRevenuesPerType[key] = monthlyTicketSalesPerType[key] * pricePerType;
-        }
-      }
-      for (key in monthlyTicketSales) {
-        var revenuesPerMonth = 0;
-        monthlyTicketSales[key] * 
+    if (events.length !== 0) {
+      var revenuesPerMonth = events[0].total_revenues_per_month_for_all_events;
+      var ticketsSoldPerMonth = events[0].total_tickets_sold_per_month_for_all_events;
+      var chartData = [];
+      for (var key in revenuesPerMonth) {
+        chartData.push({"Month": key, "Revenues": revenuesPerMonth[key], "Tickets sold": ticketsSoldPerMonth[key]});
       }
     }
+    console.log(chartData);
+    return chartData;
   }
 
   render() {
-    this._parseDataToChart();
-    return(
-      <div className="revenue-info container">
-        <h3>In total</h3>
-        <div className="row">
-          <p className="all-time-revenues col-sm-6 col-md-6 col-lg-6 col-xl-6">EGP {this._calculateAllTimeRevenues()} <p classname="revenues-word">in revenues</p></p>
-          <p className="all-time-tickets-sold col-sm-6 col-md-6 col-lg-6 col-xl-6">{this._calculateAllTimeTicketsSold()} <p classname="revenues-word">tickets sold</p></p>
-        </div>
-        <div className="row">
-          <ResponsiveContainer width="100%">
-            <LineChart>
-              <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+    const { events, loading, error } = this.props;
+    if (events.length === 0) {
+      if (loading) {
+        return (<p className="loading-message">Loading your revenue and ticket information...</p>);
+      } else if (error) {
+        return (<p className="error-message">Oops, something went wrong!</p>);
+      } else {
+        return null;
+      }
+    } else {
+      return(
+        <div className="revenue-info container">
+          <h3>Since you started...</h3>
+          <div className="row">
+            <p className="all-time-revenues col-sm-6 col-md-6 col-lg-6 col-xl-6">EGP {this._calculateAllTimeRevenues()} <p classname="revenues-word">in revenues</p></p>
+            <p className="all-time-tickets-sold col-sm-6 col-md-6 col-lg-6 col-xl-6">{this._calculateAllTimeTicketsSold()} <p classname="revenues-word">tickets sold</p></p>
+          </div>
+          <ResponsiveContainer width="100%" height="80%" className="totals-chart row">
+          <LineChart
+              width={400}
+              height={400}
+              data={this._dataToChart()}
+              margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
+            >
+              <XAxis dataKey="Month" />
+              <YAxis dataKey="Revenues" yAxisId="left" />
+              <YAxis dataKey="Tickets sold" yAxisId="right" orientation="right" />
+              <Tooltip />
+              <Legend verticalAlign="top" height={36}/>
+              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+              <Line type="monotone" dataKey="Revenues" stroke="#fbc212" yAxisId="left" activeDot={{r: 8}} />
+              <Line type="monotone" dataKey="Tickets sold" stroke="#3D6183" yAxisId="right" />
             </LineChart>
           </ResponsiveContainer>
         </div>
-      </div>
-      );
+        );
+    }
   }
 }
 
