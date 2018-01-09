@@ -63,7 +63,7 @@ class Events extends Component {
     } = this.props;
     return (
       <div className="all-events-list">
-        <h1>Events</h1>
+        <h2>Events</h2>
         { 
           (eventsLoading)
           ? <p className="loading-message">Loading events...</p>

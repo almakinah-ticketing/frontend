@@ -2,19 +2,23 @@
   background-color: #fbc212;
 }
 
-.info-nav ul {
+.basic-nav ul {
   padding-left: 0;
   margin-left: 10px;
 }
 
-.action-nav ul {
+.advanced-nav {
   margin-right: 10px;
 }
 
-.info-nav ul li, .action-nav ul li {
+.basic-nav ul li, .advanced-nav ul li, .advanced-nav p {
   display: inline-block;
 }
 
-.info-nav ul li + li, .action-nav ul li + li {
+.basic-nav ul li + li, .advanced-nav ul li + li, .advanced-nav p + a {
   margin-left: 10px;
+}
+
+.logo {
+  width: 70px;
 }

@@ -12,7 +12,7 @@ class FilterForm extends Component {
   }
 
   _handleChange(event) {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({...this.state, [event.target.name]: event.target.value});
   }
 
   componentWillMount() {

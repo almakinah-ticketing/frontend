@@ -8,8 +8,11 @@ import {
   addEventLoading, addEvent, addEventSuccess, addEventFailure, handleNewImage
   // getCategoryEventsLoading, getCategoryEvents, getCategoryEventsSuccess, getCategoryEventsFailure
 } from '../actions/events';
-import EventFormComponent from '../pages/EventForm';
+
+// import EventFormComponent from '../pages/EventForm';
 import history from '../history';
+import CreateEventFormComponent from '../pages/CreateEventForm';
+
 
 const mapStateToProps = (store) => {
   return {
@@ -50,10 +53,10 @@ const mapDispatchToProps = (dispatch) => {
     addEvent: (event) => {
       dispatch(addEventLoading());
       dispatch(addEvent(event)).then((response) => {
-        const id = response.payload.data.id;
+        // const id = response.payload.data.id;
         if (response.payload.status < 400) {
           dispatch(addEventSuccess(response.payload.data));
-          history.push(`/events/${id}`);
+          history.push(`/events/${response.payload.data.id}`);
         } else {
           dispatch(addEventFailure(response.payload.message));
         };
@@ -74,4 +77,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export const EventsList = connect(mapStateToProps, mapDispatchToProps)(EventsListPage);
-export const EventForm = connect(mapStateToProps, mapDispatchToProps)(EventFormComponent);
+export const CreateEventForm = connect(mapStateToProps, mapDispatchToProps)(CreateEventFormComponent);
