@@ -7,3 +7,10 @@
 .event-text-info {
   margin-left: 5%;
 }
+.overview-line {
+	white-space: pre-wrap;
+}
+
+.agenda-line {
+	white-space: pre-wrap;
+}

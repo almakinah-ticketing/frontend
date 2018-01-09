@@ -17,6 +17,10 @@ export const ADD_EVENT = 'ADD_EVENT';
 export const ADD_EVENT_SUCCESS = 'ADD_EVENT_SUCCESS';
 export const ADD_EVENT_FAILURE = 'ADD_EVENT_FAILURE';
 
+// handle new image
+export const HANDLE_NEW_IMAGE = 'HANDLE_NEW_IMAGE';
+
+
 
 // // Get events by category if weren't checking in apiConfig
 // export const GET_CATEGORY_EVENTS_LOADING = 'GET_CATEGORY_EVENTS_LOADING';
@@ -68,9 +72,7 @@ export const addEventLoading = () => {
 }
 
 export const addEvent = (event) => {
-  const payload = Axios.post(postEventApi, {
-    event
-  });
+  const payload = Axios.post(postEventApi, event);
   return{
     type: ADD_EVENT,
     payload
@@ -91,6 +93,15 @@ export const addEventFailure = (error) => {
   }
 }
 
+// handle new image
+
+export const handleNewImage = (encodedString, fileName) => {
+  return {
+    type: HANDLE_NEW_IMAGE,
+    newImage: encodedString,
+    imageName: fileName
+  }
+}
 
 // // Get events by category if weren't checking in apiConfig
 

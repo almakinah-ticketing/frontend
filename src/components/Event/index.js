@@ -91,13 +91,7 @@ class Event extends Component {
             <time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
             <p>Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
             <div className="overview">
-              {
-                JSON.parse(event.data.overview).map((line) => {
-                  return(
-                    <p className="overview-line">{line}</p>
-                    );
-                })
-              }
+             <p className="overview-line">{event.data.overview}</p>
               {
                 (source === 'hottest-event')
                   ? <p className="hottest-event-tickets-remaining">{event.tickets_available_per_event} tickets remaining!</p>
@@ -132,13 +126,10 @@ class Event extends Component {
             <p><span className="dataKeys col-md-4">How long?</span>{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
             <div className="overview">
               <span className="dataKeys col-md-4">What exactly?</span>
-              {
-                JSON.parse(event.data.overview).map((line) => {
-                  return(
-                    <p className="overview-line">{line}</p>
-                    );
-                })
-              }
+              
+  
+                <p className="overview-line">{event.data.overview}</p>
+              
             </div>
             <ul className="ticket-prices-per-type list-unstyled">
               {
@@ -158,13 +149,7 @@ class Event extends Component {
               }
             <div className="agenda">
               <span className="dataKeys col-md-4">What'll be happening?</span>
-              {
-                JSON.parse(event.data.agenda).map((line) => {
-                  return(
-                    <p className="agenda-line">{line}</p>
-                    );
-                })
-              }
+              <p className="agenda-line">{event.data.agenda}</p>
             </div>
             </ul>
             {
