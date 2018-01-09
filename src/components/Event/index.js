@@ -210,13 +210,7 @@ class Event extends Component {
             <time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
             <p>Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
             <div className="overview">
-              {
-                JSON.parse(event.data.overview).map((line) => {
-                  return(
-                    <p className="overview-line">{line}</p>
-                    );
-                })
-              }
+            <p className="overview-line">{event.data.overview}</p>
               {
                 (source === 'hottest-event')
                   ? <p className="hottest-event-tickets-remaining">{event.tickets_available_per_event} tickets remaining!</p>
@@ -264,13 +258,7 @@ class Event extends Component {
             <div className="row">
               <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">What exactly?</span>
               <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-              {
-                JSON.parse(event.data.overview).map((line) => {
-                  return(
-                    <p className="overview-line">{line}</p>
-                    );
-                })
-              }
+              <p className="overview-line">{event.data.overview}</p>
               </div>
             </div>
             {
@@ -297,13 +285,7 @@ class Event extends Component {
             <div className="row">
               <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">What'll be happening?</span>
               <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-              {
-                JSON.parse(event.data.agenda).map((line) => {
-                  return(
-                    <p className="agenda-line">{line}</p>
-                    );
-                })
-              }
+              <p className="agenda-line">{event.data.agenda}</p>
               </div>
             </div>
             <div className="row">
@@ -325,5 +307,4 @@ class Event extends Component {
     }
   }
 }
-
 export default Event;
