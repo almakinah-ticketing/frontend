@@ -7,18 +7,20 @@ import PAYMENT_SERVER_URL from './constants/server';
 
 const CURRENCY = 'EGP';
 
-// const fromEuroToCent = amount => amount * 100;
-
-const successPayment = data => {
+const successPayment = (event_id, type_id,type_ids) => {
   alert('Payment Successful');
-  
+  const url='http://localhost:3000/buy?';
+  const type='type_id='+ type_id+'&';
+  const event= 'event_id='+event_id;
+  const urls= url+type+event
+  axios.post(String(urls))
 };
 
 const errorPayment = data => {
   alert('Payment Error');
 };
 
-const onToken = (amount, description) => token =>
+const onToken = (amount, description, event_id, type_id,type_ids) => token => 
   axios.post('http://localhost:3000/charges',
     {
       description,
@@ -26,17 +28,20 @@ const onToken = (amount, description) => token =>
       currency: CURRENCY,
       amount: amount
     })
-    .then(successPayment)
-    .catch(errorPayment);
+    .then(() => successPayment(event_id, type_id,type_ids))
+    .catch(errorPayment)
 
-const Checkout = ({ name, description, amount }) =>
+const Checkout = ({ name, description, amount , event_id , type_id, type_ids}) =>
   <StripeCheckout
     name={name}
     description={description}
-    amount={amount}
-    token={onToken(amount, description)}
+    amount={amount*100}
+    token={onToken(amount, description, event_id, type_id)}
     currency={CURRENCY}
     stripeKey={'pk_test_fm10TRh9MmJSObGmK461z326'}
+    event_id={event_id}
+    type_id={type_id}
+    type_ids={type_ids}
   />
 
 export default Checkout;
