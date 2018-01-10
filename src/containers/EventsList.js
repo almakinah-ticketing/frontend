@@ -52,17 +52,6 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     }
-
-    // getCategoryEvents: (categoryId) => {
-    //   dispatch(getCategoryEventsLoading());
-    //   dispatch(getCategoryEvents(categoryId)).then((response) => {
-    //     if (response.payload.status < 400) {
-    //       dispatch(getCategoryEventsSuccess(response.payload.data));
-    //     } else {
-    //       dispatch(getCategoryEventsFailure(response.payload.message));
-    //     }
-    //   });
-    // }
   }
 }
 

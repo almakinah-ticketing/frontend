@@ -70,17 +70,19 @@ class Event extends Component {
   }
 
   _linkContent() {
-    const { isAuthenticated, currentUser, event } = this.props;
+    const { isAuthenticated, currentUser, event, updateEvent } = this.props;
     const eventHappened = new Date(event.data.start_datetime) < new Date();
     const eventSoldOut = event.tickets_available_per_event === 0;
+    const eventCanceled = event.data.canceled;
 
     if (isAuthenticated) {
       if (currentUser.attendee_id) {
-        // show "bought" if event forthcoming + tickets already bought
-        if (!eventHappened && !eventSoldOut) {
+        if (!eventHappened && !eventSoldOut && !eventCanceled) {
           return(
-            <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get Tickets Now</Link>
+            <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get tickets now</Link>
           );
+        }  else if (eventCanceled) {
+            <p className="event-canceled-message">Event has been canceled</p>
         } else if (eventHappened) {
           return(
             <p className="event-expired-message">Event has already happened</p>
@@ -89,11 +91,17 @@ class Event extends Component {
           <p className="event-sold-out-message">Sold out</p>
         }
       } else if (currentUser.admin_id) {
-         if (!eventHappened && !eventSoldOut) {
+         if (!eventHappened && !eventCanceled) {
           return(
             <div>
-              <button className="btn btn-primary update-event-btn">Update Event</button>
-              <button className="btn btn-link delete-event-btn-link">Delete Event</button>
+              <Link to={`/admin/update?event=${event.data.id}`} className="btn btn-primary update-event-btn">Update event</Link>
+              <button className="btn btn-danger delete-event-btn" onClick={() => {updateEvent(event.data.id, {canceled: true})}}>Cancel event</button>
+            </div>
+          );
+        } else if (eventCanceled) {
+          return(
+            <div>
+              <button className="btn btn-danger delete-event-btn" onClick={() => {updateEvent(event.data.id, {canceled: false})}}>Uncancel event</button>
             </div>
           );
         } else if (eventHappened) {
@@ -103,7 +111,7 @@ class Event extends Component {
       }
     } else {
       return(
-        <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get Tickets Now</Link>
+        <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get tickets now</Link>
           );
     }
   }
@@ -173,7 +181,7 @@ class Event extends Component {
             </tbody>
             <tfoot>
               <tr>
-                <th scope="row" colspan="2">Total</th> 
+                <th scope="row" colSpan="2">Total</th> 
                 <td>{totalCapacity}</td>
                 <td>{event.tickets_sold}</td>
                 <td>{event.tickets_available_per_event}</td>
@@ -214,10 +222,12 @@ class Event extends Component {
         <div className="event clearfix">
           {
             (new Date(event.data.start_datetime) < new Date()) 
-            ? <p className="event-expired-message">Event has already happened</p>
+            ? <p className="event-expired-message alert alert-warning">Event has already happened</p>
             : (event.tickets_available_per_event === 0)
-              ? <p className="event-sold-out-message">Sold out</p>
-              : <span></span>
+              ? <p className="event-sold-out-message alert alert-warning">Sold out</p>
+              : (event.data.canceled)
+                ? <p className="event-canceled-message alert alert-warning">Canceled</p>
+                : null
           }
           <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img pull-start" /></Link>
           <div className="event-text-info pull-start">
@@ -254,12 +264,17 @@ class Event extends Component {
             );
         } else {
           return (
-            <span></span>
+            null
             );
         }
       } else {
         return(
           <div className="event-details container">
+            {
+              (event.data.canceled)
+              ? <p className="event-canceled-message alert alert-warning">Canceled</p>
+              : null
+            }
             <div className="row">
               <h3><Link to={`/events/${event.data.id}`} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">{event.data.title}</Link></h3>
             </div>

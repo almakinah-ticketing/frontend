@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Route} from 'react-router-dom';
-import { Attendee, Admin } from './routeAuthorization';
+import { Attendee, Admin, AuthenticatedUser } from './routeAuthorization';
 import Header from './containers/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -42,6 +42,7 @@ class App extends Component {
           <Route path="/history" exact component={Attendee(AttendeeHistory)} />
           <Route path="/admin/dashboard" exact component={Admin(AdminDashboard)} />
           <Route path="/admin/create" exact component={Admin(CreateEventForm)} />
+          <Route path="/admin/update" component={Admin(CreateEventForm)} />
           <Route path="/admin/invite" exact component={Admin(InviteAdminForm)} />
         </div>
         <Footer />

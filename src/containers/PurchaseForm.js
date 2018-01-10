@@ -1,8 +1,11 @@
 import { connect } from 'react-redux';
 import PurchaseForm from '../pages/PurchaseForm';
-import{
+import {
   getTypesLoading, getTypes, getTypesSuccess, getTypesFailure
 } from '../actions/ticketTypes';
+import {
+  getEventLoading, getEvent, getEventSuccess, getEventFailure
+} from '../actions/events';
 
 
 const mapStateToProps = (store) => {
@@ -11,7 +14,8 @@ const mapStateToProps = (store) => {
     currentUser: store.authentication.currentUser,
     types: store.ticketTypes.types,
     loading: store.ticketTypes.loading,
-    error: store.ticketTypes.error
+    error: store.ticketTypes.error,
+    event: store.events.event
   }
 }
 
@@ -26,7 +30,17 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(getTypesFailure(response.payload.message));
         }
       });
-    }
+    },
+    getEvent: (eventId) => {
+      dispatch(getEventLoading());
+      dispatch(getEvent(eventId)).then(response => {
+        if (response.payload.status<400) {
+          dispatch(getEventSuccess(response.payload.data));
+        } else {
+          dispatch(getEventFailure(response.payload.response.data));
+        }
+      });
+    },
   }
 }
 

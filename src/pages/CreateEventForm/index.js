@@ -6,13 +6,24 @@ import './CreateEventForm.css'
 export default class CreateEventForm extends Component{
  constructor(){
         super();
-        this.state = {
-          title:"",
-          overview:"",
-          agenda:"",
-          category_id:"",
-          start_datetime:"",
-          end_datetime:"",
+        if (location.pathname === '/admin/update') {
+          this.state = {
+            title:"",
+            overview:"",
+            agenda:"",
+            category_id:"",
+            start_datetime:"",
+            end_datetime:"",
+          }
+        } else {
+          this.state = {
+            title:"",
+            overview:"",
+            agenda:"",
+            category_id:"",
+            start_datetime:"",
+            end_datetime:"",
+          }
         }
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -50,8 +61,11 @@ export default class CreateEventForm extends Component{
         adding,
         error,
         categories,
-        loading
+        loading,
+        location
       } = this.props;
+      console.log("LOCATION");
+      console.log(location);
       return(
         <div>
           <h1>Create New Event </h1>

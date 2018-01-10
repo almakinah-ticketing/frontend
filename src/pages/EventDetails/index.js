@@ -46,12 +46,13 @@ class EventDetails extends Component {
       error,
       isAuthenticated,
       currentUser,
-      ticketsBoughtInSession
+      ticketsBoughtInSession,
+      updateEvent
     } = this.props;
     return (
       <div className="event-details-page">
         <SearchForm />
-        <Event event={event} source="eventDetails" loading={loading} error={error} _filterEvents={this._filterEvents} isAuthenticated={isAuthenticated} currentUser={currentUser} ticketsBoughtInSession={ticketsBoughtInSession} />
+        <Event event={event} source="eventDetails" loading={loading} error={error} _filterEvents={this._filterEvents} isAuthenticated={isAuthenticated} currentUser={currentUser} ticketsBoughtInSession={ticketsBoughtInSession} updateEvent={updateEvent} />
       </div>
     );
   }

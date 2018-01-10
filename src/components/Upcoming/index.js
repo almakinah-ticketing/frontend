@@ -28,7 +28,7 @@ export default class Upcoming extends Component{
           })
         } 
 
-      <p> <Link to="/events">Show All Events</Link> </p> 
+      <p> <Link to="/events">See all events</Link> </p> 
       </div>
     )
   }
