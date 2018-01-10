@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import history from './history';
+import {
+  getCurrentUser, getCurrentUserSuccess, getCurrentUserFailure
+} from './actions/authentication';
 
 export const Authorization = (allowedRoles) => {
   return (WrappedComponent) => {
     class WithAuthorization extends Component {
       render() {
         const { currentUser } = this.props;
-        console.log(this.props);
         var currentRole;
         var urlStart;
         if (currentUser.attendee_id) {
@@ -34,6 +36,7 @@ export const Authorization = (allowedRoles) => {
         currentUser: store.authentication.currentUser
       }
     };
+
   return connect(mapStateToProps)(WithAuthorization);
   }
 }

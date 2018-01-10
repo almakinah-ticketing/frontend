@@ -14,5 +14,6 @@ const store = createStore();
 
 setAuthorizationData(store);
 
+
 ReactDOM.render(<Provider store={store}><Router history={history}><LastLocationProvider><App /></LastLocationProvider></Router></Provider>, document.getElementById('root'));
 registerServiceWorker();
