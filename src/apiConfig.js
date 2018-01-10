@@ -23,6 +23,9 @@ export const attendeesApi = `${rootApi}/attendees`;
 export const adminsApi = `${rootApi}/admins`;
 export const loginsApi = (userType) => `${rootApi}/${userType}/logins`;
 
+export const buyApi = `${rootApi}/buy?`;
+export const stripeApi = `${rootApi}/charges`;
+
 
 export const postEventApi = `${rootApi}/events`;
 

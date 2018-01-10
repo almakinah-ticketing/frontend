@@ -23,7 +23,7 @@ export default class PurchaseForm extends Component {
       });
       this.setState({
         ...state,
-        type_ids: types.map(type => type.id)
+        type_ids: []
       });
     }
   }
@@ -43,8 +43,11 @@ export default class PurchaseForm extends Component {
       [type.name]: this.state[type.name]
     })
     }else{
+      const type_ids = this.state.type_ids.slice(0);
+      type_ids.push(type.id);
       this.setState({
-      [type.name]: this.state[type.name] + 1
+      [type.name]: this.state[type.name] + 1,
+      type_ids
     })
     }
     
@@ -56,9 +59,11 @@ export default class PurchaseForm extends Component {
       [type.name]: this.state[type.name]
     })
     }else {
-
+      const type_ids = this.state.type_ids.slice(0);
+      delete type_ids[type_ids.indexOf(type.id)];
       this.setState({
-        [type.name]: this.state[type.name] - 1
+        [type.name]: this.state[type.name] - 1,
+        type_ids
       })
     }
   }
@@ -78,6 +83,7 @@ export default class PurchaseForm extends Component {
     const {types, loading, error, count, increment, decrement} = this.props;
     const {type_ids} = this.state;
     let total = 0;
+    console.log(type_ids);
     return(
       <div>
         <h2>PurchaseForm</h2>
@@ -88,10 +94,11 @@ export default class PurchaseForm extends Component {
          // console.log(this.state[type.name]+count);
         const eveId = this.props.match.params.id;
         t1 = eveId;
-        console.log(t1);
+        // console.log(t1);
         var getTyped = type.id;
         t2 = getTyped;
-        console.log(t2);
+        // console.log(t2);
+        // console.log(type_ids);
         
           return (
             <div>
