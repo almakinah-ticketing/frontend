@@ -9,6 +9,7 @@ const mapStateToProps = (store) => {
   return {
     isAuthenticated: store.authentication.isAuthenticated,
     currentUser: store.authentication.currentUser,
+    ticketsBoughtInSession: store.authentication.ticketsBoughtInSession,
     event: store.event.event,
     loading: store.event.loading,
     error: store.event.error,
@@ -24,11 +25,10 @@ const mapDispatchToProps = (dispatch) => {
     getEvent: (eventId) => {
       dispatch(getEventLoading());
       dispatch(getEvent(eventId)).then(response => {
-        console.log(response);
         if (response.payload.status<400) {
           dispatch(getEventSuccess(response.payload.data));
         } else {
-          dispatch(getEventFailure(response.payload.message));
+          dispatch(getEventFailure(response.payload.response.data));
         }
       });
     }

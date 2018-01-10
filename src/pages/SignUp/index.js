@@ -38,10 +38,14 @@ class SignUp extends Component {
     const { currentUser, lastLocation, postNewAttendeeLoading } = this.props;
     postNewAttendeeLoading();
     if (currentUser.attendee_id) {
-      if (lastLocation) {
+      if (lastLocation && lastLocation.pathname !== '/login') {
         history.replace(lastLocation.pathname);
       } else {
-        history.push('/calendar');
+        if (currentUser.attendee_id) {
+          history.push('/calendar');
+        } else if (currentUser.admin_id) {
+          history.push('/admin/dashboard');
+        }
       }
     }
   }

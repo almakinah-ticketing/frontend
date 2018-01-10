@@ -53,7 +53,6 @@ class LogIn extends Component {
 
   render() {
     const {error, lastLocation} = this.props;
-    console.log(lastLocation);
     return(
       <div className="login">
       {
