@@ -27,6 +27,9 @@ export const UPDATE_EVENT = 'UPDATE_EVENT';
 export const UPDATE_EVENT_SUCCESS = 'UPDATE_EVENT_SUCCESS';
 export const UPDATE_EVENT_FAILURE = 'UPDATE_EVENT_FAILURE';
 
+// Handle new image
+export const HANDLE_NEW_IMAGE = 'HANDLE_NEW_IMAGE';
+
 
 /* Action object creators */
 
@@ -96,9 +99,7 @@ export const addEventLoading = () => {
 }
 
 export const addEvent = (event) => {
-  const payload = Axios.post(postEventApi, {
-    event
-  });
+  const payload = Axios.post(postEventApi, event);
   return{
     type: ADD_EVENT,
     payload
@@ -116,6 +117,16 @@ export const addEventFailure = (error) => {
   return{
     type: ADD_EVENT_FAILURE,
     error
+  }
+}
+
+// Handle new image in event form
+
+export const handleNewImage = (encodedString, fileName) => {
+  return {
+    type: HANDLE_NEW_IMAGE,
+    newImage: encodedString,
+    imageName: fileName
   }
 }
 

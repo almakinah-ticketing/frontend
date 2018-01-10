@@ -5,10 +5,11 @@ import { Attendee, Admin, AuthenticatedUser } from './routeAuthorization';
 import Header from './containers/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import About from './pages/About';
 import { EventsList } from './containers/EventsList';
 import { EventDetails } from './containers/EventDetails';
 import PurchaseForm from './containers/PurchaseForm';
-import About from './pages/About';
+import {SelectCategory} from './containers/Categories';
 import { LogIn } from './containers/LogIn';
 import { LogInAdmin } from './containers/LogIn';
 import SignUp from './containers/SignUp';
@@ -18,6 +19,7 @@ import AttendeeHistory from './pages/AttendeeHistory';
 import AdminDashboard from './containers/AdminDashboard';
 import { CreateEventForm } from './containers/EventsList';
 import InviteAdminForm from './pages/InviteAdminForm';
+  
 
 class App extends Component {
   render() {

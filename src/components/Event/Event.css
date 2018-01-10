@@ -12,3 +12,11 @@
 .three-most-popular .event-img {
   width: 100%;
 }
+
+.overview-line {
+  white-space: pre-wrap;
+}
+
+.agenda-line {
+  white-space: pre-wrap;
+}

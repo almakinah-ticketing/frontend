@@ -1,13 +1,16 @@
 import { connect } from 'react-redux';
 import EventsListPage from '../pages/EventsList';
+// import EventFormComponent from '../pages/EventForm';
+import CreateEventFormComponent from '../pages/CreateEventForm';
 import {
   getCategoriesLoading, getCategories, getCategoriesSuccess, getCategoriesFailure
 } from '../actions/categories';
 import {
   getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
-  addEventLoading, addEvent, addEventSuccess, addEventFailure
+  addEventLoading, addEvent, addEventSuccess, addEventFailure, handleNewImage
 } from '../actions/events';
-import CreateEventFormComponent from '../pages/CreateEventForm';
+import history from '../history';
+
 
 const mapStateToProps = (store) => {
   return {
@@ -15,6 +18,7 @@ const mapStateToProps = (store) => {
     categoriesLoading: store.categories.loading,
     categoriesError: store.categories.error,
     events: store.events.events,
+    event: store.events.event,
     eventsLoading: store.events.loading,
     eventsError: store.events.error
   }
@@ -45,8 +49,10 @@ const mapDispatchToProps = (dispatch) => {
     addEvent: (event) => {
       dispatch(addEventLoading());
       dispatch(addEvent(event)).then((response) => {
+        // const id = response.payload.data.id;
         if (response.payload.status < 400) {
           dispatch(addEventSuccess(response.payload.data));
+          history.push(`/events/${response.payload.data.id}`);
         } else {
           dispatch(addEventFailure(response.payload.response.data));
         }

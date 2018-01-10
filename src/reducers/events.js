@@ -2,7 +2,8 @@ import {
   GET_EVENTS_LOADING, GET_EVENTS_SUCCESS, GET_EVENTS_FAILURE,
   GET_EVENT_LOADING, GET_EVENT_SUCCESS, GET_EVENT_FAILURE,
   ADD_EVENT_LOADING, ADD_EVENT, ADD_EVENT_SUCCESS, ADD_EVENT_FAILURE,
-  UPDATE_EVENT_LOADING, UPDATE_EVENT, UPDATE_EVENT_SUCCESS, UPDATE_EVENT_FAILURE
+  UPDATE_EVENT_LOADING, UPDATE_EVENT, UPDATE_EVENT_SUCCESS, UPDATE_EVENT_FAILURE,
+  HANDLE_NEW_IMAGE
 } from '../actions/events';
 
 const INITIAL_STATE = {
@@ -74,7 +75,7 @@ export default (currentState = INITIAL_STATE, action) => {
      return {
       ...currentState,
       adding: false,
-      event: [...currentState.items, action.event]
+      event: [...currentState, action.event]
       };
       break;
     case ADD_EVENT_FAILURE:
@@ -106,6 +107,12 @@ export default (currentState = INITIAL_STATE, action) => {
       error: action.error
       };
       break;
+      case HANDLE_NEW_IMAGE:
+        return {
+          ...currentState, 
+          img: action.img
+        };
+        break;
     default:
       return currentState;
       break;

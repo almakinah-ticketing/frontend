@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
+// import TicketTypes from '../pages/PurchaseForm';
+// import EventTypes from '../pages/EventForm';
 import PurchaseForm from '../pages/PurchaseForm';
 import {
-  getTypesLoading, getTypes, getTypesSuccess, getTypesFailure
+  getTypesLoading, getTypes, getTypesSuccess, getTypesFailure, addType, addTypeLoading, addTypeSuccess, addTypeFailure
 } from '../actions/ticketTypes';
 import {
   getEventLoading, getEvent, getEventSuccess, getEventFailure
@@ -13,6 +15,7 @@ const mapStateToProps = (store) => {
     isAuthenticated: store.authentication.isAuthenticated,
     currentUser: store.authentication.currentUser,
     types: store.ticketTypes.types,
+    type: store.ticketTypes.type,
     loading: store.ticketTypes.loading,
     error: store.ticketTypes.error,
     event: store.events.event
@@ -31,6 +34,16 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     },
+    addType: (type) => {
+      dispatch(addTypeLoading());
+      dispatch(addType(type)).then((response) => {
+        if (response.payload.status < 400) {
+          dispatch(addTypeSuccess(response.payload.data));
+        } else {
+          dispatch(addTypeFailure(response.payload.message));
+        }
+      });
+    },
     getEvent: (eventId) => {
       dispatch(getEventLoading());
       dispatch(getEvent(eventId)).then(response => {
@@ -44,7 +57,11 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+
+// export default connect(mapStateToProps, mapDispatchToProps)(TicketTypes);
+// export const EventForm = connect(mapStateToProps, mapDispatchToProps)(EventTypes);
 export default connect(mapStateToProps, mapDispatchToProps)(PurchaseForm);
+
 
 
 

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './PurchaseForm.css';
 import history from '../../history';
+import Checkout from '../../Checkout';
+var t1 = 0;
+var t2 = 0;
 
 export default class PurchaseForm extends Component {
   constructor(props) {
@@ -9,11 +12,17 @@ export default class PurchaseForm extends Component {
     this.state = {};
   }
 
+
   componentWillReceiveProps(nextProps){
     const {types} = nextProps;
-    if (Object.keys(this.state).length === 0) {
+    if (Object.keys(this.state).length === 0 && Object.keys(types).length !== 0) {
+      const state = {};
       types.map((type) => {
-        this.state[type.name] = 0;
+        state[type.name] = 0;
+      });
+      this.setState({
+        ...state,
+        type_ids: []
       });
     }
   }
@@ -31,8 +40,11 @@ export default class PurchaseForm extends Component {
       [type.name]: this.state[type.name]
     })
     }else{
+      const type_ids = this.state.type_ids.slice(0);
+      type_ids.push(type.id);
       this.setState({
-      [type.name]: this.state[type.name] + 1
+      [type.name]: this.state[type.name] + 1,
+      type_ids
     })
     }
     
@@ -44,9 +56,11 @@ export default class PurchaseForm extends Component {
       [type.name]: this.state[type.name]
     })
     }else {
-
+      const type_ids = this.state.type_ids.slice(0);
+      delete type_ids[type_ids.indexOf(type.id)];
       this.setState({
-        [type.name]: this.state[type.name] - 1
+        [type.name]: this.state[type.name] - 1,
+        type_ids
       })
     }
   }
@@ -61,8 +75,7 @@ export default class PurchaseForm extends Component {
   //     });
   //   }
   // }
-
-  render() {
+   render() {
     // console.log(this.state, this.state['Type 1']+this.state['Type 2']+this.state['Type 3']);
     const {types, loading, error, count, increment, decrement, event} = this.props;
     if (Object.keys(event).length !== 0) {
@@ -73,6 +86,7 @@ export default class PurchaseForm extends Component {
         history.replace(`/events/${event.data.id}`);
         return null;
       } else {
+      const {type_ids} = this.state;
       let total = 0;
       return(
         <div>
@@ -82,6 +96,13 @@ export default class PurchaseForm extends Component {
             const count = this.state[type.name];
             total += type.price * count;
            // console.log(this.state[type.name]+count);
+          const eveId = this.props.match.params.id;
+          t1 = eveId;
+          // console.log(t1);
+          var getTyped = type.id;
+          t2 = getTyped;
+          // console.log(t2);
+          // console.log(type_ids);
             return (
               <div>
                 <div className="clearfix">
@@ -93,23 +114,33 @@ export default class PurchaseForm extends Component {
                     <button onClick={(event) => {this._decrement(type, event)}}>-</button>
                   </div>
                 </div>
+                
               </div>
               )
           })
-        }
-          <div>
-            <label>Total</label>
-            {
-              total
-            }
-          </div>
-          <div>
-            <button>Add to Cart</button>
-            <button>Pay Now</button>
-            <button>cancel</button>
-          </div>
-          </div>
-        );
+        }  
+        <div>
+          <label>Total</label>
+          {
+            total
+          }
+        </div>
+        <div>
+          <button>Add to Cart</button>
+          <p>
+                    <Checkout
+                      name={'The Road to learn React'}
+                      description={'Only the Book'}
+                      amount={total}
+                      event_id={t1}
+                      type_id={t2}
+                      type_ids={type_ids}
+                    />
+          </p>
+          <button>cancel</button>
+        </div>
+        </div>
+      );
       }
     } else {
       return <div>Loading...</div>
