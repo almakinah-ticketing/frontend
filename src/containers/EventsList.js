@@ -53,6 +53,7 @@ const mapDispatchToProps = (dispatch) => {
     addEvent: (event) => {
       dispatch(addEventLoading());
       dispatch(addEvent(event)).then((response) => {
+        // debugger;
         // const id = response.payload.data.id;
         if (response.payload.status < 400) {
           dispatch(addEventSuccess(response.payload.data));
@@ -62,6 +63,8 @@ const mapDispatchToProps = (dispatch) => {
         };
       });
     }
+
+
 
     // getCategoryEvents: (categoryId) => {
     //   dispatch(getCategoryEventsLoading());

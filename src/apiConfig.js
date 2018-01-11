@@ -23,11 +23,15 @@ export const eventApi = (eventId) => `${rootApi}/events/${eventId}`;
 
 export const attendeesApi = `${rootApi}/attendees`;
 export const adminsApi = `${rootApi}/admins`;
+export const adminInvitationApi = `${rootApi}/admin/invitations`;
 export const loginsApi = (userType) => `${rootApi}/${userType}/logins`;
 export const currentUserApi = (userType, userId) => `${rootApi}/${userType}/${userId}`;
 
 export const postEventApi = `${rootApi}/events`;
 export const addTypes = (eventId) => `${rootApi}/events/${eventId}/types`;
+export const updateAdminApi = (adminId) =>  `${rootApi}/admins/${adminId}/registration`;
+export const getInvitedAdminApi = (invitationToken) =>  `${rootApi}/admins/registration/${invitationToken}`; 
+// /admins/:admin_id/registrations/:invitation_token
 
 // export const eventsApi = (categoryId) => `${rootApi}/${(categoryId && categoryId !== '0') ? 'categories/' + categoryId : 'events'}`;
 // export const categoryEventsApi = (categoryId) => `${rootApi}/categories/${categoryId}`;

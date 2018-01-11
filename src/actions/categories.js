@@ -6,7 +6,7 @@ import { categoriesApi } from '../apiConfig';
 // Get all categories
 
 export const GET_CATEGORIES_LOADING = 'GET_CATEGORIES_LOADING';
-export const  GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
 export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
 
