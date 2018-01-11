@@ -1,0 +1,74 @@
+import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
+import Event from '../Event';
+
+class MostPopularEvents extends Component {
+  constructor(props) {
+    super(props);
+    this._filterEvents.bind(this);
+  }
+
+  componentWillMount() {
+    const { getEvents } = this.props;
+    getEvents({popularity: 'desc'});
+  }
+
+  _filterEvents(params) {
+    var route;
+    function _parseDate(newDate) {
+      const dateObject = new Date(newDate);
+      const year = dateObject.getFullYear();
+      const month = dateObject.getMonth() + 1;
+      const day = dateObject.getDate();
+      const date = `${year}-${month}-${day}`;
+      return date;
+    }
+     if (params.categoryId && params.categoryId !== '0' && params.date) {
+      route = `/events?categoryId=${params.categoryId}&date=${params.date}`;
+    } else if (params.categoryId && params.categoryId !== '0') {
+      route = `/events?categoryId=${params.categoryId}`;
+    } else if (params.date) {
+      var parsedDate = _parseDate(params.date);
+      route = `/events?date=${parsedDate}`;
+    } else {
+      route = `/events`;
+    }
+    return route;
+  }
+
+  render() {
+    const { events, loading, error } = this.props;
+    return(
+      <div className="most-popular-events col-sm-8 col-md-8 col-lg-8 col-xl-8 container">
+        <h3>Most popular events</h3>
+        <div className="three-most-popular row">
+        {
+          (events.length === 0) 
+          ? (loading)
+            ? <p className="loading-message">Loading your most popular events...</p>
+            : (error)
+            ? <p className="error-message">Oops, something went wrong!</p>
+            : null
+          : events.map((event, index) => {
+            if (index < 3) {
+              console.log(index);
+              return (
+              <Event event={event} source={"most-popular-events"} _filterEvents={this._filterEvents} />
+              );
+            } else {
+              return (
+                null
+                );
+            }
+          })
+        }
+        </div>
+        <Link to="/events" className="pull-end">See all events</Link>
+        <div className="row clearfix">
+        </div>
+      </div>
+      );
+  }
+}
+
+export default MostPopularEvents;

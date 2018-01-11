@@ -1,8 +1,6 @@
 import Axios from 'axios';
 import { adminsApi, adminInvitationApi, updateAdminApi, getInvitedAdminApi} from '../apiConfig';
 
-// change to login
-
 /* Action types */
 
 // Post new admin

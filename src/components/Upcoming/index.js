@@ -13,9 +13,16 @@ export default class Upcoming extends Component{
 
      return (
       <div>
-        <h2>Upcoming Events</h2>
+        <h2>Upcoming events</h2>
        
         {
+          (events.length === 0)
+          ? (loading)
+            ? <p className="loading-message">Loading events...</p>
+            : (error)
+            ? <p className="error-message">Oops, something went wrong!</p>
+            : null
+          :
           events.map((event, index) => {
             return (
               <div>
@@ -28,7 +35,7 @@ export default class Upcoming extends Component{
           })
         } 
 
-      <p> <Link to="/events">Show All Events</Link> </p> 
+      <p> <Link to="/events">See all events</Link> </p> 
       </div>
     )
   }

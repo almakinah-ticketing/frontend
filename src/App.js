@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Route} from 'react-router-dom';
-import { Attendee, Admin } from './routeAuthorization';
+import { Attendee, Admin, AuthenticatedUser } from './routeAuthorization';
 import Header from './containers/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -34,6 +34,7 @@ class App extends Component {
           <Route path="/events" exact component={EventsList} />
           <Route path="/events?categoryId=:id" exact component={EventsList} />
           <Route path="/events?date=:date" exact component={EventsList} />
+          <Route path="/events?title=:title" exact component={EventsList} />
           <Route path="/events?categoryId=:id&date=:date" exact component={EventsList} />
           <Route path="/events/:id" exact component={EventDetails} />
           <Route path="/events/:id/tickets" exact component={Attendee(PurchaseForm)} />
@@ -46,6 +47,7 @@ class App extends Component {
           <Route path="/history" exact component={Attendee(AttendeeHistory)} />
           <Route path="/admin/dashboard" exact component={Admin(AdminDashboard)} />
           <Route path="/admin/create" exact component={Admin(CreateEventForm)} />
+          <Route path="/admin/update/:id" exact component={Admin(CreateEventForm)} />
           <Route path="/admin/invite" exact component={Admin(InviteAdminForm)} />
           <Route path="/newadmin" exact component={AdminRegistration} />
 

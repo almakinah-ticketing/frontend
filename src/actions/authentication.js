@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { loginsApi, currentUserApi } from '../apiConfig';
+import { loginsApi } from '../apiConfig';
 
 /* Action types */
 

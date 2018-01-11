@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -11,12 +15,6 @@ body {
 .App {
   text-align: center;
 }
-
-/*.error-messages{
-  background:red;
-  width:100%;
-  color:white;
-}*/
 
 .sr-only {
   position: absolute;
@@ -51,4 +49,26 @@ body {
 
 .login-as-admin {
   display: block;
+}
+
+.all-time-revenues, .all-time-tickets-sold {
+  font-size: 30px;
+}
+
+.activity-time-ago {
+  color: grey;
+  font-size: 0.75em;
+  margin-left: 5px;
+}
+
+.refresh-admin-activity-btn {
+  border: 0;
+  background: 0;
+  color: grey;
+}
+
+.admin-activity {
+  border: 2px solid black;
+  height: 500px;
+  overflow-y: scroll;
 }

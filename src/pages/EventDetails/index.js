@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Event from '../../components/Event';
-import SearchForm from '../../components/SearchForm';
 
 class EventDetails extends Component {
   constructor(props) {
@@ -33,6 +32,8 @@ class EventDetails extends Component {
     } else if (params.date) {
       var parsedDate = _parseDate(params.date);
       route = `/events?date=${parsedDate}`;
+    } else if (params.title) {
+      route = `/events?title=${params.title}`;
     } else {
       route = `/events`;
     }
@@ -46,12 +47,13 @@ class EventDetails extends Component {
       error,
       isAuthenticated,
       currentUser,
-      ticketsBoughtInSession
+      ticketsBoughtInSession,
+      updateEvent,
+      postNewAdminActivity
     } = this.props;
     return (
       <div className="event-details-page">
-        <SearchForm />
-        <Event event={event} source="eventDetails" loading={loading} error={error} _filterEvents={this._filterEvents} isAuthenticated={isAuthenticated} currentUser={currentUser} ticketsBoughtInSession={ticketsBoughtInSession} />
+        <Event event={event} source="eventDetails" loading={loading} error={error} _filterEvents={this._filterEvents} isAuthenticated={isAuthenticated} currentUser={currentUser} ticketsBoughtInSession={ticketsBoughtInSession} updateEvent={updateEvent} postNewAdminActivity={postNewAdminActivity} />
       </div>
     );
   }
