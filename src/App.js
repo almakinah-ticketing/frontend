@@ -4,7 +4,7 @@ import {Route} from 'react-router-dom';
 import { Attendee, Admin, AuthenticatedUser } from './routeAuthorization';
 import Header from './containers/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
+import Home from './containers/Home';
 import About from './pages/About';
 import { EventsList } from './containers/EventsList';
 import { EventDetails } from './containers/EventDetails';

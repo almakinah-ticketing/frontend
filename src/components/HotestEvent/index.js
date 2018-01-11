@@ -27,10 +27,6 @@ export default class HotestEvent extends Component {
 		return hottestEvent;
 	}
 
-	componentWillMount(){
-		this.props.getEvents({});
-	}
-
 	render(){
 		const {
 			events, 

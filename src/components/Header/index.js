@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
-import SearchForm from '../SearchForm';
+import { SearchForm } from '../../containers/EventsList';
 
 class Header extends Component {
   constructor(props) {
@@ -64,14 +64,14 @@ class Header extends Component {
             <li><NavLink to="/events">Events</NavLink></li>
           </ul>
         </nav>
-        <SearchForm getEvents={getEvents} />
+        <SearchForm />
         {
           (isAuthenticated && currentUser)
           ? (currentUser.attendee_id)
             ? this._attendeeAdvancedNav()
             : (currentUser.admin_id)
               ? this._adminAdvancedNav()
-              : <p>hi</p>
+              : null
           : this._unauthenticatedAdvancedNav()
         }
       </div>

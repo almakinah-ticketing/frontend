@@ -17,7 +17,6 @@ class SearchForm extends Component {
 
   _submitSearchData(event) {
     event.preventDefault();
-    console.log("HIIII")
     const { getEvents } = this.props;
     console.log(this.props);
     getEvents({title: this.state.title});

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import HotestEvent from '../components/HotestEvent';
+import HomeComponent from '../pages/Home';
 import {
   getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
 } from '../actions/events';
@@ -13,7 +13,7 @@ const mapStateToProps = (store) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return{
+  return {
     getEvents: (params) => {
       dispatch(getEventsLoading());
       dispatch(getEvents(params)).then((response) => {
@@ -27,4 +27,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HotestEvent);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeComponent);
+

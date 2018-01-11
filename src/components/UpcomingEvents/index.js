@@ -3,11 +3,7 @@ import Event from '../Event';
 import { Link } from 'react-router-dom';
 
 
-export default class Upcoming extends Component{
-  componentWillMount(){
-    this.props.getEvents({});
-  }
-
+export default class UpcomingEvents extends Component{
   render(){
     const {events, loading, error, _filterEvents} = this.props;
 

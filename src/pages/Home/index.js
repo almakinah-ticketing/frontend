@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import './Home.css';
 import { Categories } from '../../containers/Categories';
-import HotestEvent from '../../containers/HotestEvent';
-import { Upcoming } from '../../containers/UpcomingEvents';
+import HotestEvent from '../../components/HotestEvent';
+import UpcomingEvents from '../../components/UpcomingEvents';
 import { Link } from 'react-router-dom';
-import SearchForm from '../../components/SearchForm';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this._filterEvents = this._filterEvents.bind(this);
+  }
+
+  componentWillMount() {
+    const { getEvents } = this.props;
+    getEvents({});
   }
 
     // returns route with filtered data depending on query params to use in <Link>s
@@ -37,12 +41,13 @@ class Home extends Component {
   }
 
   render() {
+    const { events } = this.props;
     return(
       <div className="Home">
         <h1 className="App-title"><Link to="/">AlMakinah Summit</Link></h1>
         <Link to="/"><img className="logo" src="logo.png" alt="Logo"/></Link>
-        <HotestEvent _filterEvents={this._filterEvents} />
-        <Upcoming _filterEvents={this._filterEvents} />
+        <HotestEvent _filterEvents={this._filterEvents} events={events} />
+        <UpcomingEvents _filterEvents={this._filterEvents} events={events} />
         <Categories _filterEvents={this._filterEvents} />
       </div>
     );
