@@ -28,11 +28,11 @@ export const attendeesApi = `${rootApi}/attendees`;
 export const adminsApi = `${rootApi}/admins`;
 export const adminActivitiesApi = `${rootApi}/admin_activities`;
 export const loginsApi = (userType) => `${rootApi}/${userType}/logins`;
-// export const currentUserApi = (userType, userId) => `${rootApi}/${userType}/${userId}`;
+// export const currentUserApi = (userType, userId) => `${rootApi}/${userType}/${userId}`;;
+export const addTypes = (eventId) => `${rootApi}/events/${eventId}/types`;
 export const buyApi = `${rootApi}/buy?`;
 export const stripeApi = `${rootApi}/charges`;
-export const addTypes = (eventId) => `${rootApi}/events/${eventId}/types`;
-
+export const historyApi = `${rootApi}/history`;
 // export const eventsApi = (categoryId) => `${rootApi}/${(categoryId && categoryId !== '0') ? 'categories/' + categoryId : 'events'}`;
 // export const categoryEventsApi = (categoryId) => `${rootApi}/categories/${categoryId}`;
 // export const hotestEventApi = `${rootApi}/events/hottest`;

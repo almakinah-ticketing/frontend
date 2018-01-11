@@ -5,6 +5,7 @@ import ticketTypes from './ticketTypes';
 import attendee from './attendees';
 import authentication from './authentication';
 import adminActivities from './adminActivities';
+import history from './history'
 
 const rootReducer = combineReducers({
   categories,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   ticketTypes,
   attendee,
   authentication,
-  adminActivities
+  adminActivities,
+  history
 })
 
 export default rootReducer;
