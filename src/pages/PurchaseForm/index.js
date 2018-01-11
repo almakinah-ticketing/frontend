@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './PurchaseForm.css';
 import history from '../../history';
-import Checkout from '../../Checkout';
+import { Link } from 'react-router-dom';
+import Checkout from '../../containers/Checkout';
 var t1 = 0;
 var t2 = 0;
 
@@ -10,6 +11,8 @@ export default class PurchaseForm extends Component {
     super(props);
     const {types} = this.props;
     this.state = {};
+    this._parseDateToDisplay = this._parseDateToDisplay.bind(this);
+    this._parseTimeToDisplay = this._parseTimeToDisplay.bind(this);
   }
 
 
@@ -65,6 +68,38 @@ export default class PurchaseForm extends Component {
     }
   }
 
+  _parseDateToDisplay(dateArg) {
+    var dateNew = new Date(dateArg);
+    var daysWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var dayWeek = daysWeek[dateNew.getDay()];
+    var dayMonth = dateNew.getDate();
+    var month = months[dateNew.getMonth()];
+    var year = dateNew.getFullYear();
+    var dateString = `${dayWeek} ${month} ${dayMonth} ${year}`;
+    return dateString;
+  }
+
+  _parseTimeToDisplay(dateArg) {
+    var dateNew = new Date(dateArg);
+    var hours24 = dateNew.getHours();
+    var hours;
+    if (hours24 > 12) {
+      hours = hours24 - 12;
+    } else if (hours24 >= 10) {
+      hours = hours24;
+    } else if (hours24 < 10) {
+      hours = `0${hours24}`;
+    }
+    var minutes = dateNew.getMinutes();
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
+    var amOrPm = (hours24 >= 12) ? 'pm' : 'am';
+    var timeString = `${hours}:${minutes} ${amOrPm}`;
+    return timeString;
+  }
+
   // totalTickets(){
   //   if (Object.keys(this.state).length !== 0) {
   //     types.map((type) => {
@@ -90,7 +125,7 @@ export default class PurchaseForm extends Component {
       let total = 0;
       return(
         <div>
-          <h2>PurchaseForm</h2>
+          <h2>Get tickets to <Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h2>
           {
           types.map((type) => {
             const count = this.state[type.name];
@@ -120,25 +155,22 @@ export default class PurchaseForm extends Component {
           })
         }  
         <div>
-          <label>Total</label>
-          {
-            total
-          }
+          <p>Total: {total}</p>
         </div>
         <div>
-          <button>Add to Cart</button>
           <p>
                     <Checkout
-                      name={'The Road to learn React'}
-                      description={'Only the Book'}
+                      name={event.data.title}
+                      description={this._parseDateToDisplay(event.data.start_datetime) + ' at ' + this._parseTimeToDisplay(event.data.start_datetime)}
                       amount={total}
                       event_id={t1}
                       type_id={t2}
                       type_ids={type_ids}
                     />
           </p>
-          <button>cancel</button>
+          <Link to={`/events/${event.data.id}`} className="btn btn-secondary">Back to event</Link>
         </div>
+          <small>As per our cancelation policy, purchased tickets are non-refundable except if the event is canceled by organizers.</small>
         </div>
       );
       }

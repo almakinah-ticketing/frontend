@@ -153,12 +153,14 @@ class Event extends Component {
     const eventId = event.data.id;
     if (isAuthenticated && currentUser.attendee_id) {
       const attendeeTickets = (currentUser.tickets_bought).concat(ticketsBoughtInSession);
+      console.log(attendeeTickets);
       var attendeeEventTicketsCount = 0;
       for (var i = 0; i < attendeeTickets.length; i++) {
         if (attendeeTickets[i].event_id === eventId) {
           attendeeEventTicketsCount++;
         }
       }
+      console.log(ticketsBoughtInSession);
       if (attendeeEventTicketsCount > 0) {
           return(
             <p className="you-bought-message">You bought {attendeeEventTicketsCount} ticket(s) to this event</p>
