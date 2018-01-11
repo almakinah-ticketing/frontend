@@ -95,7 +95,6 @@ class CApp extends Component {
   // }
 
   render() {
-    debugger;
     return (
       <div>
         {/* <form className="checkboxForm">
