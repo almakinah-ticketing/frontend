@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
+import SearchForm from '../SearchForm';
 
 class Header extends Component {
   constructor(props) {
@@ -52,10 +53,10 @@ class Header extends Component {
   }
 
   render() {
-    const { isAuthenticated, currentUser } = this.props;
+    const { isAuthenticated, currentUser, getEvents } = this.props;
     return(
       <div className="App-header clearfix">
-        <h1><NavLink to="/"><img className="logo pull-start navbar-brand" src="original-favicon.png" alt="Logo" /></NavLink></h1>
+        <h1 className="logo navbar-brand pull-start"><NavLink to="/"><img src="original-favicon.png" alt="Logo" /></NavLink></h1>
         <nav className="basic-nav pull-start">
           <ul>
             <li><NavLink to="/">Home</NavLink></li>
@@ -63,6 +64,7 @@ class Header extends Component {
             <li><NavLink to="/events">Events</NavLink></li>
           </ul>
         </nav>
+        <SearchForm getEvents={getEvents} />
         {
           (isAuthenticated && currentUser)
           ? (currentUser.attendee_id)

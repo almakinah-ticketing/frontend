@@ -3,6 +3,9 @@ import Header from '../components/Header';
 import {
   setCurrentUser
 } from '../actions/authentication';
+import {
+  getEventsLoading, getEvents, getEventsSuccess, getEventsFailure
+} from '../actions/events';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import history from '../history';
 
@@ -29,6 +32,16 @@ const mapDispatchToProps = (dispatch) => {
         default:
           break;
       }
+    },
+    getEvents: (params) => {
+      dispatch(getEventsLoading());
+      dispatch(getEvents(params)).then((response) => {
+        if (response.payload.status < 400) {
+          dispatch(getEventsSuccess(response.payload.data));
+        } else {
+          dispatch(getEventsFailure(response.payload.response.data));
+        }
+      });
     }
   };
 };

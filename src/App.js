@@ -32,6 +32,7 @@ class App extends Component {
           <Route path="/events" exact component={EventsList} />
           <Route path="/events?categoryId=:id" exact component={EventsList} />
           <Route path="/events?date=:date" exact component={EventsList} />
+          <Route path="/events?title=:title" exact component={EventsList} />
           <Route path="/events?categoryId=:id&date=:date" exact component={EventsList} />
           <Route path="/events/:id" exact component={EventDetails} />
           <Route path="/events/:id/tickets" exact component={Attendee(PurchaseForm)} />
