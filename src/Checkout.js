@@ -26,7 +26,7 @@ export default class Checkout extends Component {
         });
       })
   }
-
+  
   errorPayment = (data) => {
     alert('Payment Error');
   }
