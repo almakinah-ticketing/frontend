@@ -30,6 +30,7 @@ export const postEventApi = `${rootApi}/events`;
 export const addTypes = (eventId) => `${rootApi}/events/${eventId}/types`;
 export const buyApi = `${rootApi}/buy?`;
 export const stripeApi = `${rootApi}/charges`;
+export const historyApi = `${rootApi}/history`;
 // export const eventsApi = (categoryId) => `${rootApi}/${(categoryId && categoryId !== '0') ? 'categories/' + categoryId : 'events'}`;
 // export const categoryEventsApi = (categoryId) => `${rootApi}/categories/${categoryId}`;
 // export const hotestEventApi = `${rootApi}/events/hottest`;
