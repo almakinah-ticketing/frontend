@@ -1,16 +1,22 @@
 .event {
   width: 60%;
   margin: auto;
+  margin-top: 10px;
   /*text-align: left;*/
 }
 
 .event-text-info {
   margin-left: 5%;
 }
+
+.three-most-popular .event-img {
+  width: 100%;
+}
+
 .overview-line {
-	white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 
 .agenda-line {
-	white-space: pre-wrap;
+  white-space: pre-wrap;
 }

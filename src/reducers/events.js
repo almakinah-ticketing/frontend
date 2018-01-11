@@ -1,8 +1,9 @@
 import {
   GET_EVENTS_LOADING, GET_EVENTS_SUCCESS, GET_EVENTS_FAILURE,
+  GET_EVENT_LOADING, GET_EVENT_SUCCESS, GET_EVENT_FAILURE,
   ADD_EVENT_LOADING, ADD_EVENT, ADD_EVENT_SUCCESS, ADD_EVENT_FAILURE,
-   HANDLE_NEW_IMAGE
-  // GET_CATEGORY_EVENTS_LOADING, GET_CATEGORY_EVENTS_SUCCESS, GET_CATEGORY_EVENTS_FAILURE
+  UPDATE_EVENT_LOADING, UPDATE_EVENT, UPDATE_EVENT_SUCCESS, UPDATE_EVENT_FAILURE,
+  HANDLE_NEW_IMAGE
 } from '../actions/events';
 
 const INITIAL_STATE = {
@@ -23,15 +24,12 @@ const INITIAL_STATE = {
 export default (currentState = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_EVENTS_LOADING:
-    // case GET_CATEGORY_EVENTS_LOADING:
       return {
         ...currentState, 
         loading: true
       };
       break;
     case GET_EVENTS_SUCCESS:
-    // case GET_CATEGORY_EVENTS_SUCCESS:
-      console.log(action.events);
       return {
         ...currentState, 
         loading: false, 
@@ -40,15 +38,33 @@ export default (currentState = INITIAL_STATE, action) => {
       };
       break;
     case GET_EVENTS_FAILURE:
-    // case GET_CATEGORY_EVENTS_FAILURE:
       return {
         ...currentState, 
         loading: false, 
         error: action.error
       };
       break;
-      // Add Event
-
+    case GET_EVENT_LOADING:
+      return {
+        ...currentState, 
+        loading: true
+      };
+      break;
+    case GET_EVENT_SUCCESS:
+      return {
+        ...currentState, 
+        event: action.event,
+        loading: false, 
+        error: null
+      };
+      break;
+    case GET_EVENT_FAILURE:
+      return {
+        ...currentState, 
+        error: action.error,
+        loading: false        
+      };
+      break;
     case ADD_EVENT_LOADING:
       return {
         ...currentState,
@@ -69,12 +85,34 @@ export default (currentState = INITIAL_STATE, action) => {
       errorAdding: action.error
       };
       break;
-      // handle new image
-
-      case HANDLE_NEW_IMAGE:
-      return {...currentState, img: action.img};
+    case UPDATE_EVENT_LOADING:
+      return {
+        ...currentState,
+        error: null,
+        loading: true
+      };
       break;
-
+    case UPDATE_EVENT_SUCCESS:
+     return {
+      ...currentState,
+      loading: false,
+      error: null,
+      event: action.event
+      };
+      break;
+    case UPDATE_EVENT_FAILURE:
+     return {
+      ...currentState,
+      loading: false,
+      error: action.error
+      };
+      break;
+      case HANDLE_NEW_IMAGE:
+        return {
+          ...currentState, 
+          img: action.img
+        };
+        break;
     default:
       return currentState;
       break;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './EventsList.css';
-import SearchForm from '../../components/SearchForm';
 import FilterForm from '../../components/FilterForm';
 import Events from '../../components/Events';
 
@@ -46,7 +45,6 @@ class EventsList extends Component {
     } = this.props;
     return(
       <div className="EventsList">
-        <SearchForm />
         <FilterForm categories={categories} events={events} getCategories={getCategories} getEvents={getEvents} location={location} _filterEvents={this._filterEvents} />
         <Events events={events} getEvents={getEvents} eventsLoading={eventsLoading} eventsError={eventsError} location={location} _filterEvents={this._filterEvents} />
       </div>

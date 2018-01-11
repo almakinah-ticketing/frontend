@@ -88,7 +88,7 @@ class SignUp extends Component {
           <div className="form-group">
             <label htmlFor="phone-number">Phone number</label>
             <input type="text" className="form-control" id="phone-number" name="phone_number" value={this.state.phone_number} aria-describedby="phoneNumberHelp" required minLength="9" maximum="11" pattern="\d*" onChange={this._handleChange}/>
-            <small id="phoneNumberHelp" className="form-text text-muted">Please enter a valid mobile phone or landline number in case event organizers need to contact you.</small>
+            <small id="phoneNumberHelp" className="form-text text-muted">Please enter a valid mobile phone or landline number in case we need to contact you about important updates.</small>
           </div>
           <button className="btn btn-primary">Sign up</button>
         </form>

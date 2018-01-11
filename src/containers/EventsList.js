@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
 import EventsListPage from '../pages/EventsList';
+import CreateEventFormComponent from '../pages/CreateEventForm';
 import {
   getCategoriesLoading, getCategories, getCategoriesSuccess, getCategoriesFailure
 } from '../actions/categories';
 import {
   getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
-  addEventLoading, addEvent, addEventSuccess, addEventFailure, handleNewImage
-  // getCategoryEventsLoading, getCategoryEvents, getCategoryEventsSuccess, getCategoryEventsFailure
+  getEventLoading, getEvent, getEventSuccess, getEventFailure,
+  addEventLoading, addEvent, addEventSuccess, addEventFailure, handleNewImage,
+  updateEventLoading, updateEvent, updateEventSuccess, updateEventFailure
 } from '../actions/events';
-
-// import EventFormComponent from '../pages/EventForm';
+import {
+  postNewAdminActivityLoading, postNewAdminActivity, postNewAdminActivitySuccess, postNewAdminActivityFailure
+} from '../actions/adminActivities';
 import history from '../history';
-import CreateEventFormComponent from '../pages/CreateEventForm';
 
 
 const mapStateToProps = (store) => {
@@ -22,7 +24,9 @@ const mapStateToProps = (store) => {
     events: store.events.events,
     event: store.events.event,
     eventsLoading: store.events.loading,
-    eventsError: store.events.error
+    eventsError: store.events.error,
+    adding: store.events.adding,
+    errorAdding: store.events.errorAdding,
   }
 }
 
@@ -34,7 +38,7 @@ const mapDispatchToProps = (dispatch) => {
         if (response.payload.status<400) {
           dispatch(getCategoriesSuccess(response.payload.data));
         } else {
-          dispatch(getCategoriesFailure(response.payload.message));
+          dispatch(getCategoriesFailure(response.payload.response.data));
         }
       });
     },
@@ -44,32 +48,56 @@ const mapDispatchToProps = (dispatch) => {
         if (response.payload.status < 400) {
           dispatch(getEventsSuccess(response.payload.data));
         } else {
-          dispatch(getEventsFailure(response.payload.message));
+          dispatch(getEventsFailure(response.payload.response.data));
         }
       });
     },
-    // Add Event
-
-    addEvent: (event) => {
+    getEvent: (eventId) => {
+      dispatch(getEventLoading());
+      dispatch(getEvent(eventId)).then(response => {
+        if (response.payload.status<400) {
+          dispatch(getEventSuccess(response.payload.data));
+        } else {
+          dispatch(getEventFailure(response.payload.response.data));
+        }
+      });
+    },
+    addEvent: (event, adminId, action) => {
       dispatch(addEventLoading());
       dispatch(addEvent(event)).then((response) => {
         // const id = response.payload.data.id;
         if (response.payload.status < 400) {
           dispatch(addEventSuccess(response.payload.data));
-          history.push(`/events/${response.payload.data.id}`);
+          dispatch(postNewAdminActivity({
+            admin_id: adminId,
+            event_id: response.payload.data.data.id,
+            action: action
+          }));
+          history.push(`/events/${response.payload.data.data.id}`);
         } else {
-          dispatch(addEventFailure(response.payload.message));
-        };
+          dispatch(addEventFailure(response.payload.response.data));
+        }
+      });
+    },
+    updateEvent: (eventId, updates, activity) => {
+      dispatch(updateEventLoading());
+      dispatch(updateEvent(eventId, updates)).then(response => {
+        console.log(response);
+        if (response.payload.status < 400) {
+          dispatch(updateEventSuccess(response.payload.data));
+          dispatch(postNewAdminActivity(activity));
+        } else {
+          dispatch(updateEventFailure(response.payload.response.data));
+        }
       });
     }
-
-    // getCategoryEvents: (categoryId) => {
-    //   dispatch(getCategoryEventsLoading());
-    //   dispatch(getCategoryEvents(categoryId)).then((response) => {
+    // postNewAdminActivity: (adminId, eventId, action) => {
+    //   dispatch(postNewAdminActivityLoading());
+    //   dispatch(postNewAdminActivity(adminId, eventId, action)).then(response => {
     //     if (response.payload.status < 400) {
-    //       dispatch(getCategoryEventsSuccess(response.payload.data));
+    //       dispatch(postNewAdminActivitySuccess(response.payload.data));
     //     } else {
-    //       dispatch(getCategoryEventsFailure(response.payload.message));
+    //       dispatch(postNewAdminActivityFailure(response.payload.response.data));
     //     }
     //   });
     // }

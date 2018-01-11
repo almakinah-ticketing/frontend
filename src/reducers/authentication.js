@@ -44,7 +44,7 @@ export default (currentState = INITIAL_STATE, action) => {
     case UPDATE_ATTENDEE_TICKETS:
       return {
         ...currentState,
-        ticketsBoughtInSession: currentState.ticketsBoughtInSession << action.ticket
+        ticketsBoughtInSession: [...currentState.ticketsBoughtInSession, action.ticket]
       };
       break;
     default:
