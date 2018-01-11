@@ -26,10 +26,14 @@ export const postEventApi = `${rootApi}/events`;
 export const eventApi = (eventId) => `${rootApi}/events/${eventId}`;
 export const attendeesApi = `${rootApi}/attendees`;
 export const adminsApi = `${rootApi}/admins`;
+export const adminInvitationApi = `${rootApi}/admin/invitations`;
 export const adminActivitiesApi = `${rootApi}/admin_activities`;
 export const loginsApi = (userType) => `${rootApi}/${userType}/logins`;
 // export const currentUserApi = (userType, userId) => `${rootApi}/${userType}/${userId}`;;
 export const addTypes = (eventId) => `${rootApi}/events/${eventId}/types`;
+export const updateAdminApi = (adminId) =>  `${rootApi}/admins/${adminId}/registration`;
+export const getInvitedAdminApi = (invitationToken) =>  `${rootApi}/admins/registration/${invitationToken}`; 
+// /admins/:admin_id/registrations/:invitation_token
 export const buyApi = `${rootApi}/buy?`;
 export const stripeApi = `${rootApi}/charges`;
 export const historyApi = `${rootApi}/history`;

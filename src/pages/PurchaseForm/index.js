@@ -53,7 +53,7 @@ export default class PurchaseForm extends Component {
     
   }
 
-   _decrement(type, event) {
+  _decrement(type, event) {
     if (this.state[type.name]==0){
       this.setState({
       [type.name]: this.state[type.name]

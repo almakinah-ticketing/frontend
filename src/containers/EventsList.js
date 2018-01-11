@@ -65,6 +65,7 @@ const mapDispatchToProps = (dispatch) => {
     addEvent: (event, adminId, action) => {
       dispatch(addEventLoading());
       dispatch(addEvent(event)).then((response) => {
+        // debugger;
         // const id = response.payload.data.id;
         if (response.payload.status < 400) {
           dispatch(addEventSuccess(response.payload.data));
@@ -91,9 +92,18 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     }
+
+
+
+
+    // getCategoryEvents: (categoryId) => {
+    //   dispatch(getCategoryEventsLoading());
+    //   dispatch(getCategoryEvents(categoryId)).then((response) => {
+
     // postNewAdminActivity: (adminId, eventId, action) => {
     //   dispatch(postNewAdminActivityLoading());
     //   dispatch(postNewAdminActivity(adminId, eventId, action)).then(response => {
+
     //     if (response.payload.status < 400) {
     //       dispatch(postNewAdminActivitySuccess(response.payload.data));
     //     } else {
