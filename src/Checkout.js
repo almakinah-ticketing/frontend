@@ -32,7 +32,11 @@ const onToken = (amount, description, event_id, type_id,type_ids) => token =>
       description,
       stripeToken: token.id,
       currency: CURRENCY,
-      amount: amount
+      amount: amount,
+      event_id: event_id,
+      type_ids: type_ids
+
+
     })
     .then(() => successPayment(event_id, type_id,type_ids))
     .catch(errorPayment)
