@@ -4,6 +4,9 @@ import {
   getEventLoading, getEvent, getEventSuccess, getEventFailure,
   updateEventLoading, updateEvent, updateEventSuccess, updateEventFailure
 } from '../actions/events';
+import {
+  postNewAdminActivityLoading, postNewAdminActivity, postNewAdminActivitySuccess, postNewAdminActivityFailure
+} from '../actions/adminActivities';
 
 const mapStateToProps = (store) => {
   return {
@@ -31,17 +34,27 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     },
-    updateEvent: (eventId, updates) => {
+    updateEvent: (eventId, updates, activity) => {
       dispatch(updateEventLoading());
       dispatch(updateEvent(eventId, updates)).then(response => {
-        console.log(response);
         if (response.payload.status < 400) {
           dispatch(updateEventSuccess(response.payload.data));
+          dispatch(postNewAdminActivity(activity));
         } else {
           dispatch(updateEventFailure(response.payload.response.data));
         }
       });
     }
+    // postNewAdminActivity: (adminId, eventId, action) => {
+    //   dispatch(postNewAdminActivityLoading());
+    //   dispatch(postNewAdminActivity(adminId, eventId, action)).then(response => {
+    //     if (response.payload.status < 400) {
+    //       dispatch(postNewAdminActivitySuccess(response.payload.data));
+    //     } else {
+    //       dispatch(postNewAdminActivityFailure(response.payload.response.data));
+    //     }
+    //   });
+    // }
   }
 }
 

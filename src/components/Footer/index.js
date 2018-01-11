@@ -6,7 +6,7 @@ class Footer extends Component {
   render() {
     return(
       <div className="App-footer clearfix">
-        <p className="copyrights pull-start">&copy; 2017 AlMakinah</p>
+        <p className="copyrights pull-start">&copy; 2018 AlMakinah</p>
         <nav className="contact-nav pull-end">
           <ul>
             <li><a href="mailto:info@almakinah.com"><FontAwesome className="fas fa-envelope icons" /></a></li>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { rootApi } from '../../apiConfig';
 import './Event.css';
 
 class Event extends Component {
@@ -11,6 +12,8 @@ class Event extends Component {
     this._linkContent = this._linkContent.bind(this);
     this._attendeeTicketCountMessage = this._attendeeTicketCountMessage.bind(this);
     this._adminDetailsTable = this._adminDetailsTable.bind(this);
+    this._cancelEvent = this._cancelEvent.bind(this);
+    this._uncancelEvent = this._uncancelEvent.bind(this);
   }
 
   _parseDateToDisplay(dateArg) {
@@ -69,8 +72,36 @@ class Event extends Component {
     return durationString;
   }
 
+  _cancelEvent() {
+    const { updateEvent, currentUser, event } = this.props;
+    var activity = {
+      admin_activity: {
+      admin_id: currentUser.admin_id, 
+      event_id: event.data.id, 
+      action: "canceled"
+      }
+    }
+    updateEvent(event.data.id, {
+      canceled: true
+    }, activity);
+  }
+
+  _uncancelEvent() {
+    const { updateEvent, currentUser, event } = this.props;
+    var activity = {
+      admin_activity: {
+      admin_id: currentUser.admin_id, 
+      event_id: event.data.id, 
+      action: "uncanceled"
+      }
+    } 
+    updateEvent(event.data.id, {
+      canceled: false
+    }, activity);
+  }
+
   _linkContent() {
-    const { isAuthenticated, currentUser, event, updateEvent } = this.props;
+    const { isAuthenticated, currentUser, event } = this.props;
     const eventHappened = new Date(event.data.start_datetime) < new Date();
     const eventSoldOut = event.tickets_available_per_event === 0;
     const eventCanceled = event.data.canceled;
@@ -94,14 +125,14 @@ class Event extends Component {
          if (!eventHappened && !eventCanceled) {
           return(
             <div>
-              <Link to={`/admin/update?event=${event.data.id}`} className="btn btn-primary update-event-btn">Update event</Link>
-              <button className="btn btn-danger delete-event-btn" onClick={() => {updateEvent(event.data.id, {canceled: true})}}>Cancel event</button>
+              <Link to={`/admin/update/${event.data.id}`} className="btn btn-primary update-event-btn">Update event</Link>
+              <button className="btn btn-danger delete-event-btn" onClick={this._cancelEvent}>Cancel event</button>
             </div>
           );
         } else if (eventCanceled) {
           return(
             <div>
-              <button className="btn btn-danger delete-event-btn" onClick={() => {updateEvent(event.data.id, {canceled: false})}}>Uncancel event</button>
+              <button className="btn btn-danger delete-event-btn" onClick={this._uncancelEvent}>Uncancel event</button>
             </div>
           );
         } else if (eventHappened) {
@@ -210,7 +241,7 @@ class Event extends Component {
     if (source === 'most-popular-events') {
     return (
       <div className="event col-sm-4 col-md-4 col-lg-4 col-xl-4">
-        <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img" /></Link>
+        <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img" /></Link>
         <h3><Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h3>
         <p className="tickets-sold-per-event">{event.tickets_sold} ticket(s) sold</p>
         <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>
@@ -229,7 +260,7 @@ class Event extends Component {
                 ? <p className="event-canceled-message alert alert-warning">Canceled</p>
                 : null
           }
-          <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img pull-start" /></Link>
+          <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img pull-start" /></Link>
           <div className="event-text-info pull-start">
             <h3><Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h3>
             <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>
@@ -273,7 +304,7 @@ class Event extends Component {
               <h3><Link to={`/events/${event.data.id}`} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">{event.data.title}</Link></h3>
             </div>
             <div className="row">
-              <Link to={`/events/${event.data.id}`}><img src={event.data.img} alt={event.data.title} className="event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>
+              <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>
             </div>
             <div className="row">
               <Link to={_filterEvents({categoryId: event.data.category.id})} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">#{event.data.category.name}</Link>

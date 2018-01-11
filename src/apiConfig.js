@@ -29,7 +29,6 @@ export const loginsApi = (userType) => `${rootApi}/${userType}/logins`;
 // export const currentUserApi = (userType, userId) => `${rootApi}/${userType}/${userId}`;
 export const buyApi = `${rootApi}/buy?`;
 export const stripeApi = `${rootApi}/charges`;
-export const postEventApi = `${rootApi}/events`;
 export const addTypes = (eventId) => `${rootApi}/events/${eventId}/types`;
 
 // export const eventsApi = (categoryId) => `${rootApi}/${(categoryId && categoryId !== '0') ? 'categories/' + categoryId : 'events'}`;

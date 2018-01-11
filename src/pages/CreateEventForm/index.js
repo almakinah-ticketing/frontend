@@ -1,64 +1,89 @@
 import React, {Component} from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import './CreateEventForm.css'
+import FontAwesome from 'react-fontawesome';
+import { Link } from 'react-router-dom';
+import './CreateEventForm.css';
+import { withLastLocation } from 'react-router-last-location';
+import history from '../../history';
 // import { SelectCategory } from '../../containers/Categories';
 
 
-export default class CreateEventForm extends Component{
- constructor(){
-        super();
-        if (location.pathname === '/admin/update') {
-          this.state = {
-            title:"",
-            img:"",
-            overview:"",
-            agenda:"",
-            category_id:"",
-            start_datetime:"",
-            end_datetime:"",
-            name:"",
-            price:"",
-            capacity:"",
-            types_attributes: [
-            {
-              name: '',
-              capacity: '',
-              price: ''
-            }]
-          }
-        } else {
-          this.state = {
-            title:"",
-            img:"",
-            overview:"",
-            agenda:"",
-            category_id:"",
-            start_datetime:"",
-            end_datetime:"",
-            name:"",
-            price:"",
-            capacity:"",
-            types_attributes: [
-            {
-              name: '',
-              capacity: '',
-              price: ''
-            }]
+class CreateEventForm extends Component {
+ constructor(props){
+        super(props);
+        this.state = {
+          title:"",
+          img:"",
+          overview:"",
+          agenda:"",
+          category_id:"",
+          start_datetime:"",
+          end_datetime:"",
+          types_attributes: [
+          {
+            name: '',
+            capacity: '',
+            price: '',
+          }]
         }
-      }
-
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.addType = this.addType.bind(this);
       this.handleFileChange = this.handleFileChange.bind(this);
-    }
+      this._parseDatetime = this._parseDatetimeToInputField.bind(this);
+      this._cancelButtonLinkPath = this._cancelButtonLinkPath.bind(this);
+  }
 
   componentWillMount() {
     const {
+      lastLocation,
       getCategories
     } = this.props;
     getCategories();
+    if (this.props.location.pathname.includes('/admin/update')) {
+      const { getEvent } = this.props;
+      getEvent(this.props.match.params.id);
+    }
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.pathname.includes('/admin/update')) {
+          const { event } = nextProps;
+          if (Object.keys(event).length !== 0) {
+            var types = event.data.types;
+            var typesCopy = [];
+            if (types.length !== 0) {
+              for (var i = 0; i < types.length; i++) {
+                console.log(types[i]);
+                const obj = {
+                  id: types[i].id,
+                  name: types[i].name,
+                  capacity: types[i].capacity,
+                  price: types[i].price
+                }
+                typesCopy.push(obj);
+              }
+            }
+            const types = event.data.types;
+            this.setState({
+              title: event.data.title,
+              overview: event.data.overview,
+              agenda: event.data.agenda,
+              category_id: event.data.category.id,
+              start_datetime: this._parseDatetimeToInputField(event.data.start_datetime),
+              end_datetime: this._parseDatetimeToInputField(event.data.end_datetime),
+              types_attributes: typesCopy
+            });
+          }
+        }
+    }
+
+    _parseDatetimeToInputField(datetime) {
+      var array = datetime.split(':');
+      var datetimeToInputField = array[0] + ':' + array[1];
+      return datetimeToInputField;
+    }
+
   // handleNewImage: (encodedString, fileName) => {
   //      dispatch(handleNewImage(encodedString, fileName))
   // handleNewImage(e) {
@@ -70,25 +95,25 @@ export default class CreateEventForm extends Component{
 
 
   handleChange(e) {
-  this.setState({[e.target.name]: e.target.value});
-  }
+    this.setState({[e.target.name]: e.target.value});
+    }
 
   handleFileChange(event) {
-  let file = event.target.files[0];
-  this.setState({img: event.target.files[0]});
-  }
+    let file = event.target.files[0];
+    this.setState({img: event.target.files[0]});
+    }
 
   handleTypeChange(e, index) {
     const types = this.state.types_attributes.slice();
-     types[index][e.target.name] = e.target.value;
+    types[index][e.target.name] = e.target.value;
     this.setState({types_attributes: types});
-    console.log(this.state);
+    // this.setState({types_attributes: [...this.state.types_attributes, ...types]});
   }
   
- handleSubmit(event) {
-    const {addEvent} = this.props;
+ handleSubmit(e) {
+    const { event, addEvent, updateEvent, currentUser } = this.props;
     // const {addType} = this.props;
-    event.preventDefault();
+    e.preventDefault();
     // const newState = {
     //   ...this.state,
     //   overview: this.state.overview.split('\n'),
@@ -143,9 +168,20 @@ export default class CreateEventForm extends Component{
     // formData.append("event.types_attributes[name]", name);
     // formData.append("event.types_attributes[capacity]", capacity);
     // formData.append("event.types_attributes[price]", price);
-  
-   addEvent(formData); 
-   console.log(this.state); 
+
+    if (this.props.location.pathname.includes('/admin/update')) {
+      var activity = {
+        admin_activity: {
+        admin_id: currentUser.admin_id, 
+        event_id: event.data.id, 
+        action: "updated"
+        }
+      }
+      updateEvent(this.props.match.params.id, formData, activity);
+      history.push(`/events/${this.props.match.params.id}`);
+    } else {
+      addEvent(formData, currentUser.admin_id, "created");
+    }
   }
 
   addType() {
@@ -158,6 +194,34 @@ export default class CreateEventForm extends Component{
     this.setState({types_attributes: [...this.state.types_attributes, newType]});
   }
 
+  deleteType(e, index) {
+    const types = this.state.types_attributes.slice();
+    if (types[index]["_destroy"] === undefined) {
+      types[index]["_destroy"] = true;
+    } else {
+      delete types[index]["_destroy"];
+    }
+    this.setState({types_attributes: types});
+  }
+
+  // hideType(index) {
+  //   if (index === this.state.typeToHide && this.state.isHidden) {
+  //     return {
+  //       display: "none"
+  //     };
+  //   }
+  // }
+
+  _cancelButtonLinkPath() {
+    if (this.props.location.pathname.includes('/admin/update')) {
+      return `/events/${this.props.match.params.id}`;
+    } else if (this.props.lastLocation) {
+      return this.props.lastLocation.pathname;
+    } else {
+      return '/admin/dashboard';
+    }
+  }
+
     render(){
       const {
         event,
@@ -165,40 +229,67 @@ export default class CreateEventForm extends Component{
         type,
         addType,
         adding,
-        error,
+        errorAdding,
         categories,
         loading,
         location
       } = this.props;
-      console.log("LOCATION");
-      console.log(location);
       const types = this.state.types_attributes;
       return(
         <div>
-          <h1>Create New Event </h1>
+        {
+          (errorAdding)
+          ? <p className="alert alert-danger">{errorAdding}</p>
+          : null
+        }
+        {
+          (this.props.location.pathname.includes('/admin/update'))
+          ? (Object.keys(event).length !== 0)
+            ? <h1>Update <Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h1>
+            : null
+          : <h1>Create a new event</h1>
+        }
           <div className="create-event-form">
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Label htmlFor="title">Title</Label>
                 <Input type="text" name="title" id="title" value={this.state.title} onChange={this.handleChange}></Input>
+                <small>Event title must be unique.</small>
               </FormGroup>
-              <FormGroup>
-                <Label htmlFor="category">Category</Label>
-                <select name="category_id" onChange={this.handleChange}>
-                <option disabled selected value>select category</option>
-                  
-                 {
-                    categories.map((category) => {
-                      return (
-                          <option value={category.id}>{category.name}</option>
-                        )
-                    })
-                  }
-                </select>
-              </FormGroup>
+              {
+                  (this.props.location.pathname.includes('/admin/update'))
+                  ? (<FormGroup>
+                        <Label htmlFor="category">Category</Label>
+                        <select name="category_id" onChange={this.handleChange} value={this.state.category_id}>
+                        <option disabled selected value>Select category</option>
+                          
+                         {
+                            categories.map((category) => {
+                              return (
+                                  <option value={category.id}>{category.name}</option>
+                                )
+                            })
+                          }
+                        </select>
+                      </FormGroup>)
+                  : (<FormGroup>
+                      <Label htmlFor="category">Category</Label>
+                      <select name="category_id" onChange={this.handleChange}>
+                      <option disabled selected value>Select category</option>
+                        
+                       {
+                          categories.map((category) => {
+                            return (
+                                <option value={category.id}>{category.name}</option>
+                              )
+                          })
+                        }
+                      </select>
+                      </FormGroup>)
+                }
               <FormGroup>
                 <Label htmlFor="img">Event Image</Label>
-                <Input id="img" name="img" type="file"   onChange={this.handleFileChange}></Input>
+                <Input id="img" name="img" type="file" onChange={this.handleFileChange}></Input>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="startdate">Start Date</Label>
@@ -218,7 +309,7 @@ export default class CreateEventForm extends Component{
               </FormGroup>
               <div>
               <FormGroup>
-                <Label htmlFor="tickets">Tickets Types</Label>
+                <Label htmlFor="tickets">Ticket Types</Label>
               </FormGroup>
 
                 {
@@ -227,7 +318,18 @@ export default class CreateEventForm extends Component{
                       <div>
                         <FormGroup>
                           <Label htmlFor="type">Type</Label>
+                          {
+                          (this.props.location.pathname.includes('/admin/update'))
+                          ? (
+                            <div className="delete-type">
+                              <input type="checkbox" id="delete-type" onChange={(event) => {this.deleteType(event, index)}} /> 
+                              <label htmlFor="delete-type">delete</label>                
+                            </div>
+                            )    
+                          : null    
+                        }
                           <Input id="type" name="name" type="text" value={this.state.types_attributes[index].name} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                          <small>Type name must start with a capital letter.</small>                      
                         </FormGroup>
                         <FormGroup>
                           <Label htmlFor="number">Number of Tickets</Label>
@@ -238,17 +340,20 @@ export default class CreateEventForm extends Component{
                           <Input id="price" name="price" type="number" value={this.state.types_attributes[index].price} onChange={(event) => this.handleTypeChange(event, index)}></Input>
                         </FormGroup>
                       </div>
-                    )
+                    );                    
                   })
                 }
                 <FormGroup>
-                  <Button onClick={this.addType}>Add More Types</Button>
+                  <Button onClick={this.addType}>Add more types</Button>
                 </FormGroup>
               </div>
               <Button type="submit">Submit</Button>
+              <Button><Link to={this._cancelButtonLinkPath()}>Cancel</Link></Button>
             </Form>
           </div>
         </div>
       )
     }
 }
+
+export default withLastLocation(CreateEventForm);

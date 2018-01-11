@@ -15,6 +15,7 @@ const mapStateToProps = (store) => {
     eventsLoading: store.events.loading,
     eventsError: store.events.error,
     adminActivities: store.adminActivities.adminActivities,
+    adminActivity: store.adminActivities.adminActivity,
     adminActivitiesLoading: store.adminActivities.loading,
     adminActivitiesError: store.adminActivities.error
   }

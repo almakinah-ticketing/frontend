@@ -121,7 +121,6 @@ export const addEventFailure = (error) => {
 }
 
 // Handle new image in event form
-
 export const handleNewImage = (encodedString, fileName) => {
   return {
     type: HANDLE_NEW_IMAGE,
@@ -138,7 +137,7 @@ export const updateEventLoading = () => {
 }
 
 export const updateEvent = (eventId, updates) => {
-  const payload = Axios.patch(eventApi(eventId), updates);
+  const payload = Axios.put(eventApi(eventId), updates);
   return {
     type: UPDATE_EVENT,
     payload

@@ -10,15 +10,11 @@ class AdminDashboard extends Component {
       <div className="admin-dashboard container">
         <h2>Welcome, {currentUser.f_name}</h2>
         <div className="row">
-        {
           <MostPopularEvents getEvents={getEvents} events={events} loading={eventsLoading} error={eventsError} />
-          }
           <AdminActivities currentUser={currentUser} getAdminActivities={getAdminActivities} adminActivities={adminActivities} loading={adminActivitiesLoading} error={adminActivitiesError} />
         </div>
         <div className="row">
-        {
           <RevenueInfo events={events} loading={eventsLoading} error={eventsError} />
-        }
         </div>
       </div>
       );
