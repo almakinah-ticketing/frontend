@@ -68,8 +68,8 @@ class CApp extends Component {
     this.setState({filters: filters});
 
     getEvents((events) => {
-      let filteredEvents = events.filter(this.isFiltered);
-      this.setState({events: filteredEvents});
+      // let filteredEvents = events.filter(this.isFiltered);
+      // this.setState({events: filteredEvents});
     });
   }
 
@@ -95,7 +95,7 @@ class CApp extends Component {
   // }
 
   render() {
-    debugger;
+    
     return (
       <div>
         {/* <form className="checkboxForm">
