@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import AttendeeCalendar from '../pages/AttendeeCalendar';
+import { handleNewSearchInput } from '../actions/events';
 
 const mapStateToProps = (store) => {
   return {
@@ -8,4 +9,12 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default connect(mapStateToProps)(AttendeeCalendar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AttendeeCalendar);

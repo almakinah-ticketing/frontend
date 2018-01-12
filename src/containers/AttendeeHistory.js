@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import HistoryComponent from '../components/History';
 import {getHistoryLoading, getHistory, getHistorySuccess, getHistoryFailure} from '../actions/history';
+import { handleNewSearchInput } from '../actions/events';
 
 const mapStateToProps = (store) => {
   return {
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(getHistoryFailure(response.payload.message));
         }
       });
+    },
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
     }
   }
 }

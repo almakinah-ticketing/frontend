@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import HomeComponent from '../pages/Home';
+import AboutComponent from '../pages/About';
 import {
   getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
+  handleNewSearchInput
 } from '../actions/events';
 
 const mapStateToProps = (store) => {
@@ -23,9 +25,13 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(getEventsFailure(response.payload.message));
         }
       });
+    },
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeComponent);
+export const Home = connect(mapStateToProps, mapDispatchToProps)(HomeComponent);
+export const About = connect(mapStateToProps, mapDispatchToProps)(AboutComponent);
 

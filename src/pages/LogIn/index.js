@@ -36,10 +36,24 @@ class LogIn extends Component {
   }
 
   componentWillMount() {
-    const { isAuthenticated, currentUser, lastLocation, loginLoading } = this.props;
+    const { isAuthenticated, currentUser, lastLocation, loginLoading, handleNewSearchInput } = this.props;
+    if (currentUser.admin_id) {
+      if (lastLocation && lastLocation.pathname !== '/login' && lastLocation.pathname !== '/admin/login') {
+        history.replace(lastLocation.pathname);
+      } else {
+        history.push('/admin/dashboard');
+      }
+    } else if (currentUser.attendee_id) {
+      if (lastLocation && lastLocation.pathname !== '/login' && lastLocation.pathname !== '/admin/login') {
+        history.replace(lastLocation.pathname);
+      } else {
+        history.push('/calendar');
+      }
+    }
     if (!isAuthenticated && lastLocation && lastLocation.pathname === '/signup') {
       loginLoading();
     }
+    handleNewSearchInput('');
     // if (isAuthenticated) {
     //   if (lastLocation && lastLocation.pathname !== '/admin/login' && lastLocation.pathname !== '/login') {
     //     history.replace(lastLocation.pathname);

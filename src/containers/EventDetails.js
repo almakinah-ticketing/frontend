@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import EventDetailsPage from '../pages/EventDetails';
 import {
   getEventLoading, getEvent, getEventSuccess, getEventFailure,
-  updateEventLoading, updateEvent, updateEventSuccess, updateEventFailure
+  updateEventLoading, updateEvent, updateEventSuccess, updateEventFailure,
+  handleNewSearchInput
 } from '../actions/events';
 import {
   postNewAdminActivityLoading, postNewAdminActivity, postNewAdminActivitySuccess, postNewAdminActivityFailure
@@ -44,6 +45,9 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(updateEventFailure(response.payload.response.data));
         }
       });
+    },
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
     }
     // postNewAdminActivity: (adminId, eventId, action) => {
     //   dispatch(postNewAdminActivityLoading());

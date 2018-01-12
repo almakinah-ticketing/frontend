@@ -31,10 +31,11 @@ export default class PurchaseForm extends Component {
   }
 
   componentWillMount(){
-    const { isAuthenticated, currentUser, getEvent, getTypes } = this.props;
+    const { isAuthenticated, currentUser, getEvent, getTypes, handleNewSearchInput } = this.props;
     const eventId = this.props.match.params.id;
     getEvent(eventId);
     getTypes(eventId);
+    handleNewSearchInput('');
   }
 
   _increment(type, event) {

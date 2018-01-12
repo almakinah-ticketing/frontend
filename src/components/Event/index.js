@@ -295,78 +295,88 @@ class Event extends Component {
             );
         }
       } else {
-        return(
-          <div className="event-details container">
-            {
-              (event.data.canceled)
-              ? <p className="event-canceled-message alert alert-warning">Canceled</p>
-              : null
-            }
-            <div className="row">
-              <h3><Link to={`/events/${event.data.id}`} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">{event.data.title}</Link></h3>
-            </div>
-            <div className="row">
-              <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>
-            </div>
-            <div className="row">
-              <Link to={_filterEvents({categoryId: event.data.category.id})} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">#{event.data.category.name}</Link>
-            </div>
-            <div className="row">
-              <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">When?</span>
-              <time dateTime={event.data.start_datetime} className="col-sm-8 col-md-8 col-lg-8 col-xl-8"><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
-            </div>
-            <div className="row">
-              <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">How long?</span>
-              <p className="col-sm-8 col-md-8 col-lg-8 col-xl-8">{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
-            </div>
-            <div className="row">
-              <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">What exactly?</span>
-              <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-              <p className="overview-line">{event.data.overview}</p>
+        if (Object.keys(event).length === 0) {
+          if (loading) {
+            return (<p className="loading-message">Loading event details...</p>);
+          } else if (error) {
+            return (<p className="error-message">Oops, something went wrong!</p>);
+          } else {
+            return null;
+          }
+        } else {
+          return(
+            <div className="event-details container">
+              {
+                (event.data.canceled)
+                ? <p className="event-canceled-message alert alert-warning">Canceled</p>
+                : null
+              }
+              <div className="row">
+                <h3><Link to={`/events/${event.data.id}`} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">{event.data.title}</Link></h3>
               </div>
-            </div>
-            {
-              (!isAuthenticated || (isAuthenticated && currentUser.attendee_id))
-              ? <ul className="ticket-prices-per-type list-unstyled">
+              <div className="row">
+                <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>
+              </div>
+              <div className="row">
+                <Link to={_filterEvents({categoryId: event.data.category.id})} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">#{event.data.category.name}</Link>
+              </div>
+              <div className="row">
+                <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">When?</span>
+                <time dateTime={event.data.start_datetime} className="col-sm-8 col-md-8 col-lg-8 col-xl-8"><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
+              </div>
+              <div className="row">
+                <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">How long?</span>
+                <p className="col-sm-8 col-md-8 col-lg-8 col-xl-8">{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
+              </div>
+              <div className="row">
+                <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">What exactly?</span>
+                <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <p className="overview-line">{event.data.overview}</p>
+                </div>
+              </div>
+              {
+                (!isAuthenticated || (isAuthenticated && currentUser.attendee_id))
+                ? <ul className="ticket-prices-per-type list-unstyled">
+                  {
+                    event.data.types.map((type) => {
+                      return(
+                        <li className="row">
+                          <span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.name}</span>
+                          <span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">EGP {type.price}</span>
+                          {
+                            (type.tickets_available_per_type === 0)
+                            ? <span className="ticket-type-sold-out col-sm-4 col-md-4 col-lg-4 col-xl-4">Sold out</span>
+                            : <span className="ticket-type-tickets-available col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.tickets_available_per_type} tickets left</span>
+                          }
+                        </li>
+                        );
+                    })
+                  }
+                </ul>
+                : null
+              }
+              <div className="row">
+                <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">What'll be happening?</span>
+                <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <p className="agenda-line">{event.data.agenda}</p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 {
-                  event.data.types.map((type) => {
-                    return(
-                      <li className="row">
-                        <span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.name}</span>
-                        <span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">EGP {type.price}</span>
-                        {
-                          (type.tickets_available_per_type === 0)
-                          ? <span className="ticket-type-sold-out col-sm-4 col-md-4 col-lg-4 col-xl-4">Sold out</span>
-                          : <span className="ticket-type-tickets-available col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.tickets_available_per_type} tickets left</span>
-                        }
-                      </li>
-                      );
-                  })
+                  this._adminDetailsTable()
                 }
-              </ul>
-              : null
-            }
-            <div className="row">
-              <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">What'll be happening?</span>
-              <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-              <p className="agenda-line">{event.data.agenda}</p>
+                {
+                  this._linkContent()
+                }
+                {
+                  this._attendeeTicketCountMessage()
+                }
+                </div>
               </div>
-            </div>
-            <div className="row">
-              <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-              {
-                this._adminDetailsTable()
-              }
-              {
-                this._linkContent()
-              }
-              {
-                this._attendeeTicketCountMessage()
-              }
-              </div>
-            </div>
-        </div>
-        );
+          </div>
+          );
+        }
       }
     }
   }

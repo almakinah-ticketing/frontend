@@ -30,12 +30,15 @@ class FilterForm extends Component {
       var queryParamsObject = new URLSearchParams(queryParamsString);
       var categoryId = queryParamsObject.get("categoryId");
       var date = queryParamsObject.get("date");
+      var title = queryParamsObject.get("title");
       if (this.props.location.search === `?categoryId=${categoryId}&date=${date}`) {
         this.setState({categoryId: categoryId, date: date});
       } else if (this.props.location.search === `?categoryId=${categoryId}`) {
         this.setState({categoryId: categoryId, date: ''});
       } else if (this.props.location.search === `?date=${date}`) {
         this.setState({date: date, categoryId: '0'});
+      } else if (this.props.location.search === `?title=${title}`) {
+        this.setState({date: '', categoryId: '0'});
       }
     }
   }
@@ -50,12 +53,15 @@ class FilterForm extends Component {
       var queryParamsObject = new URLSearchParams(queryParamsString);
       var categoryId = queryParamsObject.get("categoryId");
       var date = queryParamsObject.get("date");
+      var title = queryParamsObject.get("title");
       if (nextProps.location.search === `?categoryId=${categoryId}&date=${date}`) {
         this.setState({categoryId: categoryId, date: date});
       } else if (nextProps.location.search === `?categoryId=${categoryId}`) {
         this.setState({categoryId: categoryId, date: ''});
       } else if (nextProps.location.search === `?date=${date}`) {
         this.setState({date: date, categoryId: '0'});
+      } else if (nextProps.location.search === `?title=${title}`) {
+        this.setState({date: '', categoryId: '0'});
       }
     }
   }

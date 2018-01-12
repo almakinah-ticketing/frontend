@@ -4,6 +4,11 @@ import AdminActivities from '../../components/AdminActivities';
 import RevenueInfo from '../../components/RevenueInfo';
 
 class AdminDashboard extends Component {
+  componentWillMount() {
+    const { handleNewSearchInput } = this.props;
+    handleNewSearchInput('');
+  }
+  
   render() {
     const { currentUser, getEvents, events, eventsLoading, eventsError, getAdminActivities, adminActivities, adminActivitiesLoading, adminActivitiesError } = this.props;
     return(

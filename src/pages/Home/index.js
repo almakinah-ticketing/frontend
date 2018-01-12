@@ -12,8 +12,9 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    const { getEvents } = this.props;
+    const { getEvents, handleNewSearchInput } = this.props;
     getEvents({});
+    handleNewSearchInput('');
   }
 
     // returns route with filtered data depending on query params to use in <Link>s

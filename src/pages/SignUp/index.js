@@ -35,7 +35,7 @@ class SignUp extends Component {
   }
 
   componentWillMount() {
-    const { currentUser, lastLocation, postNewAttendeeLoading } = this.props;
+    const { currentUser, lastLocation, postNewAttendeeLoading, handleNewSearchInput } = this.props;
     postNewAttendeeLoading();
     if (currentUser.attendee_id) {
       if (lastLocation && lastLocation.pathname !== '/login') {
@@ -48,6 +48,7 @@ class SignUp extends Component {
         }
       }
     }
+    handleNewSearchInput('');
   }
   
   render() {

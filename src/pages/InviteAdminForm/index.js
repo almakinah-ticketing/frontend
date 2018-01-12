@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 
 class InviteAdminForm extends Component {
+  componentWillMount() {
+    const { handleNewSearchInput } = this.props;
+    handleNewSearchInput('');
+  }
+  
   render() {
     return(
       <div className="admin-dashboard">

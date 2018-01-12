@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TimeAgo from 'timeago-react';
 import FontAwesome from 'react-fontawesome';
+import { Link } from 'react-router-dom';
 
 class AdminActivities extends Component {
   componentWillMount() {
@@ -20,7 +21,7 @@ class AdminActivities extends Component {
             ? <p className="loading-message">Loading admin activity...</p>
             : (error)
             ? <p className="error-message">Oops, something went wrong!</p>
-            : null
+            : <p className="no-admin-activity-message">No admin activity yet. Be the first to do something!</p>
           : (
               <ul>
               {
@@ -32,7 +33,7 @@ class AdminActivities extends Component {
                     name = activity.admin.f_name;
                   }
                   return (
-                    <li className="list-unstyled">{name} {activity.action} {activity.event.title} <TimeAgo datetime={activity.created_at} locale='en' className="activity-time-ago" live={false} /></li>
+                    <li className="list-unstyled">{name} {activity.action} <Link to={`/events/${activity.event_id}`}>{activity.event.title}</Link> <TimeAgo datetime={activity.created_at} locale='en' className="activity-time-ago" live={false} /></li>
                   );
                 })
               }

@@ -133,10 +133,10 @@ export const handleNewImage = (encodedString, fileName) => {
 }
 
 // Handle new search input in SearchForm
-export const handleNewSearchInput = (value) => {
+export const handleNewSearchInput = (searchInput) => {
   return {
     type: HANDLE_NEW_SEARCH_INPUT,
-    value
+    searchInput
   };
 }
 

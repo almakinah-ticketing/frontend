@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import { History } from '../../containers/AttendeeHistory';
 
 class AttendeeHistory extends Component {
+  componentWillMount() {
+    const { handleNewSearchInput } = this.props;
+    handleNewSearchInput('');
+  }
+  
   render() {
     return(
       <div className="attendee-calendar">

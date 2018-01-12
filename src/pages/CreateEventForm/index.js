@@ -37,13 +37,15 @@ class CreateEventForm extends Component {
   componentWillMount() {
     const {
       lastLocation,
-      getCategories
+      getCategories,
+      handleNewSearchInput
     } = this.props;
     getCategories();
     if (this.props.location.pathname.includes('/admin/update')) {
       const { getEvent } = this.props;
       getEvent(this.props.match.params.id);
     }
+    handleNewSearchInput('');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -253,8 +255,8 @@ class CreateEventForm extends Component {
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Label htmlFor="title">Title</Label>
-                <Input type="text" name="title" id="title" value={this.state.title} onChange={this.handleChange}></Input>
-                <small>Event title must be unique.</small>
+                <Input type="text" name="title" id="title" aria-describedby="titleHelp" value={this.state.title} onChange={this.handleChange}></Input>
+                <small id="titleHelp" className="form-text text-muted">Event title must be unique.</small>
               </FormGroup>
               {
                   (this.props.location.pathname.includes('/admin/update'))
@@ -328,8 +330,8 @@ class CreateEventForm extends Component {
                             )    
                           : null    
                         }
-                          <Input id="type" name="name" type="text" value={this.state.types_attributes[index].name} onChange={(event) => this.handleTypeChange(event, index)}></Input>
-                          <small>Type name must start with a capital letter.</small>                      
+                          <Input id="type" name="name" type="text" aria-describedby="typeNameHelp" value={this.state.types_attributes[index].name} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                          <small id="typeNameHelp" className="form-text text-muted">Type name must start with a capital letter.</small>                      
                         </FormGroup>
                         <FormGroup>
                           <Label htmlFor="number">Number of Tickets</Label>

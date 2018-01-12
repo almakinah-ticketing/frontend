@@ -41,12 +41,13 @@ class EventsList extends Component {
       eventsError,
       getCategories,
       getEvents,
-      location
+      location,
+      handleNewSearchInput
     } = this.props;
     return(
       <div className="EventsList">
         <FilterForm categories={categories} events={events} getCategories={getCategories} getEvents={getEvents} location={location} _filterEvents={this._filterEvents} />
-        <Events events={events} getEvents={getEvents} eventsLoading={eventsLoading} eventsError={eventsError} location={location} _filterEvents={this._filterEvents} />
+        <Events events={events} getEvents={getEvents} eventsLoading={eventsLoading} eventsError={eventsError} location={location} _filterEvents={this._filterEvents} handleNewSearchInput={handleNewSearchInput} />
       </div>
       );
   }

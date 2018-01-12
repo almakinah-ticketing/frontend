@@ -29,7 +29,7 @@ const mapStateToProps = (store) => {
     eventsError: store.events.error,
     adding: store.events.adding,
     errorAdding: store.events.errorAdding,
-    newSearchInput: store.events.newSearchInput
+    searchInput: store.events.searchInput
   }
 }
 
@@ -94,8 +94,8 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     },
-    handleNewSearchInput: (value) => {
-      dispatch(handleNewSearchInput(value));
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
     }
     // postNewAdminActivity: (adminId, eventId, action) => {
     //   dispatch(postNewAdminActivityLoading());

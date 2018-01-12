@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
 import { SearchForm } from '../../containers/EventsList';
+import history from '../../history';
 
 class Header extends Component {
   constructor(props) {

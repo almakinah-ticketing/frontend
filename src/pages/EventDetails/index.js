@@ -9,10 +9,12 @@ class EventDetails extends Component {
 
   componentWillMount() {
     const {
+      handleNewSearchInput,
       getEvent,
       match: {params: {id}}
     } = this.props;
     getEvent(id);
+    handleNewSearchInput('');
   }
 
    _filterEvents(params) {

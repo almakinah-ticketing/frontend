@@ -10,10 +10,12 @@ class Events extends Component {
   // Checking route to determine whether to render all or filtered events when component mounts
   componentWillMount() {
     const {
-      getEvents
+      getEvents,
+      handleNewSearchInput
     } = this.props;  
     if (this.props.location.search === '') {
       getEvents({});
+      handleNewSearchInput('');
     } else {
       var searchArray = this.props.location.search.split('?');
       var queryParamsString = searchArray[1];
@@ -23,12 +25,16 @@ class Events extends Component {
       var title = queryParamsObject.get("title"); 
       if (categoryId && date) {
         getEvents({categoryId: categoryId, date: date});
+        handleNewSearchInput('');
       } else if (categoryId) {
         getEvents({categoryId: categoryId});
+        handleNewSearchInput('');
       } else if (date) {
         getEvents({date: date});
+        handleNewSearchInput('');
       } else if (title) {
         getEvents({title: title});
+        handleNewSearchInput(title);
       }
     }
   }
@@ -36,11 +42,13 @@ class Events extends Component {
   // Checking route to determine whether to render all or filtered events when component updates
   componentWillReceiveProps(nextProps) {
     const {
-      getEvents
+      getEvents,
+      handleNewSearchInput
     } = this.props;
     if (this.props.location.search !== nextProps.location.search) {
       if (nextProps.location.search === '') {
         getEvents({});
+        handleNewSearchInput('');
       } else {
         var searchArray = nextProps.location.search.split('?');
         var queryParamsString = searchArray[1];
@@ -50,12 +58,16 @@ class Events extends Component {
         var title = queryParamsObject.get("title");
         if (categoryId && date) {
           getEvents({categoryId: categoryId, date: date});
+          handleNewSearchInput('');
         } else if (categoryId) {
           getEvents({categoryId: categoryId});
+          handleNewSearchInput('');
         } else if (date) {
           getEvents({date: date});
+          handleNewSearchInput('');
         } else if (title) {
-        getEvents({title: title});
+          getEvents({title: title});
+          handleNewSearchInput(title);
         }
         // if (nextProps.location.search === `?categoryId=${categoryId}`) {
         //   getEvents(categoryId);
@@ -80,21 +92,29 @@ class Events extends Component {
       getEvents,
       _filterEvents
     } = this.props;
+    var searchArray = this.props.location.search.split('?');
+    var queryParamsString = searchArray[1];
+    var queryParamsObject = new URLSearchParams(queryParamsString);
+    var title = queryParamsObject.get("title");
     return (
       <div className="all-events-list">
         <h2>Events</h2>
         { 
           (events.length === 0)
-          ? (eventsLoading)
-            ? <p className="loading-message">Loading events...</p>
-            : (eventsError)
-              ? <p className="error-message">Oops, something went wrong!</p>
-              : this._noSearchResults()
+          ? (eventsLoading && title)
+            ? <p className="search-message">Searching for "{title}"</p>
+            : (eventsLoading)
+              ? <p className="loading-message">Loading events...</p>  
+              : (eventsError)
+                ? <p className="error-message">Oops, something went wrong!</p>
+                : this._noSearchResults()
           : 
               events.map((event) => {
-                return (
-                  <Event event={event}  getEvents={getEvents} source="events" _filterEvents={_filterEvents} />
-                  );
+                if (new Date(event.data.start_datetime) >= new Date()) {
+                  return (
+                    <Event event={event}  getEvents={getEvents} source="events" _filterEvents={_filterEvents} />
+                    );
+                }
           })
         }
       </div>
