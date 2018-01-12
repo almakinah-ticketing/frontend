@@ -68,6 +68,7 @@ const mapDispatchToProps = (dispatch) => {
       handleNewSearchInput: (searchInput) => {
       dispatch(handleNewSearchInput(searchInput));
     }
+  }
 }
 
 export const InviteAdminForm = connect(mapStateToProps, mapDispatchToProps)(InviteAdminFormComponent);
