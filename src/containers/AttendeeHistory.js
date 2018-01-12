@@ -30,4 +30,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export const History = connect(mapStateToProps, mapDispatchToProps)(HistoryComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(HistoryComponent);

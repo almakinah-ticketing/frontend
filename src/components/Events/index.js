@@ -110,7 +110,11 @@ class Events extends Component {
                 : this._noSearchResults()
           : 
               events.map((event) => {
-                if (new Date(event.data.start_datetime) >= new Date()) {
+                if (new Date(event.data.start_datetime) >= new Date() && this.props.location.search === '') {
+                  return (
+                    <Event event={event}  getEvents={getEvents} source="events" _filterEvents={_filterEvents} />
+                    );
+                } else if (this.props.location.search) {
                   return (
                     <Event event={event}  getEvents={getEvents} source="events" _filterEvents={_filterEvents} />
                     );

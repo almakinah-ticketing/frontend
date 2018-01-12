@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import history from '../../history';
 import { withLastLocation } from 'react-router-last-location';
+import '../LogIn/LogIn.css';
 
 class LogInAdmin extends Component {
   constructor(props) {
@@ -50,7 +51,8 @@ class LogInAdmin extends Component {
   render() {
     const {error} = this.props;
     return(
-      <div className="login">
+      <div className="login-admin login page">
+        <h2>Log in as admin</h2>
       {
           (error)
           ? <p className="error-messages alert alert-danger">{error}</p>
@@ -58,12 +60,12 @@ class LogInAdmin extends Component {
         }
         <form className="attendee-login-form" onSubmit={this._submitLoginData}>
           <div className="form-group">
-            <label htmlFor="email">Email address</label>
-            <input type="email" className="form-control" id="email" name="email" value={this.state.email} required onChange={this._handleChange} />
+            <label htmlFor="email" className="sr-only">Email address</label>
+            <input type="email" className="form-control" id="email" name="email" placeholder="Email address" value={this.state.email} required onChange={this._handleChange} />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" className="form-control" id="password" name="password" value={this.state.password} required onChange={this._handleChange} />
+            <label htmlFor="password" className="sr-only">Password</label>
+            <input type="password" className="form-control" id="password" name="password" placeholder="Password" value={this.state.password} required onChange={this._handleChange} />
           </div>
           <button type="submit" class="btn btn-primary">Log in as admin</button>
         </form>

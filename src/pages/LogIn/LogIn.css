@@ -1,0 +1,41 @@
+.login {
+  width: 30%;
+  margin: auto;
+  border-left: 2px solid rgba(251, 194, 18, 0.7);
+  padding: 0px 50px;
+  text-align: left;
+}
+
+.login input, 
+.login input:focus {
+  border: 0;
+  border-bottom: 2px solid rgba(67, 67, 67, 0.7);
+  border-radius: 0;
+  background-color: #efefef;
+  margin-bottom: 20px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.login input:-webkit-autofill,
+.login input:-webkit-autofill:active,
+.login input:-webkit-autofill:focus,
+.login input:-webkit-autofill:hover {
+  background-color: #efefef;
+  -webkit-box-shadow: 0 0 0px 1000px #efefef inset;
+  -webkit-text-fill-color: #434343 !important;
+}
+
+.login-as-admin {
+  margin-top: 5px;
+  display: block;
+}
+
+.login .btn, .signup .btn {
+  margin-top: 8px;
+  margin-bottom: 15px;
+}
+
+.login h2 {
+  margin-bottom: 30px;
+}

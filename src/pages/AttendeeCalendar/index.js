@@ -11,7 +11,7 @@ class AttendeeCalendar extends Component {
   render() {
     const { currentUser } = this.props;
     return(
-      <div className="attendee-calendar">
+      <div className="attendee-calendar page">
         <h2>AttendeeCalendar</h2>
         <p>Welcome, {currentUser.f_name}</p>
         <p>Here is an overview of your Calendar</p>

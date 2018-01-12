@@ -238,7 +238,7 @@ class CreateEventForm extends Component {
       } = this.props;
       const types = this.state.types_attributes;
       return(
-        <div>
+        <div className="page">
         {
           (errorAdding)
           ? <p className="alert alert-danger">{errorAdding}</p>

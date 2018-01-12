@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-html, body {
+html, body, #root {
   height: 100%;
 }
 
@@ -10,10 +10,28 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Lato', sans-serif;
+  color: #434343;
 }
 
 .App {
   text-align: center;
+  height: 100%;
+  overflow: auto;
+}
+
+.App-container {
+  padding-top: 30px;
+  margin-bottom: 20px;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  background-color: #efefef;
+  /*background-color: rgba(230, 230, 230, 0.3);*/
+}
+
+.App-container > .page {
+  /*height: 100%;*/
+  /*margin-bottom: 10px;*/
 }
 
 .sr-only {
@@ -40,15 +58,6 @@ body {
   content: "";
   display: table;
   clear: both;
-}
-
-.signup, .login {
-  width: 30%;
-  margin: auto;
-}
-
-.login-as-admin {
-  display: block;
 }
 
 .all-time-revenues, .all-time-tickets-sold {

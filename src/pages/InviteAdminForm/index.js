@@ -8,7 +8,7 @@ class InviteAdminForm extends Component {
   
   render() {
     return(
-      <div className="admin-dashboard">
+      <div className="invite-admin-form page">
         <h2>InviteAdminForm</h2>
       </div>
       );

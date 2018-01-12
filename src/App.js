@@ -13,8 +13,7 @@ import { LogIn } from './containers/LogIn';
 import { LogInAdmin } from './containers/LogIn';
 import SignUp from './containers/SignUp';
 import AttendeeCalendar from './containers/AttendeeCalendar';
-import AttendeeCart from './pages/AttendeeCart';
-import AttendeeHistory from './pages/AttendeeHistory';
+import AttendeeHistory from './containers/AttendeeHistory';
 import AdminDashboard from './containers/AdminDashboard';
 import { CreateEventForm } from './containers/EventsList';
 import InviteAdminForm from './pages/InviteAdminForm';
@@ -40,7 +39,6 @@ class App extends Component {
           <Route path="/admin/login" exact component={LogInAdmin} />
           <Route path="/signup" exact component={SignUp} />
           <Route path="/calendar" exact component={Attendee(AttendeeCalendar)} />
-          <Route path="/cart" exact component={Attendee(AttendeeCart)} />
           <Route path="/history" exact component={Attendee(AttendeeHistory)} />
           <Route path="/admin/dashboard" exact component={Admin(AdminDashboard)} />
           <Route path="/admin/create" exact component={Admin(CreateEventForm)} />

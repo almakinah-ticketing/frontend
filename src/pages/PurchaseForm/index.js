@@ -125,7 +125,7 @@ export default class PurchaseForm extends Component {
       const {type_ids} = this.state;
       let total = 0;
       return(
-        <div>
+        <div className="purchase-form page">
           <h2>Get tickets to <Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h2>
           {
           types.map((type) => {

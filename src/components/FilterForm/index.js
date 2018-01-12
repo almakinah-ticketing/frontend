@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './FilterForm.css';
 
 class FilterForm extends Component {
   constructor(props) {
@@ -73,21 +74,23 @@ class FilterForm extends Component {
     } = this.props;
     return(
       <form className="filter-events-form">
-        <input type="checkbox" id="filter-events-category-checkbox" className="filter-events-checkbox" name="filter-events-filters" />
-        <label className="filter-events-label" htmlFor="filter-events-category">Category</label>
-        <select id="filter-events-category" className="filter-events-select" name="categoryId" value={this.state.categoryId} onChange={this._handleChange}>
-          <option value="0">All Categories</option>
-          {categories.map((category) => {
-            return (
-              <option value={category.id}>{category.name}</option>
-              );
-            })
-          }
-        </select>
-        <input type="checkbox" id="filter-events-date-checkbox" className="filter-events-checkbox" name="filter-events-filters" />
-        <label className="filter-events-label" htmlFor="filter-events-date">Date</label>
-        <input type="date" id="filter-events-date" className="filter-events-date" name="date" value={this.state.date} onChange={this._handleChange} />
-        <button type="button" className="filter-events-submit btn btn-default"><Link to={_filterEvents({categoryId: this.state.categoryId, date: this.state.date})}>Filter</Link></button>
+        <div className="form-group">
+          <label className="filter-events-label sr-only" htmlFor="filter-events-category">Category</label>
+          <select id="filter-events-category" className="filter-events-input form-control" name="categoryId" value={this.state.categoryId} onChange={this._handleChange}>
+            <option value="0">All Categories</option>
+            {categories.map((category) => {
+              return (
+                <option value={category.id}>{category.name}</option>
+                );
+              })
+            }
+          </select>
+        </div>
+        <div className="form-group">
+          <label className="filter-events-label sr-only" htmlFor="filter-events-date">Date</label>
+          <input type="date" id="filter-events-date" className="filter-events-input form-control" name="date" value={this.state.date} onChange={this._handleChange} />
+        </div>
+          <button type="button" className="filter-events-submit btn btn-default"><Link to={_filterEvents({categoryId: this.state.categoryId, date: this.state.date})}>Filter</Link></button>
       </form>
     );
   }

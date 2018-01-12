@@ -54,7 +54,7 @@ class EventDetails extends Component {
       postNewAdminActivity
     } = this.props;
     return (
-      <div className="event-details-page">
+      <div className="event-details page">
         <Event event={event} source="eventDetails" loading={loading} error={error} _filterEvents={this._filterEvents} isAuthenticated={isAuthenticated} currentUser={currentUser} ticketsBoughtInSession={ticketsBoughtInSession} updateEvent={updateEvent} postNewAdminActivity={postNewAdminActivity} />
       </div>
     );

@@ -24,7 +24,7 @@ class SearchForm extends Component {
     const { searchInput } = this.props;
     return(
       <form className="search-events-form" onSubmit={this._submitSearchData}>
-        <input type="text" id="search-events-input" className="search-events-input" placeholder="Search events by title..." minLength="1" maxLength="280" required name="title" value={searchInput} onChange={this._handleChange} />
+        <input type="text" id="search-events-input" className="" placeholder="Search events by title..." minLength="1" maxLength="280" required name="title" value={searchInput} onChange={this._handleChange} />
         <label className="sr-only" htmlFor="search-events-input">Search events by title...</label>
         <button type="submit" className="search-events-submit"><Link to={`/events?title=${searchInput}`}><i class="fa fa-search" aria-hidden="true"></i></Link></button>
       </form>
