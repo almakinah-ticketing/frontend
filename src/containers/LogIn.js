@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     login: (userType, data, lastLocation) => {
       dispatch(login(userType, data)).then(response => {
         if (response.payload.status<400) {
+          console.log(response);
           dispatch(loginSuccess(response.payload.data));
           const token = response.payload.data.auth_token;
           localStorage.setItem('jwtToken', token);
@@ -40,7 +41,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
               }
               break;
             case 'admins':
-              if (lastLocation && lastLocation.pathname !== '/admin/login' && lastLocation.pathname !== '/login') {
+              if (lastLocation && lastLocation.pathname !== '/admin/login' && lastLocation.pathname !== '/login'  && lastLocation.pathname !== '/newadmin') {
                 history.goBack();
               } else {
                 history.push('/admin/dashboard');

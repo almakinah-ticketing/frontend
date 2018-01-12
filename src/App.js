@@ -16,7 +16,9 @@ import AttendeeCalendar from './containers/AttendeeCalendar';
 import AttendeeHistory from './containers/AttendeeHistory';
 import AdminDashboard from './containers/AdminDashboard';
 import { CreateEventForm } from './containers/EventsList';
-import InviteAdminForm from './pages/InviteAdminForm';
+import {InviteAdminForm} from './containers/Admins';
+import {AdminRegistration} from './containers/Admins';
+
   
 
 class App extends Component {
@@ -44,6 +46,8 @@ class App extends Component {
           <Route path="/admin/create" exact component={Admin(CreateEventForm)} />
           <Route path="/admin/update/:id" exact component={Admin(CreateEventForm)} />
           <Route path="/admin/invite" exact component={Admin(InviteAdminForm)} />
+          <Route path="/newadmin" exact component={AdminRegistration} />
+
         </div>
         <Footer />
       </div>
