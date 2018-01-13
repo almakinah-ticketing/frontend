@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import './InviteAdminForm.css';
 
 class InviteAdminForm extends Component {
   constructor(){
@@ -32,19 +32,21 @@ class InviteAdminForm extends Component {
 
     return(
       <div className="invite-admin-form page">
-        <h2>InviteAdminForm</h2>
-
+        <h2>Invite an admin</h2>
         {
         	error ? <div>{error[0]}</div> : null
         	
         }
-
         <form onSubmit={this.handleSubmit}>
-	        <label htmlFor="email">Email</label>
-	        <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange}/>
-	        <label htmlFor="message">Message</label>
-	        <input type="text" id="message" name="message" value={this.state.message} onChange={this.handleChange}/>
-	        <button type="submit">Invite</button>
+          <div className="form-group">
+            <label htmlFor="email" className="sr-only">Email address</label>
+            <input type="email" id="email" name="email" value={this.state.email} className="form-control" placeholder="Email address" onChange={this.handleChange}/>
+          </div>
+          <div className="form-group">
+            <label htmlFor="message" className="sr-only">Message</label>
+            <textarea id="message" name="message" value={this.state.message} className="form-control" rows="3" placeholder="Message" onChange={this.handleChange}></textarea>
+            </div>
+          <button type="submit" className="btn btn-primary">Invite</button>
         </form>
       </div>
       );

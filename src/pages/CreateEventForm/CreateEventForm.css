@@ -12,3 +12,134 @@
   bottom: 3px;
   left: 1px;
 }
+
+.create-event-form {
+  width: 60%;
+  margin: auto;
+  border-left: 2px solid rgba(251, 194, 18, 0.7);
+  padding: 0px 50px;
+  text-align: left;
+}
+
+.create-event-form input, 
+.create-event-form input:focus,
+.create-event-form textarea,
+.create-event-form textarea:focus,
+.create-event-form select,
+.create-event-form select:focus {
+  border: 0;
+  border-bottom: 2px solid rgba(67, 67, 67, 0.7);
+  border-radius: 0;
+  background-color: #efefef;
+  margin-bottom: 20px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.create-event-form #img {
+  border: 0;
+  opacity: 0;
+  height: 0px;
+  width: 0px;
+  display: inline-block;
+}
+
+.create-event-form input:-webkit-autofill,
+.create-event-form input:-webkit-autofill:active,
+.create-event-form input:-webkit-autofill:focus,
+.create-event-form input:-webkit-autofill:hover,
+.create-event-form textarea:-webkit-autofill,
+.create-event-form textarea:-webkit-autofill:active,
+.create-event-form textarea:-webkit-autofill:focus,
+.create-event-form textarea:-webkit-autofill:hover {
+  background-color: #efefef;
+  -webkit-box-shadow: 0 0 0px 1000px #efefef inset;
+  -webkit-text-fill-color: #434343 !important;
+}
+
+.create-event-form .btn {
+  margin-top: 8px;
+}
+
+.create-event-form .btn a,
+.create-event-form .btn a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.create-event-form .btn-outline-primary,
+.create-event-form .btn-outline-primary:hover,
+.create-event-form .btn-outline-primary:focus,
+.create-event-form .btn-outline-primary:target,
+.create-event-form .btn-outline-primary:active {
+  border: 2px solid rgba(67, 67, 67, 0.7);
+  color: #434343;
+  background: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.create-event-form .btn-primary + .btn-primary {
+  margin-left: 30px;
+}
+
+.create-event-form h2 {
+  margin-bottom: 30px;
+}
+
+.create-event-form h2 a {
+  color: #434343;
+  text-decoration: underline;
+}
+
+.type-group, #img-label {
+  width: 100%;
+  border: 2px solid rgba(67, 67, 67, 0.7);
+  padding: 10px;
+  padding-left: 18px;
+  border-radius: 10px;
+}
+
+.delete-type {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.delete-type label {
+  margin-top: 0;
+  margin-left: 8px;
+}
+
+.img-form-group {
+  height: 48px;
+}
+
+.select-group {
+  height: 38px;
+}
+
+small {
+  margin: 0;
+}
+
+.form-group {
+  margin-bottom: 35px;
+}
+
+.type-group {
+  margin-bottom: 15px;
+  padding-top: 35px;
+}
+
+.big-type-group {
+  margin-bottom: 15px;
+}
+
+#title, #type {
+  margin-bottom: 10px;
+}
+
+.group-with-small {
+  margin-bottom: 20px;
+}

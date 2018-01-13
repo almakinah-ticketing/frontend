@@ -238,7 +238,7 @@ class CreateEventForm extends Component {
       } = this.props;
       const types = this.state.types_attributes;
       return(
-        <div className="page">
+        <div className="create-event-form page">
         {
           (errorAdding)
           ? <p className="alert alert-danger">{errorAdding}</p>
@@ -247,22 +247,22 @@ class CreateEventForm extends Component {
         {
           (this.props.location.pathname.includes('/admin/update'))
           ? (Object.keys(event).length !== 0)
-            ? <h1>Update <Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h1>
+            ? <h2>Update <Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h2>
             : null
-          : <h1>Create a new event</h1>
+          : <h2>Create a new event</h2>
         }
-          <div className="create-event-form">
+          <div className="create-event-form-contents">
             <Form onSubmit={this.handleSubmit}>
-              <FormGroup>
-                <Label htmlFor="title">Title</Label>
-                <Input type="text" name="title" id="title" aria-describedby="titleHelp" value={this.state.title} onChange={this.handleChange}></Input>
+              <FormGroup className="group-with-small">
+                <Label htmlFor="title" className="sr-only">Title</Label>
+                <Input type="text" name="title" id="title" className="form-control" aria-describedby="titleHelp" placeholder="Title" value={this.state.title} onChange={this.handleChange}></Input>
                 <small id="titleHelp" className="form-text text-muted">Event title must be unique.</small>
               </FormGroup>
               {
                   (this.props.location.pathname.includes('/admin/update'))
-                  ? (<FormGroup>
-                        <Label htmlFor="category">Category</Label>
-                        <select name="category_id" onChange={this.handleChange} value={this.state.category_id}>
+                  ? (<FormGroup className="select-group">
+                        <Label htmlFor="category" className="sr-only">Category</Label>
+                        <select name="category_id" className="form-control" onChange={this.handleChange} value={this.state.category_id}>
                         <option disabled selected value>Select category</option>
                           
                          {
@@ -274,9 +274,9 @@ class CreateEventForm extends Component {
                           }
                         </select>
                       </FormGroup>)
-                  : (<FormGroup>
-                      <Label htmlFor="category">Category</Label>
-                      <select name="category_id" onChange={this.handleChange}>
+                  : (<FormGroup className="select-group">
+                      <Label htmlFor="category" className="sr-only">Category</Label>
+                      <select name="category_id" className="form-control" onChange={this.handleChange}>
                       <option disabled selected value>Select category</option>
                         
                        {
@@ -289,68 +289,65 @@ class CreateEventForm extends Component {
                       </select>
                       </FormGroup>)
                 }
-              <FormGroup>
-                <Label htmlFor="img">Event Image</Label>
-                <Input id="img" name="img" type="file" onChange={this.handleFileChange}></Input>
+              <FormGroup className="img-form-group">
+                <Label htmlFor="img" id="img-label">Choose image</Label>
+                <Input id="img" name="img" type="file" className="form-control" onChange={this.handleFileChange}></Input>
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="startdate">Start Date</Label>
+                <Label htmlFor="startdate">Start datetime</Label>
                 <Input id="startdate" name="start_datetime" type="datetime-local" value={this.state.start_datetime} onChange={this.handleChange}></Input>
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="enddate">End Date</Label>
+                <Label htmlFor="enddate">End datetime</Label>
                 <Input id="enddate" name="end_datetime" type="datetime-local" value={this.state.end_datetime} onChange={this.handleChange}></Input>
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="overview">Overview</Label>
-                <Input id="overview" name="overview" type="textarea" value={this.state.overview} onChange={this.handleChange}></Input>
+                <Label htmlFor="overview" className="sr-only">Overview</Label>
+                <Input id="overview" name="overview" type="textarea" className="form-control" placeholder="Overview" value={this.state.overview} onChange={this.handleChange}></Input>
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="agenda">Event Agenda</Label>
-                <Input id="agenda" name="agenda" type="textarea" value={this.state.agenda} onChange={this.handleChange}></Input>
+                <Label htmlFor="agenda" className="sr-only">Event agenda</Label>
+                <Input id="agenda" name="agenda" type="textarea" className="form-control" placeholder="Event agenda" value={this.state.agenda} onChange={this.handleChange}></Input>
               </FormGroup>
               <div>
-              <FormGroup>
-                <Label htmlFor="tickets">Ticket Types</Label>
-              </FormGroup>
-
-                {
-                  types.map((type, index) => {
-                    return (
-                      <div>
-                        <FormGroup>
-                          <Label htmlFor="type">Type</Label>
+                <FormGroup className="big-type-group">
+                  <Label htmlFor="tickets">Ticket types</Label>
+                  {
+                    types.map((type, index) => {
+                      return (
+                        <div className="type-group">
+                          <FormGroup className="group-with-small">
+                            <Label htmlFor="type" className="sr-only">Type</Label>
+                            <Input id="type" name="name" type="text" className="form-control" placeholder="Type name" aria-describedby="typeNameHelp" value={this.state.types_attributes[index].name} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                            <small id="typeNameHelp" className="form-text text-muted">Type name must start with a capital letter.</small>                      
+                          </FormGroup>
+                          <FormGroup>
+                            <Label htmlFor="number" className="sr-only">Number of tickets</Label>
+                            <Input id="number" name="capacity" type="number" className="form-control" placeholder="Number of tickets" value={this.state.types_attributes[index].capacity} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                          </FormGroup>
+                          <FormGroup className="group-before-delete">
+                            <Label htmlFor="price" className="sr-only">Price</Label>
+                            <Input id="price" name="price" type="number" className="form-control" placeholder="Price" value={this.state.types_attributes[index].price} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                          </FormGroup>
                           {
-                          (this.props.location.pathname.includes('/admin/update'))
-                          ? (
-                            <div className="delete-type">
-                              <input type="checkbox" id="delete-type" onChange={(event) => {this.deleteType(event, index)}} /> 
-                              <label htmlFor="delete-type">delete</label>                
-                            </div>
-                            )    
-                          : null    
-                        }
-                          <Input id="type" name="name" type="text" aria-describedby="typeNameHelp" value={this.state.types_attributes[index].name} onChange={(event) => this.handleTypeChange(event, index)}></Input>
-                          <small id="typeNameHelp" className="form-text text-muted">Type name must start with a capital letter.</small>                      
-                        </FormGroup>
-                        <FormGroup>
-                          <Label htmlFor="number">Number of Tickets</Label>
-                          <Input id="number" name="capacity" type="number" value={this.state.types_attributes[index].capacity} onChange={(event) => this.handleTypeChange(event, index)}></Input>
-                        </FormGroup>
-                        <FormGroup>
-                          <Label htmlFor="price">Price</Label>
-                          <Input id="price" name="price" type="number" value={this.state.types_attributes[index].price} onChange={(event) => this.handleTypeChange(event, index)}></Input>
-                        </FormGroup>
-                      </div>
-                    );                    
-                  })
-                }
-                <FormGroup>
-                  <Button onClick={this.addType}>Add more types</Button>
+                            (this.props.location.pathname.includes('/admin/update'))
+                            ? (
+                              <div className="delete-type">
+                                <input type="checkbox" id="delete-type" onChange={(event) => {this.deleteType(event, index)}} /> 
+                                <label htmlFor="delete-type">delete</label>                
+                              </div>
+                              )    
+                            : null    
+                          }
+                        </div>
+                      );                    
+                    })
+                  }
+                  <Button onClick={this.addType} className="btn btn-outline-primary">Add more types</Button>                  
                 </FormGroup>
               </div>
-              <Button type="submit">Submit</Button>
-              <Button><Link to={this._cancelButtonLinkPath()}>Cancel</Link></Button>
+              <button type="submit" className="btn btn-primary">Submit</button>
+              <button className="btn btn-primary"><Link to={this._cancelButtonLinkPath()}>Cancel</Link></button>
             </Form>
           </div>
         </div>

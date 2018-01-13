@@ -6,12 +6,101 @@
 }
 
 .typeName {
-	float:left;
+  float: left;
+  margin-right: 5px;
+}
 
+.counter label {
+  margin-right: 10px;
+  margin-left: 10px;
+  position: relative;
+  top: 5px;
 }
-.checkbox {
-	float: left;
+
+.dataKeys {
+  font-weight: bold;
 }
+
+/*.checkbox {
+  float: left;
+}
+*/
 .counter{
-	float:right;
+  float: right;
+}
+
+
+.purchase-form {
+  width: 60%;
+  margin: auto;
+  border-left: 2px solid rgba(251, 194, 18, 0.7);
+  padding: 0px 50px;
+  text-align: left;
+}
+
+.purchase-form input, 
+.purchase-form input:focus,
+.purchase-form textarea,
+.purchase-form textarea:focus,
+.purchase-form select,
+.purchase-form select:focus {
+  border: 0;
+  border-bottom: 2px solid rgba(67, 67, 67, 0.7);
+  border-radius: 0;
+  background-color: #efefef;
+  margin-bottom: 20px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.purchase-form input:-webkit-autofill,
+.purchase-form input:-webkit-autofill:active,
+.purchase-form input:-webkit-autofill:focus,
+.purchase-form input:-webkit-autofill:hover,
+.purchase-form textarea:-webkit-autofill,
+.purchase-form textarea:-webkit-autofill:active,
+.purchase-form textarea:-webkit-autofill:focus,
+.purchase-form textarea:-webkit-autofill:hover {
+  background-color: #efefef;
+  -webkit-box-shadow: 0 0 0px 1000px #efefef inset;
+  -webkit-text-fill-color: #434343 !important;
+}
+
+.purchase-form .btn {
+  margin-top: 8px;
+}
+
+.purchase-form .btn a,
+.purchase-form .btn a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.purchase-form .btn-outline-primary,
+.purchase-form .btn-outline-primary:hover,
+.purchase-form .btn-outline-primary:focus,
+.purchase-form .btn-outline-primary:target,
+.purchase-form .btn-outline-primary:active {
+  border: 2px solid rgba(67, 67, 67, 0.7);
+  color: #434343;
+  background: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.purchase-form .btn-primary + .btn-primary {
+  margin-left: 30px;
+}
+
+.purchase-form h2 {
+  margin-bottom: 30px;
+}
+
+.purchase-form h2 a {
+  color: #434343;
+  text-decoration: underline;
+}
+
+small {
+  margin-top: 20px;
 }

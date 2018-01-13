@@ -141,13 +141,13 @@ export default class PurchaseForm extends Component {
           // console.log(type_ids);
             return (
               <div>
-                <div className="clearfix">
-                  <label className="typeName">{type.name}     </label>
-                  <label className="typePrice">{type.price} EGP</label>
+                <div>
+                  <label className="typeName"><span className="dataKeys">{type.name}:</span></label>
+                  <label className="typePrice">EGP {type.price}</label>
                   <div className="counter">
-                    <label>{count}</label>  
-                    <button onClick={(event) => {this._increment(type, event)}}>+</button>
-                    <button onClick={(event) => {this._decrement(type, event)}}>-</button>
+                    <button onClick={(event) => {this._increment(type, event)}} className="btn btn-primary">+</button>
+                    <label>{count}</label>              
+                    <button onClick={(event) => {this._decrement(type, event)}} className="btn btn-primary">-</button>
                   </div>
                 </div>
                 
@@ -156,21 +156,21 @@ export default class PurchaseForm extends Component {
           })
         }  
         <div>
-          <p>Total: {total}</p>
+          <p><span className="dataKeys">Total:</span> {total}</p>
         </div>
-        <div>
-          <p>
-                    <Checkout
-                      name={event.data.title}
-                      description={this._parseDateToDisplay(event.data.start_datetime) + ' at ' + this._parseTimeToDisplay(event.data.start_datetime)}
-                      amount={total}
-                      event_id={t1}
-                      type_id={t2}
-                      type_ids={type_ids}
-                    />
-          </p>
-          <Link to={`/events/${event.data.id}`} className="btn btn-secondary">Back to event</Link>
-        </div>
+          <div>
+            <div>
+                      <Checkout
+                        name={event.data.title}
+                        description={this._parseDateToDisplay(event.data.start_datetime) + ' at ' + this._parseTimeToDisplay(event.data.start_datetime)}
+                        amount={total}
+                        event_id={t1}
+                        type_id={t2}
+                        type_ids={type_ids}
+                      />
+            </div>
+            <Link to={`/events/${event.data.id}`} className="btn btn-secondary">Back to event</Link>
+          </div>
           <small>As per our cancelation policy, purchased tickets are non-refundable except if the event is canceled by organizers.</small>
         </div>
       );

@@ -243,42 +243,46 @@ class Event extends Component {
     if (source === 'most-popular-events') {
     return (
       <div className="event card col-sm-4 col-md-4 col-lg-4 col-xl-4">
-        <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
-        <h3><Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h3>
         {
           (event.tickets_available_per_event === 0)
-          ? <p className="event-sold-out-message">Sold out</p>
-          : <p className="tickets-sold-per-event">{event.tickets_sold} ticket(s) sold</p>
+          ? <p className="event-sold-out-message card-header alert alert-success">Sold out</p>
+          : <p className="tickets-sold-per-event card-header">{event.tickets_sold} ticket(s) sold</p>
         }
-        <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>
-        <time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
+        <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
+        <h3><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h3>
+        <p><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="card-subtitle">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
+        <Link to={_filterEvents({categoryId: event.data.category.id})} className="card-footer">#{event.data.category.name}</Link>
         </div>
       );  
     } else if (source === 'events' || source === 'upcomingEvents' || source === 'hottest-event') {
       return (
-        <div className="event card clearfix">
+        <div className="event card container">
           {
             (new Date(event.data.start_datetime) < new Date()) 
-            ? <p className="event-expired-message alert alert-warning">Event has already happened</p>
+            ? <p className="event-expired-message alert alert-warning row card-header">Event has already happened</p>
             : (event.tickets_available_per_event === 0)
-              ? <p className="event-sold-out-message alert alert-warning">Sold out</p>
+              ? <p className="event-sold-out-message alert alert-warning row card-header">Sold out</p>
               : (event.data.canceled)
-                ? <p className="event-canceled-message alert alert-warning">Canceled</p>
+                ? <p className="event-canceled-message alert alert-warning row card-header">Canceled</p>
                 : null
           }
-          <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img pull-start card-img-top" /></Link>
-          <div className="event-text-info card-block pull-start">
-            <h3><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h3>
-            <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>
-            <time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="card-text">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
-            <p className="card-text">Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
-            <div className="overview card-text">
-            <p className="overview-line card-text">{event.data.overview}</p>
+          <div className="row">
+            <div className="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+              <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
+            </div>
+            <div className="event-text-info card-block col-sm-8 col-md-8 col-lg-8 col-xl-8">
               {
-                (source === 'hottest-event')
-                  ? <p className="hottest-event-tickets-remaining card-text">{event.tickets_available_per_event} ticket(s) remaining!</p>
-                  : <span></span>
-              }
+                  (source === 'hottest-event')
+                    ? <p className="hottest-event-tickets-remaining card-text card-header">{event.tickets_available_per_event} ticket(s) remaining!</p>
+                    : <span></span>
+                }
+              <h3><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h3>
+              <p><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="card-subtitle text-muted">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>      
+              <p className="card-text">Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
+              <div className="overview card-text">
+              <p className="overview-line card-text">{event.data.overview}</p>                
+              <Link to={_filterEvents({categoryId: event.data.category.id})} className="card-footer">#{event.data.category.name}</Link>
+              </div>
             </div>
           </div>
         </div>

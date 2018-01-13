@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Event from '../Event';
+import './Events.css';
 
 class Events extends Component {
   constructor(props) {
@@ -97,7 +98,7 @@ class Events extends Component {
     var queryParamsObject = new URLSearchParams(queryParamsString);
     var title = queryParamsObject.get("title");
     return (
-      <div className="all-events-list">
+      <div className="events">
         <h2>Events</h2>
         { 
           (events.length === 0)

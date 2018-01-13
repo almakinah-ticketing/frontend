@@ -36,19 +36,21 @@ class SignUp extends Component {
   }
 
   componentWillMount() {
-    const { currentUser, lastLocation, postNewAttendeeLoading, handleNewSearchInput } = this.props;
-    postNewAttendeeLoading();
-    if (currentUser.attendee_id) {
-      if (lastLocation && lastLocation.pathname !== '/login') {
+    const { isAuthenticated, currentUser, lastLocation, postNewAttendeeLoading, handleNewSearchInput } = this.props;
+    if (currentUser.admin_id) {
+      if (lastLocation && lastLocation.pathname !== '/login' && lastLocation.pathname !== '/admin/login') {
         history.replace(lastLocation.pathname);
       } else {
-        if (currentUser.attendee_id) {
-          history.push('/calendar');
-        } else if (currentUser.admin_id) {
-          history.push('/admin/dashboard');
-        }
+        history.push('/admin/dashboard');
+      }
+    } else if (currentUser.attendee_id) {
+      if (lastLocation && lastLocation.pathname !== '/login' && lastLocation.pathname !== '/admin/login') {
+        history.replace(lastLocation.pathname);
+      } else {
+        history.push('/calendar');
       }
     }
+    postNewAttendeeLoading();
     handleNewSearchInput('');
   }
   

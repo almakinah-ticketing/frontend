@@ -28,3 +28,8 @@
 .signup h2 {
   margin-bottom: 30px;
 }
+
+.signup .btn {
+  margin-top: 8px;
+  margin-bottom: 15px;
+}

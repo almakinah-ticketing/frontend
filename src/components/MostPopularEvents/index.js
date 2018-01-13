@@ -40,7 +40,7 @@ class MostPopularEvents extends Component {
     const { events, loading, error } = this.props;
     return(
       <div className="most-popular-events col-sm-8 col-md-8 col-lg-8 col-xl-8 container">
-        <h3>Most popular events</h3>
+        <h3>Your three most popular events are:</h3>
         <div className="three-most-popular row">
         {
           (events.length === 0) 
