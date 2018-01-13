@@ -15,19 +15,19 @@ export default class Categories extends Component {
     return (
       <div>
         <h2>Categories</h2>     
-        <ul>
+        <div className="row">
         {
         	categories.map((category) => {
         		return (
-        			<li> 
+        			<div className="col"> 
              
                <Link to={_filterEvents({categoryId: category.id})}><span className="category-name-link">{category.name}</span><img src={category.img} alt={category.name} /></Link>
-             </li>
+             </div>
         		)
 
         	})
         }
-        </ul>  
+        </div>  
       </div>
     )
   }

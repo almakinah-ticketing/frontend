@@ -253,7 +253,7 @@ class CreateEventForm extends Component {
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Label htmlFor="title">Title</Label>
-                <Input type="text" name="title" id="title" value={this.state.title} onChange={this.handleChange}></Input>
+                <Input className="input" type="text" name="title" id="title" value={this.state.title} onChange={this.handleChange}></Input>
                 <small>Event title must be unique.</small>
               </FormGroup>
               {
@@ -289,23 +289,23 @@ class CreateEventForm extends Component {
                 }
               <FormGroup>
                 <Label htmlFor="img">Event Image</Label>
-                <Input id="img" name="img" type="file" onChange={this.handleFileChange}></Input>
+                <Input className="input" id="img" name="img" type="file" onChange={this.handleFileChange}></Input>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="startdate">Start Date</Label>
-                <Input id="startdate" name="start_datetime" type="datetime-local" value={this.state.start_datetime} onChange={this.handleChange}></Input>
+                <Input className="input" id="startdate" name="start_datetime" type="datetime-local" value={this.state.start_datetime} onChange={this.handleChange}></Input>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="enddate">End Date</Label>
-                <Input id="enddate" name="end_datetime" type="datetime-local" value={this.state.end_datetime} onChange={this.handleChange}></Input>
+                <Input className="input" id="enddate" name="end_datetime" type="datetime-local" value={this.state.end_datetime} onChange={this.handleChange}></Input>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="overview">Overview</Label>
-                <Input id="overview" name="overview" type="textarea" value={this.state.overview} onChange={this.handleChange}></Input>
+                <Input className="input" className="form-control" id="overview" name="overview" type="textarea" value={this.state.overview} onChange={this.handleChange}></Input>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="agenda">Event Agenda</Label>
-                <Input id="agenda" name="agenda" type="textarea" value={this.state.agenda} onChange={this.handleChange}></Input>
+                <Input className="input" className="form-control" id="agenda" name="agenda" type="textarea" value={this.state.agenda} onChange={this.handleChange}></Input>
               </FormGroup>
               <div>
               <FormGroup>
@@ -315,7 +315,7 @@ class CreateEventForm extends Component {
                 {
                   types.map((type, index) => {
                     return (
-                      <div>
+                      <div className="tickets-types">
                         <FormGroup>
                           <Label htmlFor="type">Type</Label>
                           {
@@ -328,16 +328,16 @@ class CreateEventForm extends Component {
                             )    
                           : null    
                         }
-                          <Input id="type" name="name" type="text" value={this.state.types_attributes[index].name} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                          <Input className="input" id="type" name="name" type="text" value={this.state.types_attributes[index].name} onChange={(event) => this.handleTypeChange(event, index)}></Input>
                           <small>Type name must start with a capital letter.</small>                      
                         </FormGroup>
                         <FormGroup>
                           <Label htmlFor="number">Number of Tickets</Label>
-                          <Input id="number" name="capacity" type="number" value={this.state.types_attributes[index].capacity} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                          <Input className="input" id="number" name="capacity" type="number" value={this.state.types_attributes[index].capacity} onChange={(event) => this.handleTypeChange(event, index)}></Input>
                         </FormGroup>
                         <FormGroup>
                           <Label htmlFor="price">Price</Label>
-                          <Input id="price" name="price" type="number" value={this.state.types_attributes[index].price} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                          <Input className="input" id="price" name="price" type="number" value={this.state.types_attributes[index].price} onChange={(event) => this.handleTypeChange(event, index)}></Input>
                         </FormGroup>
                       </div>
                     );                    

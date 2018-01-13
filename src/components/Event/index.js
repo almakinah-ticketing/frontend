@@ -243,7 +243,7 @@ class Event extends Component {
     if (source === 'most-popular-events') {
     return (
       <div className="event col-sm-4 col-md-4 col-lg-4 col-xl-4">
-        <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img" /></Link>
+        <Link to={`/events/${event.data.id}`}><img className="img-fluid" src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img" /></Link>
         <h3><Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h3>
         <p className="tickets-sold-per-event">{event.tickets_sold} ticket(s) sold</p>
         <Link to={_filterEvents({categoryId: event.data.category.id})}>#{event.data.category.name}</Link>

@@ -38,7 +38,7 @@ class Home extends Component {
 
   render() {
     return(
-      <div className="Home">
+      <div className="Home container">
         <h1 className="App-title"><Link to="/">AlMakinah Summit</Link></h1>
         <Link to="/"><img className="logo" src="logo.png" alt="Logo"/></Link>
         <HotestEvent _filterEvents={this._filterEvents} />
