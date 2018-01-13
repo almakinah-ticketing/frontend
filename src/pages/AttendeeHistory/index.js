@@ -9,7 +9,7 @@ class AttendeeHistory extends Component {
   
   render() {
     return(
-      <div className="attendee-calendar page">
+      <div class="card" class="container-fluid">
         <h2>Tickets you bought:</h2>
         <p>You bought tickets to the following:</p>
         <History/>
