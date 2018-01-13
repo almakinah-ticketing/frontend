@@ -1,0 +1,11 @@
+.events {
+  width: 70%;
+  margin: auto;
+}
+
+.events h2 {
+  margin-bottom: 30px;
+  border-left: 2px solid rgba(251, 194, 18, 0.7);
+  padding: 0px 50px;
+  text-align: left;
+}

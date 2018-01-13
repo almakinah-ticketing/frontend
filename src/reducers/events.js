@@ -3,7 +3,8 @@ import {
   GET_EVENT_LOADING, GET_EVENT_SUCCESS, GET_EVENT_FAILURE,
   ADD_EVENT_LOADING, ADD_EVENT, ADD_EVENT_SUCCESS, ADD_EVENT_FAILURE,
   UPDATE_EVENT_LOADING, UPDATE_EVENT, UPDATE_EVENT_SUCCESS, UPDATE_EVENT_FAILURE,
-  HANDLE_NEW_IMAGE
+  HANDLE_NEW_IMAGE,
+  HANDLE_NEW_SEARCH_INPUT
 } from '../actions/events';
 
 const INITIAL_STATE = {
@@ -18,7 +19,8 @@ const INITIAL_STATE = {
   start_datetime:"",
   end_datetime:"",
   adding: false,
-  errorAdding: null
+  errorAdding: null,
+  searchInput: ''
 }
 
 export default (currentState = INITIAL_STATE, action) => {
@@ -26,7 +28,8 @@ export default (currentState = INITIAL_STATE, action) => {
     case GET_EVENTS_LOADING:
       return {
         ...currentState, 
-        loading: true
+        loading: true,
+        events: []
       };
       break;
     case GET_EVENTS_SUCCESS:
@@ -75,7 +78,7 @@ export default (currentState = INITIAL_STATE, action) => {
      return {
       ...currentState,
       adding: false,
-      event: [...currentState, action.event]
+      event: action.event
       };
       break;
     case ADD_EVENT_FAILURE:
@@ -111,6 +114,12 @@ export default (currentState = INITIAL_STATE, action) => {
         return {
           ...currentState, 
           img: action.img
+        };
+        break;
+      case HANDLE_NEW_SEARCH_INPUT:
+        return {
+          ...currentState,
+          searchInput: action.searchInput
         };
         break;
     default:

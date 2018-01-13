@@ -1,0 +1,50 @@
+.admin-registration-form {
+  width: 60%;
+  margin: auto;
+  border-left: 2px solid rgba(251, 194, 18, 0.7);
+  padding: 0px 50px;
+  text-align: left;
+}
+
+.admin-registration-form input, 
+.admin-registration-form input:focus,
+.admin-registration-form textarea,
+.admin-registration-form textarea:focus {
+  border: 0;
+  border-bottom: 2px solid rgba(67, 67, 67, 0.7);
+  border-radius: 0;
+  background-color: #efefef;
+  margin-bottom: 10px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.admin-registration-form input:-webkit-autofill,
+.admin-registration-form input:-webkit-autofill:active,
+.admin-registration-form input:-webkit-autofill:focus,
+.admin-registration-form input:-webkit-autofill:hover,
+.admin-registration-form textarea:-webkit-autofill,
+.admin-registration-form textarea:-webkit-autofill:active,
+.admin-registration-form textarea:-webkit-autofill:focus,
+.admin-registration-form textarea:-webkit-autofill:hover {
+  background-color: #efefef;
+  -webkit-box-shadow: 0 0 0px 1000px #efefef inset;
+  -webkit-text-fill-color: #434343 !important;
+}
+
+.admin-registration-form .btn {
+  margin-top: 8px;
+  margin-bottom: 15px;
+}
+
+.admin-registration-form h2 {
+  margin-bottom: 30px;
+}
+
+small {
+  margin: 0;
+}
+
+.group-with-small {
+  margin-bottom: 30px;
+}

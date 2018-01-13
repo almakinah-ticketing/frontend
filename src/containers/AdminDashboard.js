@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import AdminDashboard from '../pages/AdminDashboard';
 import {
   getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
+  handleNewSearchInput
 } from '../actions/events';
 import {
   getAdminActivitiesLoading, getAdminActivities, getAdminActivitiesSuccess, getAdminActivitiesFailure
@@ -42,6 +43,9 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(getAdminActivitiesFailure(response.payload.response.data));
         }
       });
+    },
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
     }
   }
 }

@@ -27,8 +27,11 @@ export const UPDATE_EVENT = 'UPDATE_EVENT';
 export const UPDATE_EVENT_SUCCESS = 'UPDATE_EVENT_SUCCESS';
 export const UPDATE_EVENT_FAILURE = 'UPDATE_EVENT_FAILURE';
 
-// Handle new image
+// Handle new image in CreateEventForm
 export const HANDLE_NEW_IMAGE = 'HANDLE_NEW_IMAGE';
+
+// Handle new search input in SearchForm
+export const HANDLE_NEW_SEARCH_INPUT = 'HANDLE_NEW_SEARCH_INPUT';
 
 
 /* Action object creators */
@@ -127,6 +130,14 @@ export const handleNewImage = (encodedString, fileName) => {
     newImage: encodedString,
     imageName: fileName
   }
+}
+
+// Handle new search input in SearchForm
+export const handleNewSearchInput = (searchInput) => {
+  return {
+    type: HANDLE_NEW_SEARCH_INPUT,
+    searchInput
+  };
 }
 
 // Update event

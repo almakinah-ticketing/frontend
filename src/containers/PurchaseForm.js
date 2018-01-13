@@ -6,7 +6,8 @@ import {
   getTypesLoading, getTypes, getTypesSuccess, getTypesFailure, addType, addTypeLoading, addTypeSuccess, addTypeFailure
 } from '../actions/ticketTypes';
 import {
-  getEventLoading, getEvent, getEventSuccess, getEventFailure
+  getEventLoading, getEvent, getEventSuccess, getEventFailure,
+  handleNewSearchInput
 } from '../actions/events';
 
 
@@ -54,6 +55,9 @@ const mapDispatchToProps = (dispatch) => {
         }
       });
     },
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
+    }
   }
 }
 

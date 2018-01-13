@@ -14,7 +14,7 @@ export default class Categories extends Component {
     console.log(categories);
     return (
       <div>
-        <h2>Categories</h2>     
+        <h3>Categories</h3>     
         <ul>
         {
         	categories.map((category) => {

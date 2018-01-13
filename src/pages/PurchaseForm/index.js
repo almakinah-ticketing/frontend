@@ -32,10 +32,11 @@ export default class PurchaseForm extends Component {
   }
 
   componentWillMount(){
-    const { isAuthenticated, currentUser, getEvent, getTypes } = this.props;
+    const { isAuthenticated, currentUser, getEvent, getTypes, handleNewSearchInput } = this.props;
     const eventId = this.props.match.params.id;
     getEvent(eventId);
     getTypes(eventId);
+    handleNewSearchInput('');
   }
 
   _increment(type, event) {
@@ -125,9 +126,16 @@ export default class PurchaseForm extends Component {
       const {type_ids} = this.state;
       let total = 0;
       return(
-        <div>
+        <div className="purchase-form page">
           <h2>Get tickets to <Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h2>
           {
+            (types.length === 0)
+            ? (loading)
+              ? <p className="loading-message">Loading...</p>
+              : (error)
+                ? <p className="error-message">Oops, something went wrong!</p>  
+                : null
+            :
           types.map((type) => {
             const count = this.state[type.name];
             total += type.price * count;
@@ -144,13 +152,13 @@ export default class PurchaseForm extends Component {
           // console.log(attendee_id);
             return (
               <div>
-                <div className="clearfix">
-                  <label className="typeName">{type.name}     </label>
-                  <label className="typePrice">{type.price} EGP</label>
+                <div>
+                  <label className="typeName"><span className="dataKeys">{type.name}:</span></label>
+                  <label className="typePrice">EGP {type.price}</label>
                   <div className="counter">
-                    <label>{count}</label>  
-                    <button onClick={(event) => {this._increment(type, event)}}>+</button>
-                    <button onClick={(event) => {this._decrement(type, event)}}>-</button>
+                    <button onClick={(event) => {this._increment(type, event)}} className="btn btn-primary">+</button>
+                    <label>{count}</label>              
+                    <button onClick={(event) => {this._decrement(type, event)}} className="btn btn-primary">-</button>
                   </div>
                 </div>
                 
@@ -159,7 +167,7 @@ export default class PurchaseForm extends Component {
           })
         }  
         <div>
-          <p>Total: {total}</p>
+          <p><span className="dataKeys">Total:</span> {total}</p>
         </div>
         <div>
           <p>
@@ -177,7 +185,7 @@ export default class PurchaseForm extends Component {
         </div>
           <small>As per our cancelation policy, purchased tickets are non-refundable except if the event is canceled by organizers.</small>
         </div>
-      );
+        );
       }
     } else {
       return <div>Loading...</div>

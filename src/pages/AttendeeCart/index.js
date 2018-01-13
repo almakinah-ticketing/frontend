@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 
 class AttendeeCart extends Component {
+  componentWillMount() {
+    const { handleNewSearchInput } = this.props;
+    handleNewSearchInput('');
+  }
+  
   render() {
     return(
       <div className="attendee-calendar">

@@ -3,6 +3,7 @@ import SignUp from '../pages/SignUp';
 import {
   postNewAttendeeLoading, postNewAttendee, postNewAttendeeSuccess, postNewAttendeeFailure
 } from '../actions/attendees';
+import { handleNewSearchInput } from '../actions/events';
 import history from '../history';
 
 const mapStateToProps = (store) => {
@@ -26,9 +27,16 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(postNewAttendeeSuccess(response.payload.data));
           history.push('/login', {email: response.payload.data.email});
         } else {
-          dispatch(postNewAttendeeFailure(response.payload.response.data));
+          if (response.payload.response.status === 422) {
+            dispatch(postNewAttendeeFailure(response.payload.response.data));
+          } else {
+            dispatch(postNewAttendeeFailure("Oops, something went wrong!"));
+          }
         }
       });
+    },
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
     }
   }
 }

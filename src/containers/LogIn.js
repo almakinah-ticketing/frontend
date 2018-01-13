@@ -4,6 +4,7 @@ import LogInAdminComponent from '../pages/LogInAdmin';
 import {
   loginLoading, login, loginSuccess, loginFailure, setCurrentUser
 } from '../actions/authentication';
+import { handleNewSearchInput } from '../actions/events';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import jwt from 'jsonwebtoken';
 import history from '../history';
@@ -50,9 +51,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
               break;
           }
         } else {
-          dispatch(loginFailure(response.payload.response.data));
+          if (response.payload.response.status === 401) {
+            dispatch(loginFailure(response.payload.response.data));
+          } else {
+            dispatch(loginFailure("Oops, something went wrong!"));
+          }
         }
       });
+    },
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
     }
   }
 }

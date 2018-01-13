@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 BigCalendar.momentLocalizer(moment);

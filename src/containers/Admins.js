@@ -4,10 +4,11 @@ import { withLastLocation } from 'react-router-last-location';
 import InviteAdminFormComponent from '../pages/InviteAdminForm';
 import AdminRegistrationComponent from '../pages/AdminRegistration';
 import {
-	postNewAdminLoading, postNewAdmin, postNewAdminSuccess, postNewAdminFailure,
+  postNewAdminLoading, postNewAdmin, postNewAdminSuccess, postNewAdminFailure,
   updateAdminLoading, updateAdmin, updateAdminSuccess, updateAdminFailure,
   getAdminLoading, getAdmin, getAdminSuccess, getAdminFailure
 } from '../actions/admins';
+import { handleNewSearchInput } from '../actions/events';
 
 const mapStateToProps = (store) => {
   return {
@@ -63,9 +64,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(getAdminFailure(response.payload.response.data));
           }
         });
-      }
-	}
-
+      },
+      handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
+    }
+  }
 }
 
 export const InviteAdminForm = connect(mapStateToProps, mapDispatchToProps)(InviteAdminFormComponent);

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import EventsListPage from '../pages/EventsList';
 import CreateEventFormComponent from '../pages/CreateEventForm';
+import SearchFormComponent from '../components/SearchForm';
 import {
   getCategoriesLoading, getCategories, getCategoriesSuccess, getCategoriesFailure
 } from '../actions/categories';
@@ -8,7 +9,8 @@ import {
   getEventsLoading, getEvents, getEventsSuccess, getEventsFailure,
   getEventLoading, getEvent, getEventSuccess, getEventFailure,
   addEventLoading, addEvent, addEventSuccess, addEventFailure, handleNewImage,
-  updateEventLoading, updateEvent, updateEventSuccess, updateEventFailure
+  updateEventLoading, updateEvent, updateEventSuccess, updateEventFailure,
+  handleNewSearchInput
 } from '../actions/events';
 import {
   postNewAdminActivityLoading, postNewAdminActivity, postNewAdminActivitySuccess, postNewAdminActivityFailure
@@ -27,6 +29,7 @@ const mapStateToProps = (store) => {
     eventsError: store.events.error,
     adding: store.events.adding,
     errorAdding: store.events.errorAdding,
+    searchInput: store.events.searchInput
   }
 }
 
@@ -76,7 +79,12 @@ const mapDispatchToProps = (dispatch) => {
           }));
           history.push(`/events/${response.payload.data.data.id}`);
         } else {
-          dispatch(addEventFailure(response.payload.response.data));
+          console.log(response);
+          if (response.payload.response.status === 422) {
+            dispatch(addEventFailure(response.payload.response.data));
+          } else {
+            dispatch(addEventFailure("Oops, something went wrong!"));
+          }
         }
       });
     },
@@ -91,6 +99,9 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(updateEventFailure(response.payload.response.data));
         }
       });
+    },
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
     }
 
 
@@ -116,3 +127,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export const EventsList = connect(mapStateToProps, mapDispatchToProps)(EventsListPage);
 export const CreateEventForm = connect(mapStateToProps, mapDispatchToProps)(CreateEventFormComponent);
+export const SearchForm = connect(mapStateToProps, mapDispatchToProps)(SearchFormComponent);

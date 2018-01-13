@@ -22,20 +22,24 @@ export default class Checkout extends Component {
   errorPayment = (data) => {
     alert('Payment Error');
   }
-  onToken = (amount, description, event_id, type_id,type_ids,attendee_id) => token => 
-  axios.post(stripeApi,
-    {
-        description,
-        stripeToken: token.id,
-        currency: 'EGP',
-        amount: amount,
-        attendee_id:attendee_id,
-        event_id:event_id,
-        type_id:type_id,
-        type_ids:type_ids
-      })
-      .then(() => this.successPayment(event_id, type_id,type_ids))
-      .catch(this.errorPayment)
+
+  onToken = (amount, description, event_id, type_id,type_ids,attendee_id) => token => {
+    const { currentUser } = this.props
+    axios.post(stripeApi,
+      {
+          description,
+          stripeToken: token.id,
+          attendee_id: currentUser.attendee_id,
+          currency: 'EGP',
+          amount: amount,
+          attendee_id:attendee_id,
+          event_id:event_id,
+          type_id:type_id,
+          type_ids:type_ids
+        })
+        .then(() => this.successPayment(event_id, type_id,type_ids))
+        .catch(this.errorPayment)
+    }
 
   render() {
     const { name, description, amount, event_id, type_id, type_ids, attendee_id } = this.props;

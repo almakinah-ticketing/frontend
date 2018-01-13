@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-import Calendar from '../components/Calendar';
+import { handleNewSearchInput } from '../actions/events';
+import AttendeeCalendarPage from '../pages/AttendeeCalendar';
+import CalendarComponent from '../components/Calendar';
 import {getCalendarLoading, getCalendar, getCalendarSuccess, getCalendarFailure} from '../actions/calendar';
 
 const mapStateToProps = (store) => {
@@ -11,6 +13,7 @@ const mapStateToProps = (store) => {
     error: store.calendar.error
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getCalendar: () => {
@@ -18,14 +21,16 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getCalendar()).then(response => {
         if (response.payload.status<400) {
           dispatch(getCalendarSuccess(response.payload.data));
-
         } else {
           dispatch(getCalendarFailure(response.payload.message));
         }
       });
+    },
+    handleNewSearchInput: (searchInput) => {
+      dispatch(handleNewSearchInput(searchInput));
     }
   }
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Calendar);
+export const AttendeeCalendar = connect(mapStateToProps, mapDispatchToProps)(AttendeeCalendarPage);
+export const Calendar = connect(mapStateToProps, mapDispatchToProps)(CalendarComponent);
