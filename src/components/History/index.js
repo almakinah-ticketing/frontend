@@ -12,13 +12,14 @@ export default class History extends Component {
     
   }
   handleClick = (e) => {
-    console.log(e.target.id);
+    // console.log(e.target.id);
     Axios.post(refundApi(e.target.id));
+    alert('Refund request sent Successfully');
 
   }
   render() {
     const {history, loading, error} = this.props;
-    console.log(history);
+    // console.log(history);
     
     return (
       <div>    
