@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import AttendeeCalendar from '../pages/AttendeeCalendar';
+import Calendar from '../components/Calendar';
 
 const mapStateToProps = (store) => {
   return {
@@ -8,4 +8,4 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default connect(mapStateToProps)(AttendeeCalendar);
+export default connect(mapStateToProps)(Calendar);
