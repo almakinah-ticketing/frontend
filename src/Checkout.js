@@ -12,20 +12,11 @@ export default class Checkout extends Component {
   successPayment = (event_id, type_id,type_ids) => {
     const { updateAttendeeTicketsDispatcher } = this.props;
     alert('Payment Successful');
-    // const url=buyApi;
-    // const type='type_id='+ type_id+'&';
-    // const event= 'event_id='+event_id;
-    // const urls= url+type+event
-    //     type_ids.map(type => {
-    //     var typepath = 'type_id='+ type +'&';
-    //     var furl= url+typepath +event
-    //     axios.post(String(furl))
-    //     .then(function (response) {
-    //       if (response.status < 400) {
-    //         updateAttendeeTicketsDispatcher(response.data);
-    //       }
-    //     });
-    //   })
+        (function (response) {
+          if (response.status < 400) {
+            updateAttendeeTicketsDispatcher(response.data);
+          }
+        });
   }
   
   errorPayment = (data) => {
