@@ -44,12 +44,15 @@ class Home extends Component {
   render() {
     const { events } = this.props;
     return(
-      <div className="home page">
-        <h1 className="App-title"><Link to="/">AlMakinah Summit</Link></h1>
-        <Link to="/"><img className="logo" src="logo.png" alt="Logo"/></Link>
-        <HotestEvent _filterEvents={this._filterEvents} events={events} />
-        <UpcomingEvents _filterEvents={this._filterEvents} events={events} />
-        <Categories _filterEvents={this._filterEvents} />
+      <div className="home">
+        <div className="splash">
+          <h1 className="App-title"><Link to="/">AlMakinah Summit</Link></h1>
+        </div>
+        <div className="home-container page">
+          <HotestEvent _filterEvents={this._filterEvents} events={events} />
+          <UpcomingEvents _filterEvents={this._filterEvents} events={events} />
+          <Categories _filterEvents={this._filterEvents} />
+        </div>
       </div>
     );
   }

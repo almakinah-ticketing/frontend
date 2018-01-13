@@ -255,14 +255,14 @@ class CreateEventForm extends Component {
             <Form onSubmit={this.handleSubmit}>
               <FormGroup className="group-with-small">
                 <Label htmlFor="title" className="sr-only">Title</Label>
-                <Input type="text" name="title" id="title" className="form-control" aria-describedby="titleHelp" placeholder="Title" value={this.state.title} onChange={this.handleChange}></Input>
+                <Input type="text" name="title" id="title" className="form-control" aria-describedby="titleHelp" placeholder="Title" value={this.state.title} required minLength="1" maxLength="280" onChange={this.handleChange}></Input>
                 <small id="titleHelp" className="form-text text-muted">Event title must be unique.</small>
               </FormGroup>
               {
                   (this.props.location.pathname.includes('/admin/update'))
                   ? (<FormGroup className="select-group">
                         <Label htmlFor="category" className="sr-only">Category</Label>
-                        <select name="category_id" className="form-control" onChange={this.handleChange} value={this.state.category_id}>
+                        <select name="category_id" className="form-control" onChange={this.handleChange} required value={this.state.category_id}>
                         <option disabled selected value>Select category</option>
                           
                          {
@@ -276,7 +276,7 @@ class CreateEventForm extends Component {
                       </FormGroup>)
                   : (<FormGroup className="select-group">
                       <Label htmlFor="category" className="sr-only">Category</Label>
-                      <select name="category_id" className="form-control" onChange={this.handleChange}>
+                      <select name="category_id" className="form-control" required onChange={this.handleChange}>
                       <option disabled selected value>Select category</option>
                         
                        {
@@ -291,23 +291,23 @@ class CreateEventForm extends Component {
                 }
               <FormGroup className="img-form-group">
                 <Label htmlFor="img" id="img-label">Choose image</Label>
-                <Input id="img" name="img" type="file" className="form-control" onChange={this.handleFileChange}></Input>
+                <Input id="img" name="img" type="file" className="form-control" required onChange={this.handleFileChange}></Input>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="startdate">Start datetime</Label>
-                <Input id="startdate" name="start_datetime" type="datetime-local" value={this.state.start_datetime} onChange={this.handleChange}></Input>
+                <Input id="startdate" name="start_datetime" type="datetime-local" required value={this.state.start_datetime} onChange={this.handleChange}></Input>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="enddate">End datetime</Label>
-                <Input id="enddate" name="end_datetime" type="datetime-local" value={this.state.end_datetime} onChange={this.handleChange}></Input>
+                <Input id="enddate" name="end_datetime" type="datetime-local" required value={this.state.end_datetime} onChange={this.handleChange}></Input>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="overview" className="sr-only">Overview</Label>
-                <Input id="overview" name="overview" type="textarea" className="form-control" placeholder="Overview" value={this.state.overview} onChange={this.handleChange}></Input>
+                <Input id="overview" name="overview" type="textarea" className="form-control" required minLength="1" maxLength="500" placeholder="Overview" value={this.state.overview} onChange={this.handleChange}></Input>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="agenda" className="sr-only">Event agenda</Label>
-                <Input id="agenda" name="agenda" type="textarea" className="form-control" placeholder="Event agenda" value={this.state.agenda} onChange={this.handleChange}></Input>
+                <Input id="agenda" name="agenda" type="textarea" className="form-control" placeholder="Event agenda" required minLength="1" maxLength="5000" value={this.state.agenda} onChange={this.handleChange}></Input>
               </FormGroup>
               <div>
                 <FormGroup className="big-type-group">
@@ -318,16 +318,16 @@ class CreateEventForm extends Component {
                         <div className="type-group">
                           <FormGroup className="group-with-small">
                             <Label htmlFor="type" className="sr-only">Type</Label>
-                            <Input id="type" name="name" type="text" className="form-control" placeholder="Type name" aria-describedby="typeNameHelp" value={this.state.types_attributes[index].name} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                            <Input id="type" name="name" type="text" className="form-control" placeholder="Type name" required minLength="1" maxLength="20" aria-describedby="typeNameHelp" value={this.state.types_attributes[index].name} onChange={(event) => this.handleTypeChange(event, index)}></Input>
                             <small id="typeNameHelp" className="form-text text-muted">Type name must start with a capital letter.</small>                      
                           </FormGroup>
                           <FormGroup>
                             <Label htmlFor="number" className="sr-only">Number of tickets</Label>
-                            <Input id="number" name="capacity" type="number" className="form-control" placeholder="Number of tickets" value={this.state.types_attributes[index].capacity} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                            <Input id="number" name="capacity" type="number" className="form-control" placeholder="Number of tickets" required pattern="\d*" value={this.state.types_attributes[index].capacity} onChange={(event) => this.handleTypeChange(event, index)}></Input>
                           </FormGroup>
                           <FormGroup className="group-before-delete">
                             <Label htmlFor="price" className="sr-only">Price</Label>
-                            <Input id="price" name="price" type="number" className="form-control" placeholder="Price" value={this.state.types_attributes[index].price} onChange={(event) => this.handleTypeChange(event, index)}></Input>
+                            <Input id="price" name="price" type="number" className="form-control" placeholder="Price" required pattern="\d*" value={this.state.types_attributes[index].price} onChange={(event) => this.handleTypeChange(event, index)}></Input>
                           </FormGroup>
                           {
                             (this.props.location.pathname.includes('/admin/update'))

@@ -28,7 +28,8 @@ export default (currentState = INITIAL_STATE, action) => {
     case GET_EVENTS_LOADING:
       return {
         ...currentState, 
-        loading: true
+        loading: true,
+        events: []
       };
       break;
     case GET_EVENTS_SUCCESS:
@@ -77,7 +78,7 @@ export default (currentState = INITIAL_STATE, action) => {
      return {
       ...currentState,
       adding: false,
-      event: [...currentState, action.event]
+      event: action.event
       };
       break;
     case ADD_EVENT_FAILURE:

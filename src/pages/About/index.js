@@ -10,7 +10,7 @@ class About extends Component {
   render() {
     return(
       <div className="about page">
-        About
+        <h2>About the Summit</h2>
       </div>
       );
   }

@@ -128,6 +128,13 @@ export default class PurchaseForm extends Component {
         <div className="purchase-form page">
           <h2>Get tickets to <Link to={`/events/${event.data.id}`}>{event.data.title}</Link></h2>
           {
+            (types.length === 0)
+            ? (loading)
+              ? <p className="loading-message">Loading...</p>
+              : (error)
+                ? <p className="error-message">Oops, something went wrong!</p>  
+                : null
+            :
           types.map((type) => {
             const count = this.state[type.name];
             total += type.price * count;

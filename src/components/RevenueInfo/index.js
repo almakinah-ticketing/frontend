@@ -24,7 +24,7 @@ class RevenueInfo extends Component {
       }
       totalRevenues += eventRevenues;
     }
-    return totalRevenues;
+    return Math.round(totalRevenues);
   }
 
   _calculateAllTimeTicketsSold() {
@@ -68,7 +68,7 @@ class RevenueInfo extends Component {
             <p className="all-time-revenues col-sm-6 col-md-6 col-lg-6 col-xl-6">EGP {this._calculateAllTimeRevenues()} <p classname="revenues-word">in revenues</p></p>
             <p className="all-time-tickets-sold col-sm-6 col-md-6 col-lg-6 col-xl-6">{this._calculateAllTimeTicketsSold()} <p classname="revenues-word">tickets sold</p></p>
           </div>
-          <ResponsiveContainer width="100%" height="80%" className="totals-chart row">
+          <ResponsiveContainer width="80%" height="75%" className="totals-chart row">
           <LineChart
               width={400}
               height={400}

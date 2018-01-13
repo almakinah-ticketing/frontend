@@ -79,7 +79,12 @@ const mapDispatchToProps = (dispatch) => {
           }));
           history.push(`/events/${response.payload.data.data.id}`);
         } else {
-          dispatch(addEventFailure(response.payload.response.data));
+          console.log(response);
+          if (response.payload.response.status === 422) {
+            dispatch(addEventFailure(response.payload.response.data));
+          } else {
+            dispatch(addEventFailure("Oops, something went wrong!"));
+          }
         }
       });
     },

@@ -1,0 +1,38 @@
+.home-container {
+  width: 70%;
+  margin: auto;
+}
+
+.home {
+  height: 100%;
+  margin-top: -40px;
+}
+
+.splash {
+  height: 100%;
+  background: url('splash1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: 80%;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash h1 {
+  margin: 0;
+  font-size: 100px;
+}
+
+.splash h1 a {
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Raleway', 'Lato', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.home h3 {
+  text-align: left;
+}

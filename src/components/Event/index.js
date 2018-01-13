@@ -249,7 +249,7 @@ class Event extends Component {
           : <p className="tickets-sold-per-event card-header">{event.tickets_sold} ticket(s) sold</p>
         }
         <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
-        <h3><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h3>
+        <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
         <p><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="card-subtitle">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
         <Link to={_filterEvents({categoryId: event.data.category.id})} className="card-footer">#{event.data.category.name}</Link>
         </div>
@@ -273,7 +273,7 @@ class Event extends Component {
             <div className="event-text-info card-block col-sm-8 col-md-8 col-lg-8 col-xl-8">
               {
                   (source === 'hottest-event')
-                    ? <p className="hottest-event-tickets-remaining card-text card-header">{event.tickets_available_per_event} ticket(s) remaining!</p>
+                    ? <p className="hottest-event-tickets-remaining card-text card-header alert alert-info">{event.tickets_available_per_event} ticket(s) remaining!</p>
                     : <span></span>
                 }
               <h3><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h3>
@@ -281,14 +281,17 @@ class Event extends Component {
               <p className="card-text">Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
               <div className="overview card-text">
               <p className="overview-line card-text">{event.data.overview}</p>                
-              <Link to={_filterEvents({categoryId: event.data.category.id})} className="card-footer">#{event.data.category.name}</Link>
+              </div>
+              <div className="card-footer">
+                <Link to={_filterEvents({categoryId: event.data.category.id})} className="text-muted">#{event.data.category.name}</Link>
               </div>
             </div>
           </div>
         </div>
       );
-    } else if (source === 'eventDetails') {
-      if (Object.keys(event).length === 0) {
+    } else if (source === 'event-details') {
+      if (!event || Object.keys(event).length === 0) {
+        console.log(event);
         if (loading) {
           return(
             <p className="loading-message">Loading event details...</p>
@@ -303,15 +306,6 @@ class Event extends Component {
             );
         }
       } else {
-        if (Object.keys(event).length === 0) {
-          if (loading) {
-            return (<p className="loading-message">Loading event details...</p>);
-          } else if (error) {
-            return (<p className="error-message">Oops, something went wrong!</p>);
-          } else {
-            return null;
-          }
-        } else {
           return(
             <div className="event-details container">
               {
@@ -320,10 +314,8 @@ class Event extends Component {
                 : null
               }
               <div className="row">
-                <h3><Link to={`/events/${event.data.id}`} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">{event.data.title}</Link></h3>
-              </div>
-              <div className="row">
-                <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>
+                <h3><Link to={`/events/${event.data.id}`} className="col-sm-12 col-md-12 col-lg-12 col-xl-12 event-title">{event.data.title}</Link></h3>
+                <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>  
               </div>
               <div className="row">
                 <Link to={_filterEvents({categoryId: event.data.category.id})} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">#{event.data.category.name}</Link>
@@ -384,7 +376,6 @@ class Event extends Component {
               </div>
           </div>
           );
-        }
       }
     }
   }
