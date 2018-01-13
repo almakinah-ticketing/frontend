@@ -4,7 +4,8 @@ import { updateAttendeeTickets } from '../actions/authentication';
 
 const mapStateToProps = (store) => {
   return {
-
+    isAuthenticated: store.authentication.isAuthenticated,
+    currentUser: store.authentication.currentUser
   };
 }
 
