@@ -11,6 +11,7 @@ class AttendeeHistory extends Component {
     return(
       <div className="attendee-calendar page">
         <h2>Tickets you bought:</h2>
+        <p>You bought tickets to the following:</p>
         <History/>
       </div>
       );

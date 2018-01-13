@@ -10,7 +10,7 @@ import history from './history';
 import setAuthorizationData from './setAuthorizationData';
 import { LastLocationProvider } from 'react-router-last-location';
 
-
+require("react-big-calendar/lib/css/react-big-calendar.css");
 const store = createStore();
 
 setAuthorizationData(store);

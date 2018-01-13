@@ -37,6 +37,8 @@ export const getInvitedAdminApi = (invitationToken) =>  `${rootApi}/admins/regis
 export const buyApi = `${rootApi}/buy?`;
 export const stripeApi = `${rootApi}/charges`;
 export const historyApi = `${rootApi}/history`;
+export const refundApi = (token) => `${rootApi}/refund?charge=${token}`;
+export const calendarApi = `${rootApi}/calendar`;
 // export const eventsApi = (categoryId) => `${rootApi}/${(categoryId && categoryId !== '0') ? 'categories/' + categoryId : 'events'}`;
 // export const categoryEventsApi = (categoryId) => `${rootApi}/categories/${categoryId}`;
 // export const hotestEventApi = `${rootApi}/events/hottest`;

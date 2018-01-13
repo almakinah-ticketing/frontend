@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Checkout from '../../containers/Checkout';
 var t1 = 0;
 var t2 = 0;
+var attendee_id = 0;
 
 export default class PurchaseForm extends Component {
   constructor(props) {
@@ -146,6 +147,9 @@ export default class PurchaseForm extends Component {
           t2 = getTyped;
           // console.log(t2);
           // console.log(type_ids);
+          const { currentUser } = this.props;
+          attendee_id = currentUser.attendee_id;
+          // console.log(attendee_id);
             return (
               <div>
                 <div>
@@ -165,22 +169,23 @@ export default class PurchaseForm extends Component {
         <div>
           <p><span className="dataKeys">Total:</span> {total}</p>
         </div>
-          <div>
-            <div>
-                      <Checkout
-                        name={event.data.title}
-                        description={this._parseDateToDisplay(event.data.start_datetime) + ' at ' + this._parseTimeToDisplay(event.data.start_datetime)}
-                        amount={total}
-                        event_id={t1}
-                        type_id={t2}
-                        type_ids={type_ids}
-                      />
-            </div>
-            <Link to={`/events/${event.data.id}`} className="btn btn-secondary">Back to event</Link>
-          </div>
+        <div>
+          <p>
+                    <Checkout
+                      name={event.data.title}
+                      description={this._parseDateToDisplay(event.data.start_datetime) + ' at ' + this._parseTimeToDisplay(event.data.start_datetime)}
+                      amount={total}
+                      event_id={t1}
+                      type_id={t2}
+                      type_ids={type_ids}
+                      attendee_id= {attendee_id}
+                    />
+          </p>
+          <Link to={`/events/${event.data.id}`} className="btn btn-secondary">Back to event</Link>
+        </div>
           <small>As per our cancelation policy, purchased tickets are non-refundable except if the event is canceled by organizers.</small>
         </div>
-      );
+        );
       }
     } else {
       return <div>Loading...</div>
