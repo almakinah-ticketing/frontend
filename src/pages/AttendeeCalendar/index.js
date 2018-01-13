@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import CApp from '../../components/App/App';
+import { Calendar } from '../../containers/AttendeeCalendar';
+
 
 class AttendeeCalendar extends Component {
   render() {
@@ -10,7 +11,8 @@ class AttendeeCalendar extends Component {
         <h2>AttendeeCalendar</h2>
         <p>Welcome, {currentUser.f_name}</p>
         <p>Here is an overview of your Calendar</p>
-      <CApp /></div>
+        <Calendar/>
+       </div>
        
       );
   }

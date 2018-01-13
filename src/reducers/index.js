@@ -7,6 +7,7 @@ import authentication from './authentication';
 import admins from './admins';
 import adminActivities from './adminActivities';
 import history from './history'
+import calendar from './calendar'
 
 const rootReducer = combineReducers({
   categories,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   authentication,
   admins,
   adminActivities,
-  history
+  history,
+  calendar
 })
 
 export default rootReducer;

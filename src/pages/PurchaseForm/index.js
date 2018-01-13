@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Checkout from '../../containers/Checkout';
 var t1 = 0;
 var t2 = 0;
+var attendee_id = 0;
 
 export default class PurchaseForm extends Component {
   constructor(props) {
@@ -138,6 +139,9 @@ export default class PurchaseForm extends Component {
           t2 = getTyped;
           // console.log(t2);
           // console.log(type_ids);
+          const { currentUser } = this.props;
+          attendee_id = currentUser.attendee_id;
+          // console.log(attendee_id);
             return (
               <div>
                 <div className="clearfix">
@@ -166,6 +170,7 @@ export default class PurchaseForm extends Component {
                       event_id={t1}
                       type_id={t2}
                       type_ids={type_ids}
+                      attendee_id= {attendee_id}
                     />
           </p>
           <Link to={`/events/${event.data.id}`} className="btn btn-secondary">Back to event</Link>

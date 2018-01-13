@@ -5,7 +5,7 @@ class AttendeeHistory extends Component {
   render() {
     return(
       <div className="attendee-calendar">
-        <h2>AttendeeHistory</h2>
+        <h2>History</h2>
         <p>You bought tickets to the following:</p>
         <History/>
       </div>
