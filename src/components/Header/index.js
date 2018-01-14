@@ -26,12 +26,12 @@ class Header extends Component {
   _attendeeAdvancedNav() {
     const { currentUser, logout } = this.props;
     return(
-      <nav className="advanced-nav authenticated-nav">
-        <p>Logged in as: {currentUser.f_name} {currentUser.l_name}</p>
+      <nav className="advanced-nav authenticated-nav clearfix">
+        <p className="header-p">Logged in as: {currentUser.f_name} {currentUser.l_name}</p>
         <button onClick={() => {logout('attendees')}} className="btn btn-link">Log Out</button>
         <ul>
           <li><NavLink to="/calendar">Calendar</NavLink></li>
-          <li><NavLink to="/history">History</NavLink></li>
+          <li className="pull-end"><NavLink to="/history">History</NavLink></li>
         </ul>
       </nav>
       );
@@ -41,7 +41,7 @@ class Header extends Component {
     const { currentUser, logout } = this.props;
     return(
       <nav className="advanced-nav authenticated-nav">
-        <p>Logged in as: {currentUser.f_name} {currentUser.l_name}</p>
+        <p className="header-p">Logged in as: {currentUser.f_name} {currentUser.l_name}</p>
         <button onClick={() => {logout('admins')}} className="btn btn-link">Log Out</button>
         <ul>
           <li><NavLink to="/admin/dashboard">Dashboard</NavLink></li>

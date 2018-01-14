@@ -14,7 +14,7 @@ class AttendeeCalendar extends Component {
     return(
       <div className="attendee-calendar page">
         <h2>Welcome, {currentUser.f_name}</h2>
-        <p>Here is an overview of your Calendar</p>
+        <p>Here is an overview of your calendar</p>
         <Calendar />
        </div>
       );

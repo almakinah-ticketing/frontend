@@ -12,11 +12,6 @@ export default class Checkout extends Component {
   successPayment = (event_id, type_id,type_ids) => {
     const { updateAttendeeTicketsDispatcher } = this.props;
     alert('Payment Successful');
-        (function (response) {
-          if (response.status < 400) {
-            updateAttendeeTicketsDispatcher(response.data);
-          }
-        });
   }
   
   errorPayment = (data) => {
@@ -37,7 +32,7 @@ export default class Checkout extends Component {
           type_id:type_id,
           type_ids:type_ids
         })
-        .then(() => this.successPayment(event_id, type_id,type_ids))
+        .then((response) => this.successPayment(event_id, type_id,type_ids))
         .catch(this.errorPayment)
     }
 

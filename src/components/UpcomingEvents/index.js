@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Event from '../Event';
+import '../Events/Events.css';
 import { Link } from 'react-router-dom';
 
 export default class UpcomingEvents extends Component{
@@ -15,10 +16,10 @@ export default class UpcomingEvents extends Component{
   }
 
   render(){
-    const {events, loading, error, _filterEvents} = this.props;
+    const {events, loading, error, _filterEvents, currentUser, isAuthenticated} = this.props;
     return (
-      <div>
-        <h3>Upcoming events</h3>
+      <div className="upcoming-events">
+        <h3>More upcoming events...</h3>
         {
           (this._upcomingEvents().length === 0)
           ? (loading)
@@ -31,14 +32,13 @@ export default class UpcomingEvents extends Component{
             return (
               <div>
               {
-                index < 3? <Event event={event} _filterEvents={_filterEvents} source="upcomingEvents" /> : false
+                index < 3? <Event event={event} currentUser={currentUser} isAuthenticated={isAuthenticated} _filterEvents={_filterEvents} source="upcomingEvents" /> : false
               }
               </div>
             );
           })
-        } 
-
-      <p> <Link to="/events">See all events</Link> </p> 
+        }
+      <p><Link to="/events" className="see-all">See all events</Link> </p> 
       </div>
     )
   }

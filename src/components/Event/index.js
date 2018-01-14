@@ -149,27 +149,15 @@ class Event extends Component {
 }
 
   _attendeeTicketCountMessage() {
-    const { isAuthenticated, currentUser, ticketsBoughtInSession, event } = this.props;
-    const eventId = event.data.id;
-    if (isAuthenticated && currentUser.attendee_id) {
-      const attendeeTickets = (currentUser.tickets_bought).concat(ticketsBoughtInSession);
-      console.log(attendeeTickets);
-      var attendeeEventTicketsCount = 0;
-      for (var i = 0; i < attendeeTickets.length; i++) {
-        if (attendeeTickets[i].event_id === eventId) {
-          attendeeEventTicketsCount++;
-        }
-      }
-      console.log(ticketsBoughtInSession);
-      if (attendeeEventTicketsCount > 0) {
-          return(
-            <p className="you-bought-message">You bought {attendeeEventTicketsCount} ticket(s) to this event</p>
-            );
-        } else {
-          return (
-            null
-            );
-        }
+    const { isAuthenticated, currentUser, event } = this.props;
+    if (isAuthenticated && currentUser.attendee_id && event.current_attendee_tickets !== 0) {
+        return(
+          <p className="you-bought-message">You bought {event.current_attendee_tickets} ticket(s) to this event</p>
+          );
+      } else {
+        return (
+          null
+          );
       }
   }
 
@@ -248,13 +236,15 @@ class Event extends Component {
           ? <p className="event-sold-out-message card-header alert alert-success">Sold out</p>
           : <p className="tickets-sold-per-event card-header">{event.tickets_sold} ticket(s) sold</p>
         }
-        <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
-        <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
-        <p><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="card-subtitle">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
-        <Link to={_filterEvents({categoryId: event.data.category.id})} className="card-footer">#{event.data.category.name}</Link>
+        <div className="card-block">
+          <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
+          <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
+          <p className="card-subtitle"><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="text-muted">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
+        </div>
+        <Link to={_filterEvents({categoryId: event.data.category.id})} className="card-footer text-muted">#{event.data.category.name}</Link>
         </div>
       );  
-    } else if (source === 'events' || source === 'upcomingEvents' || source === 'hottest-event') {
+    } else if (source === 'events' || source === 'upcomingEvents') {
       return (
         <div className="event card container">
           {
@@ -271,12 +261,7 @@ class Event extends Component {
               <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
             </div>
             <div className="event-text-info card-block col-sm-8 col-md-8 col-lg-8 col-xl-8">
-              {
-                  (source === 'hottest-event')
-                    ? <p className="hottest-event-tickets-remaining card-text card-header alert alert-info">{event.tickets_available_per_event} ticket(s) remaining!</p>
-                    : <span></span>
-                }
-              <h3><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h3>
+              <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
               <p><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="card-subtitle text-muted">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>      
               <p className="card-text">Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
               <div className="overview card-text">
@@ -287,6 +272,22 @@ class Event extends Component {
               </div>
             </div>
           </div>
+        </div>
+      );
+    } else if (source === 'hottest-event') {
+      return (
+        <div className="hottest-event container clearfix">
+          <div className="row">
+            <h3 className="col-sm-9 col-md-9 col-lg-9 col-xl-9"><Link to={`/events/${event.data.id}`} className="event-title pull-start">{event.data.title}</Link></h3>
+            <div className="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            {
+              this._linkContent()
+            }
+            </div>
+          </div>
+          <p><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="text-muted">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>      
+          <p className="">Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
+          <p className="hottest-event-tickets-remaining alert alert-info">{event.tickets_available_per_event} ticket(s) remaining!</p>
         </div>
       );
     } else if (source === 'event-details') {

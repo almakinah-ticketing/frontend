@@ -289,10 +289,21 @@ class CreateEventForm extends Component {
                       </select>
                       </FormGroup>)
                 }
-              <FormGroup className="img-form-group">
-                <Label htmlFor="img" id="img-label">Choose image</Label>
-                <Input id="img" name="img" type="file" className="form-control" required onChange={this.handleFileChange}></Input>
-              </FormGroup>
+                {
+                  (this.props.location.pathname.includes('/admin/update'))
+                  ? (
+                    <FormGroup className="img-form-group">
+                      <Label htmlFor="img" id="img-label">Choose image</Label>
+                      <Input id="img" name="img" type="file" className="form-control" onChange={this.handleFileChange}></Input>
+                    </FormGroup>
+                    )
+                  : (
+                    <FormGroup className="img-form-group">
+                      <Label htmlFor="img" id="img-label">Choose image</Label>
+                      <Input id="img" name="img" type="file" className="form-control" required onChange={this.handleFileChange}></Input>
+                    </FormGroup>
+                    )
+                }
               <FormGroup>
                 <Label htmlFor="startdate">Start datetime</Label>
                 <Input id="startdate" name="start_datetime" type="datetime-local" required value={this.state.start_datetime} onChange={this.handleChange}></Input>
