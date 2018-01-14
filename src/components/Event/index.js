@@ -109,7 +109,7 @@ class Event extends Component {
     if (isAuthenticated && currentUser.attendee_id) {
       if (!eventHappened && !eventSoldOut && !eventCanceled) {
         return(
-          <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get tickets now</Link>
+          <Link to={`/events/${event.data.id}/tickets`} className="tickets-button btn btn-primary">Get tickets now</Link>
         );
       }  else if (eventCanceled) {
           <p className="event-canceled-message">Event has been canceled</p>
@@ -149,27 +149,15 @@ class Event extends Component {
 }
 
   _attendeeTicketCountMessage() {
-    const { isAuthenticated, currentUser, ticketsBoughtInSession, event } = this.props;
-    const eventId = event.data.id;
-    if (isAuthenticated && currentUser.attendee_id) {
-      const attendeeTickets = (currentUser.tickets_bought).concat(ticketsBoughtInSession);
-      console.log(attendeeTickets);
-      var attendeeEventTicketsCount = 0;
-      for (var i = 0; i < attendeeTickets.length; i++) {
-        if (attendeeTickets[i].event_id === eventId) {
-          attendeeEventTicketsCount++;
-        }
-      }
-      console.log(ticketsBoughtInSession);
-      if (attendeeEventTicketsCount > 0) {
-          return(
-            <p className="you-bought-message">You bought {attendeeEventTicketsCount} ticket(s) to this event</p>
-            );
-        } else {
-          return (
-            null
-            );
-        }
+    const { isAuthenticated, currentUser, event } = this.props;
+    if (isAuthenticated && currentUser.attendee_id && event.current_attendee_tickets !== 0) {
+        return(
+          <p className="you-bought-message">You bought {event.current_attendee_tickets} ticket(s) to this event</p>
+          );
+      } else {
+        return (
+          null
+          );
       }
   }
 
@@ -181,8 +169,8 @@ class Event extends Component {
     if (isAuthenticated && currentUser.admin_id) {
       return (
         <div className="row">
-          <span className="datakeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Ticket sales so far</span>
-          <table className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+          <span className="datakeys ticket-sales-sofar col-sm-4 col-md-4 col-lg-4 col-xl-4">Ticket sales so far</span>
+          <table className="table-tickets table table-bordered col-sm-8 col-md-8 col-lg-8 col-xl-8">
             <thead>
               <tr>
                 <th scope="col">Type</th>
@@ -250,11 +238,13 @@ class Event extends Component {
           ? <p className="event-sold-out-message card-header alert alert-success">Sold out</p>
           : <p className="tickets-sold-per-event card-header">{event.tickets_sold} ticket(s) sold</p>
         }
-        <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
-        <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
-        <p><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="card-subtitle">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
-        <Link to={_filterEvents({categoryId: event.data.category.id})} className="card-footer">#{event.data.category.name}</Link>
 
+        <div className="card-block">
+          <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
+          <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
+          <p className="card-subtitle"><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="text-muted">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
+        </div>
+        <Link to={_filterEvents({categoryId: event.data.category.id})} className="card-footer text-muted">#{event.data.category.name}</Link>
         </div>
       );  
     } else if (source === 'events' || source === 'upcomingEvents') {
@@ -274,12 +264,7 @@ class Event extends Component {
               <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
             </div>
             <div className="event-text-info card-block col-sm-8 col-md-8 col-lg-8 col-xl-8">
-              {
-                  (source === 'hottest-event')
-                    ? <p className="hottest-event-tickets-remaining card-text card-header alert alert-info">{event.tickets_available_per_event} ticket(s) remaining!</p>
-                    : <span></span>
-                }
-              <h3><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h3>
+              <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
               <p><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="card-subtitle text-muted">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>      
               <p className="card-text">Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
               <div className="overview card-text">
@@ -292,44 +277,24 @@ class Event extends Component {
           </div>
         </div>
       );
-    }else if(source === 'hottest-event'){
 
+    } else if (source === 'hottest-event') {
       return (
-        <div className="hottest-event event card container">
-          {
-            (new Date(event.data.start_datetime) < new Date()) 
-            ? <p className="event-expired-message alert alert-warning row card-header">Event has already happened</p>
-            : (event.tickets_available_per_event === 0)
-              ? <p className="event-sold-out-message alert alert-warning row card-header">Sold out</p>
-              : (event.data.canceled)
-                ? <p className="event-canceled-message alert alert-warning row card-header">Canceled</p>
-                : null
-          }
+        <div className="hottest-event container clearfix">
           <div className="row">
-            <div className="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-              <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
-            </div>
-            <div className="event-text-info card-block col-sm-8 col-md-8 col-lg-8 col-xl-8">
-              {
-                  (source === 'hottest-event')
-                    ? <p className="hottest-event-tickets-remaining card-text card-header alert alert-info">{event.tickets_available_per_event} ticket(s) remaining!</p>
-                    : <span></span>
-                }
-              <h3><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h3>
-              <p><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="card-subtitle text-muted">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>      
-              <p className="card-text">Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
-              <div className="overview card-text">
-              <p className="overview-line card-text">{event.data.overview}</p>                
-              </div>
-              <div className="card-footer">
-                <Link to={_filterEvents({categoryId: event.data.category.id})} className="text-muted">#{event.data.category.name}</Link>
-              </div>
+            <h3 className="col-sm-9 col-md-9 col-lg-9 col-xl-9"><Link to={`/events/${event.data.id}`} className="event-title pull-start">{event.data.title}</Link></h3>
+            <div className="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            {
+              this._linkContent()
+            }
             </div>
           </div>
+          <p><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="text-muted">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>      
+          <p className="">Duration: {this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
+          <p className="hottest-event-tickets-remaining alert alert-info">{event.tickets_available_per_event} ticket(s) remaining!</p>
         </div>
       );
 
-    
     } else if (source === 'event-details') {
       if (!event || Object.keys(event).length === 0) {
         console.log(event);
@@ -355,53 +320,75 @@ class Event extends Component {
                 : null
               }
               <div className="row">
-                <h3><Link to={`/events/${event.data.id}`} className="col-sm-12 col-md-12 col-lg-12 col-xl-12 event-title">{event.data.title}</Link></h3>
+
+                <h3><Link to={`/events/${event.data.id}`} className="event-title col-sm-12 col-md-12 col-lg-12 col-xl-12 event-title">{event.data.title}</Link></h3>
                 <Link className="event-img-link" to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="img-fluid event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>  
               </div>
               <div className="row">
                 <Link to={_filterEvents({categoryId: event.data.category.id})} className="category col-sm-12 col-md-12 col-lg-12 col-xl-12">#{event.data.category.name}</Link>
               </div>
               <div className="row">
-                <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">When?</span>
-                <time dateTime={event.data.start_datetime} className="col-sm-8 col-md-8 col-lg-8 col-xl-8"><Link to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time>
+
+               <table className="table">
+                <tbody>
+                  <tr>
+                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Date :</span></th>
+                    <td><time dateTime={event.data.start_datetime} className="col-sm-8 col-md-8 col-lg-8 col-xl-8"><Link className="date" to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></td>
+                  </tr>
+                  <tr>
+                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Duration :</span></th>
+                    <td><p className="duration col-sm-8 col-md-8 col-lg-8 col-xl-8">{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p></td>
+                  </tr>
+                  <tr>
+                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Overview :</span></th>
+                    <td> <p className="overview-line">{event.data.overview}</p></td>
+                  </tr>
+                   <tr>
+                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Event Agenda :</span></th>
+                    <td><p className="agenda-line">{event.data.agenda}</p></td>
+                  </tr>
+                   <tr>
+                    <th></th>
+                    <td></td>
+                  </tr>
+                </tbody>
+             </table>
               </div>
-              <div className="row">
-                <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">How long?</span>
-                <p className="col-sm-8 col-md-8 col-lg-8 col-xl-8">{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p>
-              </div>
-              <div className="row">
-                <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">What exactly?</span>
-                <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <p className="overview-line">{event.data.overview}</p>
-                </div>
-              </div>
+             
               {
                 (!isAuthenticated || (isAuthenticated && currentUser.attendee_id))
-                ? <ul className="ticket-prices-per-type list-unstyled">
-                  {
-                    event.data.types.map((type) => {
-                      return(
-                        <li className="row">
-                          <span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.name}</span>
-                          <span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">EGP {type.price}</span>
-                          {
-                            (type.tickets_available_per_type === 0)
-                            ? <span className="ticket-type-sold-out col-sm-4 col-md-4 col-lg-4 col-xl-4">Sold out</span>
-                            : <span className="ticket-type-tickets-available col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.tickets_available_per_type} tickets left</span>
-                          }
-                        </li>
-                        );
-                    })
-                  }
-                </ul>
+                ? 
+                <div>
+                  <h4 className="tickets-heading">Ticket Types</h4>
+                  <table className="table table-bordered ticket-prices-per-type list-unstyled">
+                    <tbody>
+                      {
+                      event.data.types.map((type) => {
+                        return(
+                          <tr>
+                            <td><span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.name}</span></td>
+                            <td><span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">EGP {type.price}</span></td>
+                            <td></td>
+                         
+                         
+                
+                            {
+                              (type.tickets_available_per_type === 0)
+                              ?<td><span className="ticket-type-sold-out col-sm-4 col-md-4 col-lg-4 col-xl-4">Sold out</span></td>
+                              : <td><span className="ticket-type-tickets-available col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.tickets_available_per_type} tickets left</span></td>
+                            }
+                          </tr>
+                          
+                          );
+                      })
+                    }
+                    </tbody>
+                    
+                  </table>
+                </div>
                 : null
               }
-              <div className="row">
-                <span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">What'll be happening?</span>
-                <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <p className="agenda-line">{event.data.agenda}</p>
-                </div>
-              </div>
+             
               <div className="row">
                 <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 {

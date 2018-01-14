@@ -10,7 +10,7 @@ export default class HotestEvent extends Component {
 	_hottestEvent(events) {
 		var hottestEvent;
 		var availableEvents = events.filter(event => {
-			return event.tickets_available_per_event !== 0 && new Date(event.data.start_datetime) >= new Date();
+			return event.tickets_available_per_event !== 0 && new Date(event.data.start_datetime) >= new Date() && event.data.canceled !== true;
 		})
 		if (availableEvents.length === 0) {
 			return;
@@ -32,11 +32,12 @@ export default class HotestEvent extends Component {
 			events, 
 			loading, 
 			error, 
-			_filterEvents
+			_filterEvents,
+			currentUser,
+			isAuthenticated
 		} = this.props;
 		return (
-			<div className="hottest-event">
-				<h3>Hottest event</h3>
+			<div className="hottest-event-container">
 				{ 
 					(events === undefined || events.length === 0)
 					? (loading)
@@ -45,7 +46,7 @@ export default class HotestEvent extends Component {
 				            ? <p className="error-message">Oops, something went wrong!</p>
 				            : <span></span>
 			      		: (this._hottestEvent(events) !== undefined)
-			      			? <Event event={this._hottestEvent(events)} loading={loading} error={error} source="hottest-event" _filterEvents={_filterEvents} />
+			      			? <Event event={this._hottestEvent(events)} currentUser={currentUser} isAuthenticated={isAuthenticated} loading={loading} error={error} source="hottest-event" _filterEvents={_filterEvents} />
 			      			: <span></span>
 				}
 			</div>

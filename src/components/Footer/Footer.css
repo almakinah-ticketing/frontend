@@ -3,6 +3,8 @@
   height: 30px;
   margin-top: -30px;
   width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 .App-footer p, .App-footer ul {
@@ -32,3 +34,7 @@
 .copyrights {
   margin-left: 10px;
 }
+/*.stick-footer-down{
+  display: flex;
+  align-items: flex-end;
+}*/

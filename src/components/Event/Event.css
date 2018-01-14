@@ -16,14 +16,18 @@
 
 .card-block {
   text-align: left;
-  padding: 15px;
+  padding: 7px 20px;
 }
 
 p.alert {
   margin-bottom: 0;
 }
 
-a.card-subtitle,
+a.card-subtitle {
+  color: #434343;
+  text-decoration: none;
+}
+
 a.card-subtitle:hover {
   color: #434343;
   text-decoration: underline;
@@ -39,10 +43,13 @@ a.card-subtitle:hover {
   padding: 5px 0;
 }
 
-.card-footer a,
-.card-footer a:hover {
+.card-footer a {
   color: #434343;
-  text-decoration: none;
+  text-decoration: none
+}
+
+.card-footer a:hover {
+  text-decoration: underline;
 }
 
 .card-title, 
@@ -58,6 +65,13 @@ a.card-subtitle:hover {
 .agenda-line {
   white-space: pre-wrap;
 }
+.date{
+  color:#ff9800;
+}
+.duration{
+  white-space: pre-wrap;
+  padding-left: 10px;
+}
 
 .col-sm-4, .col-md-4, .col-lg-4, .col-xl-4 {
   padding: 0;
@@ -72,6 +86,7 @@ a.card-subtitle:hover {
 .event-title:hover {
   color: #434343;
 }
+
 
 .event-details a {
   display: inline-block;
@@ -89,4 +104,46 @@ a.card-subtitle:hover {
   font-size: 30px;
   color:#434343;
   font-weight: bold;
+}
+.category:hover{
+  color:#434343;
+}
+
+.you-bought-message {
+  margin-top: 30px;
+}
+
+.hottest-event {
+  font-size: 17px;
+}
+
+.hottest-event .delete-event-btn {
+  display: none;
+
+}
+
+.table-tickets{
+ width: 75%;
+}
+.btn-primary {
+    color: #2b3641;
+    background-color: #ff9800;
+    border-color: #ff9800;
+}
+.tickets-heading {
+  font-size: 25px;
+  text-align: left;
+}
+.ticket-sales-sofar{
+  font-size: 20px;
+  text-align: left;
+}
+.update-event-btn{
+  margin:1%;
+}
+.delete-event-btn{
+  margin: 1%;
+}
+.event-title{
+  margin-bottom: 20px;
 }

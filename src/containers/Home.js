@@ -10,7 +10,9 @@ const mapStateToProps = (store) => {
   return {
     events: store.events.events,
     loading: store.events.loading,
-    error: store.events.error
+    error: store.events.error,
+    isAuthenticated: store.authentication.isAuthenticated,
+    currentUser: store.authentication.currentUser
   }
 }
 
