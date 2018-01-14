@@ -41,12 +41,6 @@ export default (currentState = INITIAL_STATE, action) => {
         error: action.error
       }
       break;
-    case UPDATE_ATTENDEE_TICKETS:
-      return {
-        ...currentState,
-        ticketsBoughtInSession: [...currentState.ticketsBoughtInSession, action.ticket]
-      };
-      break;
     default:
       return currentState;
       break;

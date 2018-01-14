@@ -15,9 +15,6 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 // Set current user after login returns authentication token
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
-// Update user activity in store to render it in real time within one log-in session
-export const UPDATE_ATTENDEE_TICKETS = 'UPDATE_ATTENDEE_TICKETS';
-
 
 /* Action object creators */
 
@@ -63,13 +60,5 @@ export const setCurrentUser = (currentUser) => {
     type: SET_CURRENT_USER,
     currentUser
   };
-}
-
-// Update user activity in store to render it in real time within one log-in session
-export const updateAttendeeTickets = (ticket) => {
-  return {
-    type: UPDATE_ATTENDEE_TICKETS,
-    ticket
-  }
 }
 

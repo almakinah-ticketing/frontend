@@ -3,6 +3,8 @@
   height: 30px;
   margin-top: -30px;
   width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 .App-footer p, .App-footer ul {

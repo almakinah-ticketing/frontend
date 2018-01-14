@@ -33,3 +33,9 @@
   margin-top: 8px;
   margin-bottom: 15px;
 }
+
+.signup a:link,
+.signup a:hover,
+.signup a:active {
+  color: rgba(163, 0, 2, 0.72);
+}

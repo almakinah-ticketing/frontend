@@ -41,7 +41,7 @@ class MostPopularEvents extends Component {
     return(
       <div className="most-popular-events col-sm-9 col-md-9 col-lg-9 col-xl-9 container">
         <h3>Your three most popular events are:</h3>
-        <div className="three-most-popular row">
+        <div className="three-most-popular row card-deck">
         {
           (events.length === 0) 
           ? (loading)
@@ -63,9 +63,11 @@ class MostPopularEvents extends Component {
           })
         }
         </div>
-        <Link to="/events" className="pull-end">See all events</Link>
-        <div className="row clearfix">
-        </div>
+        {
+          (events.length !== 0) 
+          ? <Link to="/events" className="see-all pull-start">See all events</Link>
+          : null
+        }
       </div>
       );
   }

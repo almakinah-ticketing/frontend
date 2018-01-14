@@ -42,15 +42,18 @@ class Home extends Component {
   }
 
   render() {
-    const { events } = this.props;
+    const { events, loading, error, currentUser, isAuthenticated } = this.props;
+    console.log('PROPS', this.props);
     return(
       <div className="home">
         <div className="splash">
-          <h1 className="App-title"><Link to="/">AlMakinah Summit</Link></h1>
+          <div className="splash-content">
+            <h1 className="App-title"><Link to="/">AlMakinah Summit</Link></h1>
+          </div>
         </div>
         <div className="home-container page">
-          <HotestEvent _filterEvents={this._filterEvents} events={events} />
-          <UpcomingEvents _filterEvents={this._filterEvents} events={events} />
+          <HotestEvent _filterEvents={this._filterEvents} events={events} loading={loading} error={error} currentUser={currentUser} isAuthenticated={isAuthenticated} />
+          <UpcomingEvents _filterEvents={this._filterEvents} events={events} loading={loading} error={error} currentUser={currentUser} isAuthenticated={isAuthenticated} />
           <Categories _filterEvents={this._filterEvents} />
         </div>
       </div>

@@ -36,6 +36,11 @@
   margin-bottom: 15px;
 }
 
+.login a,
+.login a:hover {
+  color: rgba(163, 0, 2, 0.72);
+}
+
 .login h2 {
   margin-bottom: 30px;
 }
