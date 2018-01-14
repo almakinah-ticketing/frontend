@@ -1,0 +1,36 @@
+.App-footer {
+  background-color: #2a3641;
+  height: 30px;
+  margin-top: -30px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.App-footer p, .App-footer ul {
+  margin-bottom: 0;
+}
+
+.copyrights, .icons {
+  color: #fff;
+}
+
+.contact-nav ul li a {
+  text-decoration: none;
+}
+
+.contact-nav ul li {
+  display: inline-block;
+}
+
+.contact-nav ul li + li {
+  margin-left: 20px;
+}
+
+.contact-nav {
+  margin-right: 10px;
+}
+
+.copyrights {
+  margin-left: 10px;
+}

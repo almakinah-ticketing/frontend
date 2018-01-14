@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+/*html, body, #root {
+  height: 100%;
+}*/
+
+html {
+  height: 100%;
+}
+
+body , #root {
+  min-height:  100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  color: #434343;
+  position: relative;
+  background-color: #efefef;
+}
+
+.App {
+  text-align: center;
+  /*height: 100%;*/
+  overflow: auto;
+  /*position: relative;*/
+}
+
+.App-container {
+  /*padding-top: 40px;*/
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  background-color: #efefef;
+  /*background-color: rgba(230, 230, 230, 0.3);*/
+}
+
+.App-container .page {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  padding:  40px 35px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.pull-start {
+  float: left;
+}
+
+.pull-end {
+  float: right;
+}
+
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+.alert, .alert-danger, .alert-warning, .alert-success {
+  border-radius: 10px;
+}
+

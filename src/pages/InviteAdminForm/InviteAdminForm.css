@@ -1,0 +1,42 @@
+.invite-admin-form {
+  width: 30%;
+  margin: auto;
+  border-left: 2px solid rgba(251, 194, 18, 0.7);
+  padding: 0px 50px;
+  text-align: left;
+}
+
+.invite-admin-form input, 
+.invite-admin-form input:focus,
+.invite-admin-form textarea,
+.invite-admin-form textarea:focus {
+  border: 0;
+  border-bottom: 2px solid rgba(67, 67, 67, 0.7);
+  border-radius: 0;
+  background-color: #efefef;
+  margin-bottom: 20px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.invite-admin-form input:-webkit-autofill,
+.invite-admin-form input:-webkit-autofill:active,
+.invite-admin-form input:-webkit-autofill:focus,
+.invite-admin-form input:-webkit-autofill:hover,
+.invite-admin-form textarea:-webkit-autofill,
+.invite-admin-form textarea:-webkit-autofill:active,
+.invite-admin-form textarea:-webkit-autofill:focus,
+.invite-admin-form textarea:-webkit-autofill:hover {
+  background-color: #efefef;
+  -webkit-box-shadow: 0 0 0px 1000px #efefef inset;
+  -webkit-text-fill-color: #434343 !important;
+}
+
+.invite-admin-form .btn {
+  margin-top: 8px;
+  margin-bottom: 15px;
+}
+
+.invite-admin-form h2 {
+  margin-bottom: 30px;
+}
