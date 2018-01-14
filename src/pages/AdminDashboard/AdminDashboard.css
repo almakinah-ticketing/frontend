@@ -125,3 +125,7 @@
   padding-left: 20px;
   min-height: 400px;
 }
+
+.no-admin-activity-message {
+  padding: 0 20px;
+}
