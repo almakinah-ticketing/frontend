@@ -1,0 +1,131 @@
+.admin-dashboard {
+  padding: 0;
+}
+
+.admin-dashboard h2 {
+  margin-bottom: 30px;
+}
+
+.revenue-info {
+  margin-top: 20px;
+}
+
+.admin-dashboard .row {
+  margin-bottom: 20px;
+}
+
+.admin-dashboard .card-deck {
+  margin-bottom: 20px;
+}
+
+.admin-dashboard .card + .admin-dashboard .card {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.admin-dashboard .card {
+  margin-top: 15px;
+}
+
+.admin-dashboard .card-footer {
+  text-align: left;
+  padding: 5px 20px;
+}
+
+.admin-dashboard .card-title {
+  font-size: 24px;
+}
+
+.admin-dashboard .card-title, .admin-dashboard .card-subtitle {
+  padding: 10px;
+}
+
+.admin-dashboard .card-subtitle {
+  font-size: 15px;
+}
+
+.admin-dashboard .card-block {
+  /*height: 225px;*/
+  width: 100%;
+  padding: 0;
+  text-align: center;
+}
+
+.admin-dashboard .card-img-top {
+  margin-bottom: 10px;
+  height: 150px;
+}
+
+.admin-dashboard .see-all {
+  color: #434343;
+  text-decoration: underline;
+  font-size: 17px;
+}
+
+.all-time-revenues, .all-time-revenues p, .all-time-tickets-sold, .all-time-tickets-sold p {
+  font-size: 30px;
+  margin-bottom: 0;
+}
+
+.activity-time-ago {
+  color: grey;
+  font-size: 0.75em;
+  margin-left: 5px;
+}
+
+.refresh-admin-activity-btn {
+  border: 0;
+  background: 0;
+  color: grey;
+}
+
+.admin-activity {
+  border-left: 2px solid rgba(251, 194, 18, 0.7);
+  padding-left: 0px;
+  height: 400px;
+  text-align: left;
+}
+
+.admin-activity ul {
+  height: 90%;
+  overflow-y: auto;
+}
+
+.admin-activity h3, .admin-activity ul {
+  padding-left: 20px;
+}
+
+.admin-activity h3, .admin-activity button {
+  display: inline-block;
+}
+
+.admin-activity button {
+  position: relative;
+  bottom: 5px;
+}
+
+.admin-activity a {
+  color: #EAAF00;
+  text-decoration: underline;
+}
+
+.admin-activity li {
+  border-bottom: 2px solid rgba(163, 163, 163, 0.3);
+  padding: 10px 5px;
+}
+
+.totals-chart {
+  padding: 0;
+  margin: 0 auto;
+  margin-top: -20px;
+}
+
+.most-popular-events {
+  padding-right: 50px;
+  padding-left: 20px;
+  min-height: 400px;
+}
+
+.no-admin-activity-message {
+  padding: 0 20px;
+}

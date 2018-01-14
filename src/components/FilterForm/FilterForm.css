@@ -1,0 +1,19 @@
+.filter-events-form {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.filter-events-form .form-group, .filter-events-form .form-control {
+  display: inline-block;
+}
+
+.filter-events-form input, .filter-events-form button a {
+  color: #434343;
+}
+
+.filter-events-form input, .filter-events-form select, .filter-events-form button {
+  height: 40px;
+  padding: 6px 12px;
+}
