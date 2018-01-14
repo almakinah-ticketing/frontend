@@ -253,6 +253,7 @@ class CreateEventForm extends Component {
         }
           <div className="create-event-form-contents">
             <Form onSubmit={this.handleSubmit}>
+
               <FormGroup className="group-with-small">
                 <Label htmlFor="title" className="sr-only">Title</Label>
                 <Input type="text" name="title" id="title" className="form-control" aria-describedby="titleHelp" placeholder="Title" value={this.state.title} required minLength="1" maxLength="280" onChange={this.handleChange}></Input>
@@ -289,6 +290,7 @@ class CreateEventForm extends Component {
                       </select>
                       </FormGroup>)
                 }
+
                 {
                   (this.props.location.pathname.includes('/admin/update'))
                   ? (
@@ -304,6 +306,7 @@ class CreateEventForm extends Component {
                     </FormGroup>
                     )
                 }
+
               <FormGroup>
                 <Label htmlFor="startdate">Start datetime</Label>
                 <Input id="startdate" name="start_datetime" type="datetime-local" required value={this.state.start_datetime} onChange={this.handleChange}></Input>
@@ -355,6 +358,7 @@ class CreateEventForm extends Component {
                     })
                   }
                   <Button onClick={this.addType} className="btn btn-outline-primary">Add more types</Button>                  
+>>>>>>> 6750e9c78065bd47a68b201f0bb28477abbf9d8c
                 </FormGroup>
               </div>
               <button type="submit" className="btn btn-primary">Submit</button>
