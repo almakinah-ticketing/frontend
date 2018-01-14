@@ -52,10 +52,20 @@ export default class Categories extends Component {
     const {loading, error, _filterEvents} = this.props;
     const {categories} = this.state;
     return (
+
+     
+
+
       <div className="categories container">
+
         <h3>Categories</h3>     
-        <ul>
+        <div className="row">
+      <ul>
+
         {
+
+        
+
           (categories.length === 0)
           ? (loading)
             ? <p className="loading-message">Loading categories...</p>
@@ -80,6 +90,8 @@ export default class Categories extends Component {
           })
          }
         </ul>
+
+        </div>
       </div>
     )
   }
