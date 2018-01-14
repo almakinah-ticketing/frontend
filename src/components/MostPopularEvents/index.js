@@ -51,7 +51,6 @@ class MostPopularEvents extends Component {
             : null
           : events.map((event, index) => {
             if (index < 3) {
-              console.log(index);
               return (
               <Event event={event} source={"most-popular-events"} _filterEvents={this._filterEvents} />
               );
