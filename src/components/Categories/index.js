@@ -53,8 +53,7 @@ export default class Categories extends Component {
     const {categories} = this.state;
     return (
       <div className="categories container">
-        <h3>Categories</h3>     
-        <ul>
+        <h3>Categories</h3> 
         {
           (categories.length === 0)
           ? (loading)
@@ -79,7 +78,6 @@ export default class Categories extends Component {
               );
           })
          }
-        </ul>
       </div>
     )
   }

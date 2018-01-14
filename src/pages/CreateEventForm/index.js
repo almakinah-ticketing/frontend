@@ -56,7 +56,6 @@ class CreateEventForm extends Component {
             var typesCopy = [];
             if (types.length !== 0) {
               for (var i = 0; i < types.length; i++) {
-                console.log(types[i]);
                 const obj = {
                   id: types[i].id,
                   name: types[i].name,
@@ -142,10 +141,10 @@ class CreateEventForm extends Component {
       }  
    })
    // the proplem is here
-   console.log(filtered_types); 
+   // console.log(filtered_types); 
    // console.log(types_copy);
    this.setState({types_attributes: filtered_types});
-   console.log(this.state.types_attributes);
+   // console.log(this.state.types_attributes);
    // types_copy.map((type) => {
    //  if (type["name"] === '' || type["capacity"] === '' || type["price"] === '') {
    //    types
@@ -253,6 +252,7 @@ class CreateEventForm extends Component {
         }
           <div className="create-event-form-contents">
             <Form onSubmit={this.handleSubmit}>
+
               <FormGroup className="group-with-small">
                 <Label htmlFor="title" className="sr-only">Title</Label>
                 <Input type="text" name="title" id="title" className="form-control" aria-describedby="titleHelp" placeholder="Title" value={this.state.title} required minLength="1" maxLength="280" onChange={this.handleChange}></Input>
@@ -289,6 +289,7 @@ class CreateEventForm extends Component {
                       </select>
                       </FormGroup>)
                 }
+
                 {
                   (this.props.location.pathname.includes('/admin/update'))
                   ? (
@@ -304,6 +305,7 @@ class CreateEventForm extends Component {
                     </FormGroup>
                     )
                 }
+
               <FormGroup>
                 <Label htmlFor="startdate">Start datetime</Label>
                 <Input id="startdate" name="start_datetime" type="datetime-local" required value={this.state.start_datetime} onChange={this.handleChange}></Input>
@@ -354,7 +356,7 @@ class CreateEventForm extends Component {
                       );                    
                     })
                   }
-                  <Button onClick={this.addType} className="btn btn-outline-primary">Add more types</Button>                  
+                  <Button onClick={this.addType} className="btn btn-outline-primary">Add more types</Button>
                 </FormGroup>
               </div>
               <button type="submit" className="btn btn-primary">Submit</button>

@@ -41,7 +41,7 @@ body {
 
 .App-container .page {
   margin-top: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 48px;
   padding:  40px 35px;
 }
 
@@ -77,5 +77,9 @@ h2 {
 
 .alert, .alert-danger, .alert-warning, .alert-success {
   border-radius: 10px;
+}
+
+.loading-message, .error-message {
+  text-align: center;
 }
 

@@ -60,6 +60,7 @@
   color: #434343;
   text-decoration: underline;
   font-size: 17px;
+  padding-left: 15px;
 }
 
 .all-time-revenues, .all-time-revenues p, .all-time-tickets-sold, .all-time-tickets-sold p {
@@ -118,6 +119,8 @@
   padding: 0;
   margin: 0 auto;
   margin-top: -20px;
+  width: 80%;
+  height: 75%;
 }
 
 .most-popular-events {
@@ -128,4 +131,9 @@
 
 .no-admin-activity-message {
   padding: 0 20px;
+}
+
+.admin-dashboard .card-header-canceled {
+  text-transform: uppercase;
+  color: #856404;
 }

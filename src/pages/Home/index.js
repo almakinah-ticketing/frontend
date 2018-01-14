@@ -43,8 +43,8 @@ class Home extends Component {
 
   render() {
     const { events, loading, error, currentUser, isAuthenticated } = this.props;
-    console.log('PROPS', this.props);
     return(
+
       <div className="home">
         <div className="splash">
           <div className="splash-content">

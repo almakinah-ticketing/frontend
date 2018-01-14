@@ -79,7 +79,6 @@ const mapDispatchToProps = (dispatch) => {
           }));
           history.push(`/events/${response.payload.data.data.id}`);
         } else {
-          console.log(response);
           if (response.payload.response.status === 422) {
             dispatch(addEventFailure(response.payload.response.data));
           } else {
@@ -91,7 +90,6 @@ const mapDispatchToProps = (dispatch) => {
     updateEvent: (eventId, updates, activity) => {
       dispatch(updateEventLoading());
       dispatch(updateEvent(eventId, updates)).then(response => {
-        console.log(response);
         if (response.payload.status < 400) {
           dispatch(updateEventSuccess(response.payload.data));
           dispatch(postNewAdminActivity(activity));

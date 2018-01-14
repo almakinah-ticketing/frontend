@@ -23,17 +23,13 @@ p.alert {
   margin-bottom: 0;
 }
 
-a.card-subtitle {
-  color: #434343;
+a.card-subtitle, .event-details a.date {
   text-decoration: none;
 }
 
-a.card-subtitle:hover {
-  color: #434343;
+a.card-subtitle:hover,
+.event-details a.date:hover {
   text-decoration: underline;
-}
-
-.card-header {
 }
 
 .card-footer {
@@ -58,16 +54,20 @@ a.card-subtitle:hover {
   color: #434343;
 }
 
+.you-bought-message {
+  margin-top: 30px;
+}
+
+.hottest-event {
+  font-size: 17px;
+}
+
 .overview-line {
   white-space: pre-wrap;
 }
 
 .agenda-line {
   white-space: pre-wrap;
-}
-
-.col-sm-4, .col-md-4, .col-lg-4, .col-xl-4 {
-  padding: 0;
 }
 
 .event-title {
@@ -80,14 +80,89 @@ a.card-subtitle:hover {
   color: #434343;
 }
 
-.you-bought-message {
-  margin-top: 30px;
+.event-details .duration{
+  white-space: pre-wrap;
 }
 
-.hottest-event {
-  font-size: 17px;
+.event-details .col-sm-4, .col-md-4, .col-lg-4, .col-xl-4 {
+  padding: 0;
+}
+
+.event-details a {
+  display: inline-block;
+  text-align: center;
+}
+
+.event-img-link {
+  width: 100%;
+}
+
+.row {
+  padding: 15px;
+}
+
+.event-details .category {
+  font-size: 30px;
+  color:#434343;
+  font-weight: bold;
+}
+
+.event-details .category:hover{
+  color:#434343;
 }
 
 .hottest-event .delete-event-btn {
   display: none;
+}
+
+.event-details .table-tickets{
+ width: 100%;
+ padding-top: 0;
+}
+
+.event-details .tickets-heading {
+  font-size: 25px;
+  text-align: left;
+  padding-left: 10%;
+  padding-bottom: 0;
+}
+
+.event-details .ticket-sales-sofar {
+  text-align: left;
+  width: 85%;
+  margin: auto;
+}
+
+.event-details .tickets-sales-sofar .row {
+  padding-left: 0;
+}
+
+.event-details .ticket-sales-sofar .row h4,  .event-details .ticket-sales-sofar .row table{
+  padding-left: 0;
+}
+
+.event-details-table, .ticket-prices-per-type-table {
+  text-align: left;
+  width: 80%;
+  margin: auto;
+}
+
+.event-details-table td, .event-details-table time, .event-details-table p {
+  padding-left: 0;
+}
+
+.event-details .update-event-btn{
+  margin:1%;
+}
+
+.event-details .delete-event-btn{
+  margin: 1%;
+}
+
+.event-details .btn-primary {
+  margin: 1%;
+}
+
+.event-details .event-title{
+  margin-bottom: 20px;
 }
