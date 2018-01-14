@@ -52,18 +52,18 @@ class RevenueInfo extends Component {
 
   render() {
     const { events, loading, error } = this.props;
-    if (events.length === 0) {
-      if (loading) {
-        return (<p className="loading-message">Loading your revenue and ticket information...</p>);
-      } else if (error) {
-        return (<p className="error-message">Oops, something went wrong!</p>);
-      } else {
-        return null;
-      }
-    } else {
-      return(
-        <div className="revenue-info container">
-          <h3>Since you started...</h3>
+    return(
+      <div className="revenue-info container">
+        <h3>Since you started...</h3>
+        {
+        (events.length === 0)
+        ? (loading)
+          ? (<p className="loading-message">Loading your revenue and ticket information...</p>)
+          : (error)
+            ? (<p className="error-message">Oops, something went wrong!</p>)
+            : null
+        :
+        <div className="revenue-info-content">
           <div className="row">
             <p className="all-time-revenues col-sm-6 col-md-6 col-lg-6 col-xl-6">EGP {this._calculateAllTimeRevenues()} <p classname="revenues-word">in revenues</p></p>
             <p className="all-time-tickets-sold col-sm-6 col-md-6 col-lg-6 col-xl-6">{this._calculateAllTimeTicketsSold()} <p classname="revenues-word">tickets sold</p></p>
@@ -86,8 +86,9 @@ class RevenueInfo extends Component {
             </LineChart>
           </ResponsiveContainer>
         </div>
-        );
-    }
+        }
+      </div>
+      );
   }
 }
 

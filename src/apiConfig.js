@@ -1,4 +1,4 @@
-export const rootApi = 'http://localhost:3000';
+export const rootApi = process.env.NODE_ENV === 'production' ? 'https://almakinah-summit-backend.herokuapp.com' : 'http://localhost:3000';
 
 export const categoriesApi = `${rootApi}/categories`;
 // export const hotestEventApi = `${rootApi}/hot/event`;
