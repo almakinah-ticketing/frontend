@@ -1,6 +1,13 @@
 .App-footer {
   background-color: #2a3641;
-  }
+  height: 30px;
+  margin-top: -30px;
+  width: 100%;
+}
+
+.App-footer p, .App-footer ul {
+  margin-bottom: 0;
+}
 
 .copyrights, .icons {
   color: #fff;

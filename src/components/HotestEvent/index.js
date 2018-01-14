@@ -27,10 +27,6 @@ export default class HotestEvent extends Component {
 		return hottestEvent;
 	}
 
-	componentWillMount(){
-		this.props.getEvents({});
-	}
-
 	render(){
 		const {
 			events, 
@@ -40,7 +36,7 @@ export default class HotestEvent extends Component {
 		} = this.props;
 		return (
 			<div className="hottest-event">
-				<h2>Hottest event</h2>
+				<h3>Hottest event</h3>
 				{ 
 					(events === undefined || events.length === 0)
 					? (loading)

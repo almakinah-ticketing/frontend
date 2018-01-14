@@ -1,17 +1,53 @@
- .App-header {
-  background-color: #fbc212;
-  /*display: flex;
-  flex-direction: column;
-  justify-content: center;*/
+
+ 
+.App-header {
+  background-color: rgba(251, 194, 18, 0.7);
   position: relative;
+  min-height: 75px;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+.App-header ul {
+  margin-bottom: 0;
 }
 
 .search-events-form {
-  /*align-self: center;*/
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 30%;
+}
+
+.search-events-form input {
+  width: 90%;
+  margin: 0;
+  padding: 4px 7px;
+  border: 1px solid rgba(207, 207, 207, 0.4);
+  border-radius: 5px;
+  color: #434343;
+}
+
+.search-events-form button {
+  background: 0;
+  border: 0;
+  margin: 0;
+  position: relative;
+  right: 29px;
+}
+
+.search-events-form button a {
+  width: 100%;
+  color: #AFAFAF;
+}
+
+.basic-nav {
+  position: absolute;
+  top: 50%;
+  left: 85px;
+  transform: translateY(-50%);
 }
 
 .basic-nav ul {
@@ -22,6 +58,25 @@
 .advanced-nav {
   margin-right: 10px;
   text-align: right;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.authenticated-nav p {
+  text-transform: none;
+}
+
+.authenticated-nav a + .authenticated-nav a, .authenticated-nav button{
+  margin-left: 10px;
+}
+
+.authenticated-nav .btn-link {
+  text-transform: inherit;
+  color: inherit;
+  padding: 0;
+  font-size: 15px;
 }
 
 .basic-nav ul li, .advanced-nav ul li, .advanced-nav p {
@@ -33,5 +88,13 @@
 }
 
 h1.logo img {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
   width: 70px;
+}
+
+.App-header li > a, h1.logo a {
+  color: #434343;
 }

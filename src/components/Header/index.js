@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
-import SearchForm from '../SearchForm';
+import { SearchForm } from '../../containers/EventsList';
+import history from '../../history';
 
 class Header extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Header extends Component {
 
   _unauthenticatedAdvancedNav() {
     return(
-      <nav className="advanced-nav pull-end">
+      <nav className="advanced-nav">
           <ul>
             <li><NavLink to="/login">Log In</NavLink></li>
             <li><NavLink to="/signup">Sign Up</NavLink></li>
@@ -25,12 +26,11 @@ class Header extends Component {
   _attendeeAdvancedNav() {
     const { currentUser, logout } = this.props;
     return(
-      <nav className="advanced-nav pull-end">
+      <nav className="advanced-nav authenticated-nav">
         <p>Logged in as: {currentUser.f_name} {currentUser.l_name}</p>
         <button onClick={() => {logout('attendees')}} className="btn btn-link">Log Out</button>
         <ul>
           <li><NavLink to="/calendar">Calendar</NavLink></li>
-          <li><NavLink to="/cart">Cart</NavLink></li>
           <li><NavLink to="/history">History</NavLink></li>
         </ul>
       </nav>
@@ -40,7 +40,7 @@ class Header extends Component {
   _adminAdvancedNav() {
     const { currentUser, logout } = this.props;
     return(
-      <nav className="advanced-nav pull-end">
+      <nav className="advanced-nav authenticated-nav">
         <p>Logged in as: {currentUser.f_name} {currentUser.l_name}</p>
         <button onClick={() => {logout('admins')}} className="btn btn-link">Log Out</button>
         <ul>
@@ -56,22 +56,22 @@ class Header extends Component {
     const { isAuthenticated, currentUser, getEvents } = this.props;
     return(
       <div className="App-header clearfix">
-        <h1 className="logo navbar-brand pull-start"><NavLink to="/"><img src="original-favicon.png" alt="Logo" /></NavLink></h1>
-        <nav className="basic-nav pull-start">
+        <h1 className="logo navbar-brand"><NavLink to="/"><img src="original-favicon.png" alt="Logo" /></NavLink></h1>
+        <nav className="basic-nav">
           <ul>
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/about">About the Summit</NavLink></li>
             <li><NavLink to="/events">Events</NavLink></li>
           </ul>
         </nav>
-        <SearchForm getEvents={getEvents} />
+        <SearchForm />
         {
           (isAuthenticated && currentUser)
           ? (currentUser.attendee_id)
             ? this._attendeeAdvancedNav()
             : (currentUser.admin_id)
               ? this._adminAdvancedNav()
-              : <p>hi</p>
+              : null
           : this._unauthenticatedAdvancedNav()
         }
       </div>

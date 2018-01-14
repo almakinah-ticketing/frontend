@@ -9,10 +9,12 @@ class EventDetails extends Component {
 
   componentWillMount() {
     const {
+      handleNewSearchInput,
       getEvent,
       match: {params: {id}}
     } = this.props;
     getEvent(id);
+    handleNewSearchInput('');
   }
 
    _filterEvents(params) {
@@ -52,8 +54,8 @@ class EventDetails extends Component {
       postNewAdminActivity
     } = this.props;
     return (
-      <div className="event-details-page">
-        <Event event={event} source="eventDetails" loading={loading} error={error} _filterEvents={this._filterEvents} isAuthenticated={isAuthenticated} currentUser={currentUser} ticketsBoughtInSession={ticketsBoughtInSession} updateEvent={updateEvent} postNewAdminActivity={postNewAdminActivity} />
+      <div className="event-details page">
+        <Event event={event} source="event-details" loading={loading} error={error} _filterEvents={this._filterEvents} isAuthenticated={isAuthenticated} currentUser={currentUser} ticketsBoughtInSession={ticketsBoughtInSession} updateEvent={updateEvent} postNewAdminActivity={postNewAdminActivity} />
       </div>
     );
   }

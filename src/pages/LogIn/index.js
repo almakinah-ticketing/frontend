@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import history from '../../history';
 import { withLastLocation } from 'react-router-last-location';
+import './LogIn.css';
 
 class LogIn extends Component {
   constructor(props) {
@@ -36,10 +37,24 @@ class LogIn extends Component {
   }
 
   componentWillMount() {
-    const { isAuthenticated, currentUser, lastLocation, loginLoading } = this.props;
+    const { isAuthenticated, currentUser, lastLocation, loginLoading, handleNewSearchInput } = this.props;
+    if (currentUser.admin_id) {
+      if (lastLocation && lastLocation.pathname !== '/login' && lastLocation.pathname !== '/admin/login') {
+        history.replace(lastLocation.pathname);
+      } else {
+        history.push('/admin/dashboard');
+      }
+    } else if (currentUser.attendee_id) {
+      if (lastLocation && lastLocation.pathname !== '/login' && lastLocation.pathname !== '/admin/login') {
+        history.replace(lastLocation.pathname);
+      } else {
+        history.push('/calendar');
+      }
+    }
     if (!isAuthenticated && lastLocation && lastLocation.pathname === '/signup') {
       loginLoading();
     }
+    handleNewSearchInput('');
     // if (isAuthenticated) {
     //   if (lastLocation && lastLocation.pathname !== '/admin/login' && lastLocation.pathname !== '/login') {
     //     history.replace(lastLocation.pathname);
@@ -56,7 +71,8 @@ class LogIn extends Component {
   render() {
     const {error, lastLocation} = this.props;
     return(
-      <div className="login">
+      <div className="login page">
+      <h2>Log in</h2>
       {
         (error)
           ? <p className="error-messages alert alert-danger">{error}</p>
@@ -66,12 +82,12 @@ class LogIn extends Component {
       }
         <form className="attendee-login-form" onSubmit={this._submitLoginData}>
           <div className="form-group">
-            <label htmlFor="email">Email address</label>
-            <input type="email" className="form-control" id="email" name="email" value={this.state.email} required onChange={this._handleChange} />
+            <label htmlFor="email" className="sr-only">Email address</label>
+            <input type="email" className="form-control" id="email" name="email" value={this.state.email} required onChange={this._handleChange} placeholder="Email address" />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" className="form-control" id="password" name="password" value={this.state.password} required onChange={this._handleChange} />
+            <label htmlFor="password" className="sr-only">Password</label>
+            <input type="password" className="form-control" id="password" name="password" value={this.state.password} required onChange={this._handleChange} placeholder="Password" />
           </div>
           <button type="submit" class="btn btn-primary">Log in</button>
         </form>

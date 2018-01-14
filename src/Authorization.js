@@ -6,7 +6,7 @@ export const Authorization = (allowedRoles) => {
   return (WrappedComponent) => {
     class WithAuthorization extends Component {
       render() {
-        const { currentUser } = this.props;
+        const { isAuthenticated, currentUser } = this.props;
         var currentRole;
         var urlStart;
         if (currentUser.attendee_id) {
@@ -18,11 +18,18 @@ export const Authorization = (allowedRoles) => {
           return <WrappedComponent {...this.props} />
         } else {
           if (allowedRoles[0] === 'attendee') {
-            urlStart = '/';
+            if (isAuthenticated && currentRole === 'admin') {
+              history.push('/admin/dashboard');
+            } else {
+              history.push('/login');
+            }
           } else if (allowedRoles[0] === 'admin') {
-            urlStart = '/admin/';
+            if (isAuthenticated && currentRole === 'attendee') {
+              history.push('/calendar');
+            } else {
+              history.push('/admin/login');
+            }
           }
-          history.push(`${urlStart}login`);
           return null;
         }
       }

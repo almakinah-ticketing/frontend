@@ -1,0 +1,73 @@
+.admin-dashboard {
+  padding: 0;
+}
+
+.admin-dashboard h2 {
+  margin-bottom: 30px;
+}
+
+.revenue-info {
+  margin-top: 30px;
+}
+
+.admin-dashboard .card + .admin-dashboard .card {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.all-time-revenues, .all-time-tickets-sold {
+  font-size: 30px;
+}
+
+.activity-time-ago {
+  color: grey;
+  font-size: 0.75em;
+  margin-left: 5px;
+}
+
+.refresh-admin-activity-btn {
+  border: 0;
+  background: 0;
+  color: grey;
+}
+
+.admin-activity {
+  border-left: 2px solid rgba(251, 194, 18, 0.7);
+  padding-left: 0px;
+  height: 400px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.admin-activity h3, .admin-activity ul {
+  padding-left: 20px;
+}
+
+.admin-activity h3, .admin-activity button {
+  display: inline-block;
+}
+
+.admin-activity button {
+  position: relative;
+  bottom: 5px;
+}
+
+.admin-activity a {
+  color: #EAAF00;
+  text-decoration: underline;
+}
+
+.admin-activity li {
+  border-bottom: 2px solid rgba(163, 163, 163, 0.3);
+  padding: 10px 5px;
+}
+
+.totals-chart {
+  margin: auto;
+}
+
+.most-popular-events {
+  padding-right: 50px;
+  padding-left: 20px;
+  min-height: 400px;
+}
