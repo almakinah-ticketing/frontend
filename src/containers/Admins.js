@@ -42,13 +42,10 @@ const mapDispatchToProps = (dispatch) => {
      updateAdmin: (adminId, updates) => {
 	      dispatch(updateAdminLoading());
 	      dispatch(updateAdmin(adminId, updates)).then(response => {
-          
-	        console.log(response);
-	        if (response.payload.status < 400) {
+          	 if (response.payload.status < 400) {
 	          dispatch(updateAdminSuccess(response.payload.data));
             history.push('/admin/login')
 	        } else {
-            console.log(response);
 	          dispatch(updateAdminFailure(response.payload.response.data));
 	        }
      	  });

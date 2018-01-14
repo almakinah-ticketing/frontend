@@ -46,7 +46,6 @@ class RevenueInfo extends Component {
         chartData.push({"Month": key, "Revenues": revenuesPerMonth[key], "Tickets sold": ticketsSoldPerMonth[key]});
       }
     }
-    console.log(chartData);
     return chartData;
   }
 
@@ -63,28 +62,34 @@ class RevenueInfo extends Component {
             ? (<p className="error-message">Oops, something went wrong!</p>)
             : null
         :
-        <div className="revenue-info-content">
+        <div className="revenue-info-content container">
           <div className="row">
             <p className="all-time-revenues col-sm-6 col-md-6 col-lg-6 col-xl-6">EGP {this._calculateAllTimeRevenues()} <p classname="revenues-word">in revenues</p></p>
             <p className="all-time-tickets-sold col-sm-6 col-md-6 col-lg-6 col-xl-6">{this._calculateAllTimeTicketsSold()} <p classname="revenues-word">tickets sold</p></p>
           </div>
-          <ResponsiveContainer width="80%" height="75%" className="totals-chart row">
-          <LineChart
-              width={400}
-              height={400}
-              data={this._dataToChart()}
-              margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
-            >
-              <XAxis dataKey="Month" />
-              <YAxis dataKey="Revenues" yAxisId="left" />
-              <YAxis dataKey="Tickets sold" yAxisId="right" orientation="right" />
-              <Tooltip />
-              <Legend verticalAlign="top" height={36}/>
-              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-              <Line type="monotone" dataKey="Revenues" stroke="#fbc212" yAxisId="left" activeDot={{r: 8}} />
-              <Line type="monotone" dataKey="Tickets sold" stroke="#3D6183" yAxisId="right" />
-            </LineChart>
-          </ResponsiveContainer>
+          {
+          // <ResponsiveContainer width="80%" height="75%" className="totals-chart row">
+          }
+          <div className="totals-chart row">
+            <LineChart
+                width={800}
+                height={400}
+                data={this._dataToChart()}
+                margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
+              >
+                <XAxis dataKey="Month" />
+                <YAxis dataKey="Revenues" yAxisId="left" />
+                <YAxis dataKey="Tickets sold" yAxisId="right" orientation="right" />
+                <Tooltip />
+                <Legend verticalAlign="top" height={36}/>
+                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                <Line type="monotone" dataKey="Revenues" stroke="#fbc212" yAxisId="left" activeDot={{r: 8}} />
+                <Line type="monotone" dataKey="Tickets sold" stroke="#3D6183" yAxisId="right" />
+              </LineChart>
+            </div>
+          {
+          // </ResponsiveContainer>
+          }
         </div>
         }
       </div>

@@ -26,7 +26,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     login: (userType, data, lastLocation) => {
       dispatch(login(userType, data)).then(response => {
         if (response.payload.status<400) {
-          console.log(response);
           dispatch(loginSuccess(response.payload.data));
           const token = response.payload.data.auth_token;
           localStorage.setItem('jwtToken', token);

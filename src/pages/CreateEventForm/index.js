@@ -56,7 +56,6 @@ class CreateEventForm extends Component {
             var typesCopy = [];
             if (types.length !== 0) {
               for (var i = 0; i < types.length; i++) {
-                console.log(types[i]);
                 const obj = {
                   id: types[i].id,
                   name: types[i].name,
@@ -142,10 +141,10 @@ class CreateEventForm extends Component {
       }  
    })
    // the proplem is here
-   console.log(filtered_types); 
+   // console.log(filtered_types); 
    // console.log(types_copy);
    this.setState({types_attributes: filtered_types});
-   console.log(this.state.types_attributes);
+   // console.log(this.state.types_attributes);
    // types_copy.map((type) => {
    //  if (type["name"] === '' || type["capacity"] === '' || type["price"] === '') {
    //    types
@@ -357,8 +356,7 @@ class CreateEventForm extends Component {
                       );                    
                     })
                   }
-                  <Button onClick={this.addType} className="btn btn-outline-primary">Add more types</Button>                  
->>>>>>> 6750e9c78065bd47a68b201f0bb28477abbf9d8c
+                  <Button onClick={this.addType} className="btn btn-outline-primary">Add more types</Button>
                 </FormGroup>
               </div>
               <button type="submit" className="btn btn-primary">Submit</button>

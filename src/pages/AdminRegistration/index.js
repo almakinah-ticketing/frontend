@@ -18,11 +18,11 @@ export default class AdminRegistration extends Component {
   }
 
   handleChange(event) {
- 	 this.setState({[event.target.name]: event.target.value});
- 	} 
+    this.setState({[event.target.name]: event.target.value});
+  } 
 
-	 handleSubmit(event) {
-  	const {admin, updateAdmin} = this.props;
+  handleSubmit(event) {
+    const {admin, updateAdmin} = this.props;
     event.preventDefault();
     updateAdmin(admin.id, this.state);
   }
@@ -37,9 +37,7 @@ export default class AdminRegistration extends Component {
   }
 
   render(){
-  	const {error, admin} = this.props;
-  	console.log(this.props);
-  	
+  	const {error, admin} = this.props;  	
   	return(
   		<div className="admin-registration-form">
   			<h2>Complete your admin registration</h2>

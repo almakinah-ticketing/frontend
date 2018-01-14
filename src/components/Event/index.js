@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { rootApi } from '../../apiConfig';
 import './Event.css';
 
 class Event extends Component {
@@ -109,7 +108,7 @@ class Event extends Component {
     if (isAuthenticated && currentUser.attendee_id) {
       if (!eventHappened && !eventSoldOut && !eventCanceled) {
         return(
-          <Link to={`/events/${event.data.id}/tickets`} className="tickets-button btn btn-primary">Get tickets now</Link>
+          <Link to={`/events/${event.data.id}/tickets`} className="btn btn-primary">Get tickets now</Link>
         );
       }  else if (eventCanceled) {
           <p className="event-canceled-message">Event has been canceled</p>
@@ -168,49 +167,52 @@ class Event extends Component {
     var totalRevenues = 0;
     if (isAuthenticated && currentUser.admin_id) {
       return (
-        <div className="row">
-          <span className="datakeys ticket-sales-sofar col-sm-4 col-md-4 col-lg-4 col-xl-4">Ticket sales so far</span>
-          <table className="table-tickets table table-bordered col-sm-8 col-md-8 col-lg-8 col-xl-8">
-            <thead>
-              <tr>
-                <th scope="col">Type</th>
-                <th scope="col">Price</th>
-                <th scope="col">Capacity</th>
-                <th scope="col">Tickets sold</th>
-                <th scope="col">Tickets remaining</th>
-                <th scope="col">Revenues</th>
-              </tr>
-            </thead>
-            <tbody>
-            {
-              types.map((type) => {
-                totalCapacity += type.capacity;
-                totalRevenues += type.price * type.tickets_sold_per_type; 
-                return (
-                  <tr>
-                    <td>{type.name}</td>
-                    <td>EGP {type.price}</td>
-                    <td>{type.capacity}</td>
-                    <td>{type.tickets_sold_per_type}</td>
-                    <td>{type.capacity - type.tickets_sold_per_type}</td>
-                    <td>EGP {type.price * type.tickets_sold_per_type}</td>
-                  </tr>
-                  );
+        <div className="container ticket-sales-sofar">
+          <div className="row">
+            <h4 className="datakeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Ticket sales</h4>
+          </div>
+          <div className="row">
+            <table className="table-tickets table table-bordered col-sm-8 col-md-8 col-lg-8 col-xl-8">
+              <thead>
+                <tr>
+                  <th scope="col">Type</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Capacity</th>
+                  <th scope="col">Tickets sold</th>
+                  <th scope="col">Tickets remaining</th>
+                  <th scope="col">Revenues</th>
+                </tr>
+              </thead>
+              <tbody>
+              {
+                types.map((type) => {
+                  totalCapacity += type.capacity;
+                  totalRevenues += type.price * type.tickets_sold_per_type; 
+                  return (
+                    <tr>
+                      <td>{type.name}</td>
+                      <td>EGP {type.price}</td>
+                      <td>{type.capacity}</td>
+                      <td>{type.tickets_sold_per_type}</td>
+                      <td>{type.capacity - type.tickets_sold_per_type}</td>
+                      <td>EGP {type.price * type.tickets_sold_per_type}</td>
+                    </tr>
+                    );
 
-              })
-            }
-            </tbody>
-            <tfoot>
-              <tr>
-                <th scope="row" colSpan="2">Total</th> 
-                <td>{totalCapacity}</td>
-                <td>{event.tickets_sold}</td>
-                <td>{event.tickets_available_per_event}</td>
-                <td>EGP {totalRevenues}</td>
-                <td></td>
-              </tr>
-            </tfoot>
-          </table>
+                })
+              }
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="row" colSpan="2">Total</th> 
+                  <td>{totalCapacity}</td>
+                  <td>{event.tickets_sold}</td>
+                  <td>{event.tickets_available_per_event}</td>
+                  <td>EGP {totalRevenues}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
         );
     } else {
@@ -230,17 +232,16 @@ class Event extends Component {
     } = this.props;
     if (source === 'most-popular-events') {
     return (
-
-   
       <div className="event card col-sm-4 col-md-4 col-lg-4 col-xl-4">
         {
-          (event.tickets_available_per_event === 0)
-          ? <p className="event-sold-out-message card-header alert alert-success">Sold out</p>
-          : <p className="tickets-sold-per-event card-header">{event.tickets_sold} ticket(s) sold</p>
+          (event.data.canceled)
+            ? <p className="event-canceled-message card-header card-header-canceled">Canceled</p>
+              : (event.tickets_available_per_event === 0)
+                ? <p className="event-sold-out-message card-header alert alert-success">Sold out</p>
+                : <p className="tickets-sold-per-event card-header">{event.tickets_sold} ticket(s) sold</p>
         }
-
         <div className="card-block">
-          <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
+          <Link to={`/events/${event.data.id}`}><img src={`${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
           <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
           <p className="card-subtitle"><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="text-muted">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
         </div>
@@ -261,7 +262,7 @@ class Event extends Component {
           }
           <div className="row">
             <div className="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-              <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
+              <Link to={`/events/${event.data.id}`}><img src={`${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
             </div>
             <div className="event-text-info card-block col-sm-8 col-md-8 col-lg-8 col-xl-8">
               <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
@@ -277,7 +278,6 @@ class Event extends Component {
           </div>
         </div>
       );
-
     } else if (source === 'hottest-event') {
       return (
         <div className="hottest-event container clearfix">
@@ -294,10 +294,8 @@ class Event extends Component {
           <p className="hottest-event-tickets-remaining alert alert-info">{event.tickets_available_per_event} ticket(s) remaining!</p>
         </div>
       );
-
     } else if (source === 'event-details') {
       if (!event || Object.keys(event).length === 0) {
-        console.log(event);
         if (loading) {
           return(
             <p className="loading-message">Loading event details...</p>
@@ -312,7 +310,7 @@ class Event extends Component {
             );
         }
       } else {
-          return(
+           return(
             <div className="event-details container">
               {
                 (event.data.canceled)
@@ -322,29 +320,28 @@ class Event extends Component {
               <div className="row">
 
                 <h3><Link to={`/events/${event.data.id}`} className="event-title col-sm-12 col-md-12 col-lg-12 col-xl-12 event-title">{event.data.title}</Link></h3>
-                <Link className="event-img-link" to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="img-fluid event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>  
+                <Link className="event-img-link" to={`/events/${event.data.id}`}><img src={`${event.data.img.url}`} alt={event.data.title} className="img-fluid event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>  
               </div>
               <div className="row">
                 <Link to={_filterEvents({categoryId: event.data.category.id})} className="category col-sm-12 col-md-12 col-lg-12 col-xl-12">#{event.data.category.name}</Link>
               </div>
               <div className="row">
-
-               <table className="table">
+               <table className="table event-details-table">
                 <tbody>
                   <tr>
-                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Date :</span></th>
-                    <td><time dateTime={event.data.start_datetime} className="col-sm-8 col-md-8 col-lg-8 col-xl-8"><Link className="date" to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></td>
+                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Date</span></th>
+                    <td><time dateTime={event.data.start_datetime} className="col-sm-8 col-md-8 col-lg-8 col-xl-8"><Link className="date text-muted" to={_filterEvents({date: event.data.event_date})}>{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></td>
                   </tr>
                   <tr>
-                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Duration :</span></th>
+                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Duration</span></th>
                     <td><p className="duration col-sm-8 col-md-8 col-lg-8 col-xl-8">{this._parseDuration(event.data.end_datetime, event.data.start_datetime)}</p></td>
                   </tr>
                   <tr>
-                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Overview :</span></th>
+                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Overview</span></th>
                     <td> <p className="overview-line">{event.data.overview}</p></td>
                   </tr>
                    <tr>
-                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Event Agenda :</span></th>
+                    <th><span className="dataKeys col-sm-4 col-md-4 col-lg-4 col-xl-4">Agenda</span></th>
                     <td><p className="agenda-line">{event.data.agenda}</p></td>
                   </tr>
                    <tr>
@@ -359,8 +356,8 @@ class Event extends Component {
                 (!isAuthenticated || (isAuthenticated && currentUser.attendee_id))
                 ? 
                 <div>
-                  <h4 className="tickets-heading">Ticket Types</h4>
-                  <table className="table table-bordered ticket-prices-per-type list-unstyled">
+                  <h4 className="tickets-heading">Tickets</h4>
+                  <table className="table table-bordered ticket-prices-per-type-table list-unstyled">
                     <tbody>
                       {
                       event.data.types.map((type) => {
@@ -368,10 +365,6 @@ class Event extends Component {
                           <tr>
                             <td><span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">{type.name}</span></td>
                             <td><span className="ticket-type-name col-sm-4 col-md-4 col-lg-4 col-xl-4">EGP {type.price}</span></td>
-                            <td></td>
-                         
-                         
-                
                             {
                               (type.tickets_available_per_type === 0)
                               ?<td><span className="ticket-type-sold-out col-sm-4 col-md-4 col-lg-4 col-xl-4">Sold out</span></td>
@@ -387,8 +380,7 @@ class Event extends Component {
                   </table>
                 </div>
                 : null
-              }
-             
+              }             
               <div className="row">
                 <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 {
