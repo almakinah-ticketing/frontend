@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { rootApi } from '../../apiConfig';
 import './Event.css';
 
 class Event extends Component {
@@ -237,7 +236,7 @@ class Event extends Component {
           : <p className="tickets-sold-per-event card-header">{event.tickets_sold} ticket(s) sold</p>
         }
         <div className="card-block">
-          <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
+          <Link to={`/events/${event.data.id}`}><img src={`${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
           <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
           <p className="card-subtitle"><time dateTime={event.data.start_datetime}><Link to={_filterEvents({date: event.data.event_date})} className="text-muted">{this._parseDateToDisplay(event.data.event_date)}</Link> at {this._parseTimeToDisplay(event.data.start_datetime)}</time></p>
         </div>
@@ -258,7 +257,7 @@ class Event extends Component {
           }
           <div className="row">
             <div className="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-              <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
+              <Link to={`/events/${event.data.id}`}><img src={`${event.data.img.url}`} alt={event.data.title} className="event-img card-img-top" /></Link>
             </div>
             <div className="event-text-info card-block col-sm-8 col-md-8 col-lg-8 col-xl-8">
               <h4><Link to={`/events/${event.data.id}`} className="card-title">{event.data.title}</Link></h4>
@@ -316,7 +315,7 @@ class Event extends Component {
               }
               <div className="row">
                 <h3><Link to={`/events/${event.data.id}`} className="col-sm-12 col-md-12 col-lg-12 col-xl-12 event-title">{event.data.title}</Link></h3>
-                <Link to={`/events/${event.data.id}`}><img src={`${rootApi}${event.data.img.url}`} alt={event.data.title} className="event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>  
+                <Link to={`/events/${event.data.id}`}><img src={`${event.data.img.url}`} alt={event.data.title} className="event-img col-sm-12 col-md-12 col-lg-12 col-xl-12" /></Link>  
               </div>
               <div className="row">
                 <Link to={_filterEvents({categoryId: event.data.category.id})} className="col-sm-12 col-md-12 col-lg-12 col-xl-12">#{event.data.category.name}</Link>
