@@ -16,13 +16,8 @@ class About extends Component {
               <h2>About the Summit</h2>
               <div className="about-paragraphs">
                 <p>
-                    The summit is our one-stop-shop, entrepreneurship marathon! 
-                    We promise that the world comes to AlMakinah, 
-                    and thanks to an incredible level of commitment from our tireless team and partners, we deliver. 
-                    Thought leaders, media mavens, tech-legends and power player investors gather to share their experience,
-                    support and invest in the Middle East & Africa’s flourishing entrepreneurial ecosystem.
-                    From workshops, inspiring talks, and panel discussions to startup stations, pitch competitions,
-                    and networking platforms with industry experts. Whoever you are, you’ll find a place for you.</p>
+                  Running for the first annual cycle in our new home in budding tech hub Maadi, the summit is a concatenation of everything AlMakinah believes in: code, community, and continuous learning. Over the course of two weeks are workshops, panel discussions, talks, and meetups across a diverse range of technologies and projects, all driven by the desire to fuse technology, startup culture, and education to make our world more livable. Come build. Come connect. Come learn. But most importantly, come meet our mascot Makmak.
+                </p>
               </div>
             </div>
           </div>
