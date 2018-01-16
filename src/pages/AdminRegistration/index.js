@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import history from '../../history';
 import './AdminRegistration.css';
 
-export default class AdminRegistration extends Component {
-	constructor(){
-	  super();
+export default class AdminRegistration extends Component {  
+  constructor(){
+    super();
     this.state = {
     	f_name:"",
     	l_name:"",
@@ -39,14 +39,13 @@ export default class AdminRegistration extends Component {
   render(){
   	const {error, admin} = this.props;  	
   	return(
-  		<div className="admin-registration-form">
+  		<div className="admin-registration-form page">
   			<h2>Complete your admin registration</h2>
   			 {
-                      // (error) 
-                     //    ? <div>{error}</div> 
-                     //    : null
+                      (error)
+                      ? console.log(error)
+                      : null
                     }
-        
   			<form className="form-horizontal" onSubmit={this.handleSubmit}>
 	  			<div className="form-group  group-with-small">
 	  				<label htmlFor="email" className="sr-only">Email address</label>
@@ -75,10 +74,9 @@ export default class AdminRegistration extends Component {
                           <div className="form-group group-with-small">
                             <label htmlFor="phone_number" className="sr-only">Phone Number</label>
                             <input type="tel" id="phone_number" name="phone_number" className="form-control" placeholder="Phone number" value={this.state.phone_number} onChange={this.handleChange}/>    
-                            <small id="phoneNumberHelp" className="form-text text-muted">Please enter a valid mobile phone or landline number in case event organizers need to contact you.</small>
+                            <small id="phoneNumberHelp" className="form-text text-muted">Please enter a valid mobile phone or landline number in case other admins need to contact you.</small>
                           </div>
 	  			<button className="btn btn-primary" type="submit">Submit</button>
-	  			
   			</form>
   		</div>
 

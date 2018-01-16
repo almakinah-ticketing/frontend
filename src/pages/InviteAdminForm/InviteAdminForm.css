@@ -38,5 +38,9 @@
 }
 
 .invite-admin-form h2 {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+}
+
+.invite-admin-form {
+  margin-top: 50px;
 }

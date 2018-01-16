@@ -13,7 +13,7 @@ import { LogIn } from './containers/LogIn';
 import { LogInAdmin } from './containers/LogIn';
 import SignUp from './containers/SignUp';
 import { AttendeeCalendar } from './containers/AttendeeCalendar';
-import AttendeeHistory from './containers/AttendeeHistory';
+import { AttendeeHistory } from './containers/AttendeeHistory';
 import AdminDashboard from './containers/AdminDashboard';
 import { CreateEventForm } from './containers/EventsList';
 import {InviteAdminForm} from './containers/Admins';

@@ -53,7 +53,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           if (response.payload.response.status === 401) {
             dispatch(loginFailure(response.payload.response.data));
           } else {
-            dispatch(loginFailure("Oops, something went wrong!"));
+            dispatch(loginFailure("Oops, something went wrong! Please try again."));
           }
         }
       });

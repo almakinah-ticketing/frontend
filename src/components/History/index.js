@@ -40,20 +40,20 @@ export default class History extends Component {
     const {history, loading, error} = this.props;
     // console.log(history);
     return(
-      <div class="test">
+      <div className="test">
       {
       history.map((histo) => {
       return (
-      <div class="box">
-      <div class='inner'>
-      <h1>{histo[0].event}</h1>
-      <div class='info clearfix'>
-        <div class='wp'>Tickets<h2>1</h2></div>
-        <div class='wp'>Type<p>{histo[0].type}</p></div>
-        <div class='wp'><h2><button class="btn btn-primary" onClick={this.handleClick} id={histo[0].charge} name={histo[0].id}>Refund</button></h2></div>
+      <div className="box">
+      <div className='inner'>
+      <h3>{histo[0].event}</h3>
+      <div className='info clearfix'>
+        <div className='wp'>Tickets<h4>1</h4></div>
+        <div className='wp'>Type<p>{histo[0].type}</p></div>
+        <div className='wp'><h4><button className="btn btn-primary" onClick={this.handleClick} id={histo[0].charge} name={histo[0].id}>Refund</button></h4></div>
       </div>
-      <div class='total clearfix'>
-        <h2>Total : <p>{histo[0].price}</p></h2>
+      <div className='total clearfix'>
+        <h4>Total : <p>{histo[0].price}</p></h4>
       </div>
       </div>
     </div>
@@ -63,12 +63,12 @@ export default class History extends Component {
         </div>
     )
     // return (
-    //   <div class="card" class="container-fluid">    
-    //     <ul class="list-group list-group-flush">
+    //   <div className="card" className="container-fluid">    
+    //     <ul className="list-group list-group-flush">
     //     {
     //     	history.map((histo) => {
     //     		return (
-    //     			<li class="list-group-item"><span className="x">1 X</span> ticket to: {histo[0].event} ,for: {histo[0].price} EGP <button class="btn btn-primary" onClick={this.handleClick} id={histo[0].charge}>Refund</button></li>
+    //     			<li className="list-group-item"><span classNameName="x">1 X</span> ticket to: {histo[0].event} ,for: {histo[0].price} EGP <button className="btn btn-primary" onClick={this.handleClick} id={histo[0].charge}>Refund</button></li>
     //     			)
     //     	})
     //     }

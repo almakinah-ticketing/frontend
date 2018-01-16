@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './InviteAdminForm.css';
+import { withLastLocation } from 'react-router-last-location';
 
 class InviteAdminForm extends Component {
   constructor(){
@@ -23,8 +24,12 @@ class InviteAdminForm extends Component {
   }
 
   componentWillMount() {
-    const { handleNewSearchInput } = this.props;
+    const { handleNewSearchInput, postNewAdminLoading, isAuthenticated, lastLocation } = this.props;
     handleNewSearchInput('');
+    console.log(lastLocation);
+    if (isAuthenticated && lastLocation && (lastLocation.pathname === '/newadmin')) {
+      postNewAdminLoading();
+    }
   }
 
   render() {
@@ -34,8 +39,9 @@ class InviteAdminForm extends Component {
       <div className="invite-admin-form page">
         <h2>Invite an admin</h2>
         {
-        	error ? <div>{error[0]}</div> : null
-        	
+          (error)
+          ? <div className="error-message alert alert-danger">{error[0]}</div> 
+          : null
         }
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -53,4 +59,4 @@ class InviteAdminForm extends Component {
   }
 }
 
-export default InviteAdminForm;
+export default withLastLocation(InviteAdminForm);
