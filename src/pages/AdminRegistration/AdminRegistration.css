@@ -38,7 +38,11 @@
 }
 
 .admin-registration-form h2 {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+}
+
+.admin-registration-form .form-horizontal {
+  margin-top: 40px;
 }
 
 small {

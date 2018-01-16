@@ -64,7 +64,7 @@ class SignUp extends Component {
           ? <p className="error-messages alert alert-danger">{error}</p>
           : null
         }
-        <form className="sign-up-form" onSubmit={this._submitNewAttendee}>
+        <form className="signup-form" onSubmit={this._submitNewAttendee}>
           <div className="form-group">
             <label htmlFor="email" className="sr-only">Email address</label>
             <input type="email" className="form-control" id="email" name="email" value={this.state.email} aria-describedby="emailHelp" placeholder="Email address" required pattern='^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' onChange={this._handleChange} />

@@ -17,8 +17,8 @@ export default (currentState = INITIAL_STATE, action) => {
 
 		// Add Admin
 
-		case POST_NEW_ADMIN_LOADING:
-      return {...currentState, loading: true};
+    case POST_NEW_ADMIN_LOADING:
+      return {...currentState, error: null, loading: true};
       break;
     case POST_NEW_ADMIN_SUCCESS:
       return{...currentState, adding: false, error: null,  admin: [...currentState, action.admin]};
@@ -40,7 +40,7 @@ export default (currentState = INITIAL_STATE, action) => {
 
       // Get Admin
     case GET_ADMIN_LOADING:
-      return {...currentState, loading: true};
+      return {...currentState, error: null, loading: true};
       break;
     case GET_ADMIN_SUCCESS:
       return {...currentState, loading: false, error: null, admin: action.admin};

@@ -23,6 +23,10 @@ const mapDispatchToProps = (dispatch) => {
 		// Add Admin
 
 
+    postNewAdminLoading: () => {
+      dispatch(postNewAdminLoading());
+    },
+
     postNewAdmin: (admin) => {
       dispatch(postNewAdminLoading());
       dispatch(postNewAdmin(admin)).then((response) => {
@@ -44,7 +48,7 @@ const mapDispatchToProps = (dispatch) => {
 	      dispatch(updateAdmin(adminId, updates)).then(response => {
           	 if (response.payload.status < 400) {
 	          dispatch(updateAdminSuccess(response.payload.data));
-            history.push('/admin/login')
+                history.push('/admin/login', {email: response.payload.data.email});
 	        } else {
 	          dispatch(updateAdminFailure(response.payload.response.data));
 	        }
@@ -62,6 +66,7 @@ const mapDispatchToProps = (dispatch) => {
           }
         });
       },
+
       handleNewSearchInput: (searchInput) => {
       dispatch(handleNewSearchInput(searchInput));
     }

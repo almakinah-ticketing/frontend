@@ -9,10 +9,9 @@ class AttendeeHistory extends Component {
   
   render() {
     return(
-      <div class="card" class="container-fluid">
-        <h2>Tickets you bought:</h2>
-        <p>You bought tickets to the following:</p>
-        <History/>
+      <div className="attendee-history container-fluid page">
+        <h2>Tickets you bought</h2>
+        <History />
       </div>
       );
   }

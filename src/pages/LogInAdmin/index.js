@@ -6,9 +6,16 @@ import '../LogIn/LogIn.css';
 class LogInAdmin extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: '',
-      password: ''
+    if (history.location.state) {
+      this.state = {
+        email: history.location.state.email,
+        password: ''
+      }
+    } else {
+      this.state = {
+        email: '',
+        password: ''
+      }
     }
     this._handleChange = this._handleChange.bind(this);
     this._submitLoginData = this._submitLoginData.bind(this);
@@ -58,7 +65,7 @@ class LogInAdmin extends Component {
           ? <p className="error-messages alert alert-danger">{error}</p>
           : null
         }
-        <form className="attendee-login-form" onSubmit={this._submitLoginData}>
+        <form className="admin-login-form" onSubmit={this._submitLoginData}>
           <div className="form-group">
             <label htmlFor="email" className="sr-only">Email address</label>
             <input type="email" className="form-control" id="email" name="email" placeholder="Email address" value={this.state.email} required onChange={this._handleChange} />

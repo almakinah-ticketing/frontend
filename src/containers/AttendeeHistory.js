@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import AttendeeHistoryPage from '../pages/AttendeeHistory';
 import HistoryComponent from '../components/History';
 import {getHistoryLoading, getHistory, getHistorySuccess, getHistoryFailure} from '../actions/history';
 import { handleNewSearchInput } from '../actions/events';
@@ -30,4 +31,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HistoryComponent);
+export const AttendeeHistory = connect(mapStateToProps, mapDispatchToProps)(AttendeeHistoryPage);
+export const History = connect(mapStateToProps, mapDispatchToProps)(HistoryComponent);
