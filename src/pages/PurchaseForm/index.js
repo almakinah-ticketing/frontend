@@ -172,8 +172,8 @@ export default class PurchaseForm extends Component {
         <div>
           <p>
                     <Checkout
-                      name={event.data.title}
-                      description={this._parseDateToDisplay(event.data.start_datetime) + ' at ' + this._parseTimeToDisplay(event.data.start_datetime)}
+                      name={"AlMakinah Summit"}
+                      description={event.data.title}
                       amount={total}
                       event_id={t1}
                       type_id={t2}
