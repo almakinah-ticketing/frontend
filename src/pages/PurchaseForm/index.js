@@ -182,8 +182,7 @@ export default class PurchaseForm extends Component {
                     />
           </p>
           <Link to={`/events/${event.data.id}`} className="btn btn-secondary">Back to event</Link>
-        </div>
-          <small>As per our cancelation policy, purchased tickets are non-refundable except if the event is canceled by organizers.</small>
+          </div>
         </div>
         );
       }
