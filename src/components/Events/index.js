@@ -108,7 +108,9 @@ class Events extends Component {
               ? <p className="loading-message">Loading events...</p>  
               : (eventsError)
                 ? <p className="error-message">Oops, something went wrong!</p>
-                : this._noSearchResults()
+                : (title)
+                ? this._noSearchResults()
+                : <p className="no-events-yet-message">No events yet</p>
           : 
               events.map((event) => {
                 if (new Date(event.data.start_datetime) >= new Date() && this.props.location.search === '') {

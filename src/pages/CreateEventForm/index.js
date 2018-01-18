@@ -32,6 +32,7 @@ class CreateEventForm extends Component {
       this.handleFileChange = this.handleFileChange.bind(this);
       this._parseDatetime = this._parseDatetimeToInputField.bind(this);
       this._cancelButtonLinkPath = this._cancelButtonLinkPath.bind(this);
+      this._removeUnaddedType = this._removeUnaddedType.bind(this);
       this.typesDeletable = {};
   }
 
@@ -212,6 +213,16 @@ class CreateEventForm extends Component {
     this.setState({types_attributes: types});
   }
 
+  _removeUnaddedType(index) {
+    var types_attributes = this.state.types_attributes.slice(0);
+    var newTypes = types_attributes.filter((type, i) => i !== index);
+    this.setState({
+      types_attributes: newTypes
+    }, () => {
+      console.log(this.state);
+    });
+  }
+
   // hideType(index) {
   //   if (index === this.state.typeToHide && this.state.isHidden) {
   //     return {
@@ -335,7 +346,23 @@ class CreateEventForm extends Component {
                   {
                     types.map((type, index) => {
                       return (
-                        <div className="type-group">
+                        <div className="type-group clearfix">
+                        {
+                            (this.props.location.pathname.includes('/admin/update') && type.id)
+                            ? (
+                              <div className="delete-type clearfix pull-end">
+                                <input type="checkbox" id="delete-type" className="delete-type-contents" onChange={(event) => {this.deleteType(event, index)}} checked={this.typesDeletable[index]} /> 
+                                <label htmlFor="delete-type" className="delete-type-contents">Delete</label>                
+                              </div>
+                              )    
+                            : (!type.id && types.length > 1)
+                              ? (
+                                  <div className="remove-unadded-type clearfix pull-end">
+                                    <button className="remove-unadded-type-button pull-end" onClick={() => {this._removeUnaddedType(index)}}>&times;</button>
+                                  </div>
+                                )
+                              : null
+                          }
                           <FormGroup className="group-with-small">
                             <Label htmlFor="type" className="sr-only">Type</Label>
                             <Input id="type" name="name" type="text" className="form-control" placeholder="Type name" required minLength="1" maxLength="20" aria-describedby="typeNameHelp" value={this.state.types_attributes[index].name} onChange={(event) => this.handleTypeChange(event, index)}></Input>
@@ -349,16 +376,6 @@ class CreateEventForm extends Component {
                             <Label htmlFor="price" className="sr-only">Price</Label>
                             <Input id="price" name="price" type="number" className="form-control" placeholder="Price" required pattern="\d*" value={this.state.types_attributes[index].price} onChange={(event) => this.handleTypeChange(event, index)}></Input>
                           </FormGroup>
-                          {
-                            (this.props.location.pathname.includes('/admin/update'))
-                            ? (
-                              <div className="delete-type">
-                                <input type="checkbox" id="delete-type" onChange={(event) => {this.deleteType(event, index)}} checked={this.typesDeletable[index]} /> 
-                                <label htmlFor="delete-type">delete</label>                
-                              </div>
-                              )    
-                            : null    
-                          }
                         </div>
                       );                    
                     })

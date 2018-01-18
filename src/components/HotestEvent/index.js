@@ -44,7 +44,7 @@ export default class HotestEvent extends Component {
 				          ? <p className="loading-message">Loading hottest event...</p>
 				          : (error)
 				            ? <p className="error-message">Oops, something went wrong!</p>
-				            : <span></span>
+            					: null
 			      		: (this._hottestEvent(events) !== undefined)
 			      			? <Event event={this._hottestEvent(events)} currentUser={currentUser} isAuthenticated={isAuthenticated} loading={loading} error={error} source="hottest-event" _filterEvents={_filterEvents} />
 			      			: <span></span>
