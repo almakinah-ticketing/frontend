@@ -26,7 +26,7 @@ export default class UpcomingEvents extends Component{
             ? <p className="loading-message">Loading upcoming events...</p>
             : (error)
             ? <p className="error-message">Oops, something went wrong!</p>
-            : null
+            : <p className="no-events-yet-message">No events yet</p>
           :
           this._upcomingEvents().map((event, index) => {
             return (
