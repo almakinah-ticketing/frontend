@@ -19,7 +19,7 @@ export default class UpcomingEvents extends Component{
     const {events, loading, error, _filterEvents, currentUser, isAuthenticated} = this.props;
     return (
       <div className="upcoming-events">
-        <h3>More upcoming events...</h3>
+        <h3>Upcoming events</h3>
         {
           (this._upcomingEvents().length === 0)
           ? (loading)
