@@ -32,6 +32,7 @@ class CreateEventForm extends Component {
       this.handleFileChange = this.handleFileChange.bind(this);
       this._parseDatetime = this._parseDatetimeToInputField.bind(this);
       this._cancelButtonLinkPath = this._cancelButtonLinkPath.bind(this);
+      this.typesDeletable = {};
   }
 
   componentWillMount() {
@@ -197,10 +198,16 @@ class CreateEventForm extends Component {
 
   deleteType(e, index) {
     const types = this.state.types_attributes.slice();
-    if (types[index]["_destroy"] === undefined) {
+    const typesDeletable = Object.values(this.typesDeletable).filter(val => val === true);
+    if (types[index]["_destroy"] === undefined && (types.length - typesDeletable.length) !== 1 ) {
       types[index]["_destroy"] = true;
+      this.typesDeletable[index] = true;
+    } else if (this.typesDeletable[index] !== true && (types.length - typesDeletable.length) === 1 ) {
+      alert("Running event must have at least one ticket type.");
+      this.typesDeletable[index] = false;
     } else {
       delete types[index]["_destroy"];
+      this.typesDeletable[index] = false;
     }
     this.setState({types_attributes: types});
   }
@@ -346,7 +353,7 @@ class CreateEventForm extends Component {
                             (this.props.location.pathname.includes('/admin/update'))
                             ? (
                               <div className="delete-type">
-                                <input type="checkbox" id="delete-type" onChange={(event) => {this.deleteType(event, index)}} /> 
+                                <input type="checkbox" id="delete-type" onChange={(event) => {this.deleteType(event, index)}} checked={this.typesDeletable[index]} /> 
                                 <label htmlFor="delete-type">delete</label>                
                               </div>
                               )    
